@@ -1,22 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "../src/libft/includes/libft.h"
 
 int	main(int argc, char **argv, char **env)
 {
-	ssize_t	rd;
-	char	buf[256];
+	char	*input;
+	int		rd;
 
 	(void)argc;
 	(void)argv;
 	(void)env;
-	write(1, "$> ", 3);
-	while ((rd = read(0, buf, 256)) != -1)
+	ft_printf("$> ");
+	while ((rd = get_next_line(0, &input)) != -1)
 	{
 		if (rd)
 		{
-			printf("command is: %.*s\n", (int)rd, buf)
-			write(1, "$> ", 3);
+			if (*input)
+				ft_printf("input is: %s\n$> ", input);
+			else
+				ft_printf("$> ");
+			free(input);
 		}
 	}
 	return (0);
