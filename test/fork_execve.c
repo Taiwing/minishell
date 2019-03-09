@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 	{
 		if ((ret = execve(argv[1], argv + 1, NULL)) == -1)
 			perror("execve");
-		printf("TEST: this line shouldn't be printed if execve works\n");
 		return (ret);
 	}
 	else if (wait(&ret) == -1)
