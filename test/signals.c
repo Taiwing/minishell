@@ -21,7 +21,7 @@ void handler2(int sig)
 	counter += 3; 
 	printf("counter = %d\n", counter); 
 	fflush(stdout); 
-	exit(0); 
+	exit(0);
 } 
 
 int main(void) 

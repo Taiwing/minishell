@@ -10,7 +10,7 @@ int	main(int argc, char **argv, char **env)
 		ms_input(&msd);
 		if (msd.input_buffer)
 			ms_parse(&msd);
-		if (msd.command)
+		if (msd.msc)
 			ms_execute(&msd);
 	}
 	return (0);
