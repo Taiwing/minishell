@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/15 14:12:43 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/15 17:31:57 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void		ms_init(t_ms_data *msd, char **env)
 	msd->envc = env ? ft_wtlen(msd->env) : 0;
 	msd->envsize = env ? msd->envc + 1 : 0;
 	msd->path = get_path(msd);
+	flush_msd(LOAD_MSD, msd);
 }

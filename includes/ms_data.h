@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/15 14:18:39 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/15 17:41:08 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ typedef struct		s_ms_command
 	char			**env;
 }					t_ms_command;
 
+
+enum				e_ops {LOAD_MSD, FLUSH_ENV, FLUSH_INPUT,
+							FLUSH_CMD, FLUSH_ALL};
+
+void				flush_msd(int op, t_ms_data *msd_ptr);
 void				ms_init(t_ms_data *msd, char **env);
 void				ms_input(t_ms_data *msd);
 void				ms_parse(t_ms_data *msd);

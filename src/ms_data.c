@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_cmd.c                                           :+:      :+:    :+:   */
+/*   ms_data.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/15 14:22:44 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/15 17:45:31 by yforeau          ###   ########.fr       */
+/*   Created: 2019/03/15 17:20:09 by yforeau           #+#    #+#             */
+/*   Updated: 2019/03/15 17:43:37 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_cmd.h"
 
-void	del_cmd(void *cmd_ptr, size_t size)
+void	flush_msd(int op, t_ms_data *msd_ptr)
 {
-	t_ms_cmd	*cmd;
+	static t_ms_data	*msd = NULL;
 
-	(void)size;
-	cmd = (t_ms_cmd *)cmd_ptr;
-	ft_wtfree(cmd->argv);
-	ft_wtfree(cmd->env);
-	free(cmd);
+	if (op == LOAD_MSD)
+		msd = msd_ptr;
+	else if (op == FLUSH_ENV)
+		ft_wtfree(msd->env);
+	else if (op == FLUSH_INPUT)
+		free(msd->input_buffer);
+	else if (op == FLUSH_CMD)
+		ft_lstdel(&msd->cmd_list, del_cmd);
+	else if (op == FLUSH_ALL)
+	{
+		ft_wtfree(msd->env);
+		free(msd->input_buffer);
+		ft_lstdel(&msd->cmd_list, del_cmd);
+	}
 }

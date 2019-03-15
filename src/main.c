@@ -4,14 +4,18 @@ int	main(int argc, char **argv, char **env)
 {
 	t_ms_data	msd;
 
+	(void)argc;
+	(void)argv;
 	ms_init(&msd, env);
 	while (1)
 	{
 		ms_input(&msd);
-		if (msd.input_buffer)
+		free(msd.input_buffer);
+		msd.input_buffer = NULL;
+/*		if (msd.input_buffer)
 			ms_parse(&msd);
 		if (msd.cmd_list)
-			ms_execute(&msd);
+			ms_execute(&msd);*/
 	}
 	return (0);
 }

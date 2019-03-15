@@ -6,7 +6,13 @@ int	main(void)
 	int		rd;
 
 	ft_printf("$> ");
-	while ((rd = get_next_line(0, &input)) != -1)
+	rd = get_next_line(0, &input);
+	if (*input)
+	{
+		ft_printf("input is: %s\n", input);
+		free(input);
+	}
+/*	while ((rd = get_next_line(0, &input)) > 0)
 	{
 		if (rd)
 		{
@@ -17,5 +23,6 @@ int	main(void)
 			free(input);
 		}
 	}
+*/
 	return (0);
 }
