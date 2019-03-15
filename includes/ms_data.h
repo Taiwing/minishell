@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/14 11:55:00 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/15 14:18:39 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 # define ENV_SIZE	256
 
-# include <stdint.h>
-
-typedef struct		s_ms_command	t_ms_command;
+# include "libft.h"
 
 /*all the data of minishell*/
 typedef struct		s_ms_data
@@ -27,17 +25,17 @@ typedef struct		s_ms_data
 	size_t			envsize;				/*keeps the size of env*/
 	char			*path;					/*PATH string*/
 	char			*input_buffer;			/*raw input*/
-	t_ms_command	*msc;					/*after parsing*/
+	t_list			*cmd_list;				/*after parsing*/
 }					t_ms_data;
 
 /*this is used to execute a command*/
-struct				s_ms_command
+typedef struct		s_ms_command
 {
 	void			(*ms_builtin)(t_ms_data *msd, int argc, char **argv);
 	int				argc;
 	char			**argv;
 	char			**env;
-};
+}					t_ms_command;
 
 void				ms_init(t_ms_data *msd, char **env);
 void				ms_input(t_ms_data *msd);

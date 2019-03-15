@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/14 16:23:04 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/15 14:12:43 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*get_path(t_ms_data *msd)
 void		ms_init(t_ms_data *msd, char **env)
 {
 	signal(SIGINT, SIG_IGN);
-	msd->msc = NULL;
+	msd->cmd_list = NULL;
 	msd->input_buffer = NULL;
 	if (env && !(msd->env = ft_wtdup(env)))
 		fatal_error(msd);	/*this will flush the msd structure and exit*/

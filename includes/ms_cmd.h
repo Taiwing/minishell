@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fatal_error.c                                      :+:      :+:    :+:   */
+/*   ms_cmd.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/14 16:17:11 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/15 14:30:52 by yforeau          ###   ########.fr       */
+/*   Created: 2019/03/15 14:19:15 by yforeau           #+#    #+#             */
+/*   Updated: 2019/03/15 14:28:05 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_data.h"
-#include "ms_cmd.h"
+#ifndef MS_CMD_H
+# define MS_CMD_H
 
-void	fatal_error(t_ms_data *msd)
+/*this is used to execute a command*/
+typedef struct		s_ms_cmd
 {
-	ft_wtfree(msd->env);
-	free(msd->input_buffer);
-	if (msd->cmd_list)
-		ft_lstdel(&msd->cmd_list, del_cmd);
-	exit(FATAL_ERROR);
-}
+	void			(*ms_builtin)(t_ms_data *msd, int argc, char **argv);
+	int				argc;
+	char			**argv;
+	char			**env;
+}					t_ms_cmd;
+
+void				del_cmd(void *cmd_ptr, size_t size);
+
+#endif

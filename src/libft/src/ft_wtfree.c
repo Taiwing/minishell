@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fatal_error.c                                      :+:      :+:    :+:   */
+/*   ft_wtfree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/14 16:17:11 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/15 14:30:52 by yforeau          ###   ########.fr       */
+/*   Created: 2019/03/14 16:04:19 by yforeau           #+#    #+#             */
+/*   Updated: 2019/03/14 16:06:16 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_data.h"
-#include "ms_cmd.h"
+#include <stdlib.h>
 
-void	fatal_error(t_ms_data *msd)
+void	ft_wtfree(char **wt)
 {
-	ft_wtfree(msd->env);
-	free(msd->input_buffer);
-	if (msd->cmd_list)
-		ft_lstdel(&msd->cmd_list, del_cmd);
-	exit(FATAL_ERROR);
+	char	**ptr;
+
+	if (!wt)
+		return ;
+	ptr = wt;
+	while (*wt)
+		free(*wt++);
+	free(*wt);
+	free(ptr);
 }
