@@ -6,11 +6,11 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 16:04:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/14 16:06:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:25:48 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 void	ft_wtfree(char **wt)
 {
@@ -20,7 +20,7 @@ void	ft_wtfree(char **wt)
 		return ;
 	ptr = wt;
 	while (*wt)
-		free(*wt++);
-	free(*wt);
-	free(ptr);
+		free(heap_collector(*wt++, HS_GET));
+	free(heap_collector(*wt, HS_GET));
+	free(heap_collector(ptr, HS_GET));
 }

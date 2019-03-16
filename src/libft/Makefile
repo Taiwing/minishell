@@ -66,6 +66,7 @@ SRCC			=	ft_atoi.c\
 					ft_putnbr_fd.c\
 					ft_putstr.c\
 					ft_putstr_fd.c\
+					ft_secmalloc.c\
 					ft_split_whitespaces.c\
 					ft_stradd.c\
 					ft_strcat.c\
@@ -103,6 +104,7 @@ SRCC			=	ft_atoi.c\
 					ft_wtfree.c\
 					ft_wtlen.c\
 					get_next_line.c\
+					heap_collector.c\
 
 BINTC			=	bint_mathconsts.c\
 					divide_bint.c\
@@ -274,6 +276,7 @@ ft_putnbr.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_putnbr_fd.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_putstr.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_putstr_fd.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
+ft_secmalloc.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_split_whitespaces.o: libft.h get_next_line.h ft_getopt.h ft_printf.h\
 	t_pbuf.h
 ft_stradd.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
@@ -309,6 +312,7 @@ ft_tolower.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_toupper.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_wtdup.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 get_next_line.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
+heap_collector.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 

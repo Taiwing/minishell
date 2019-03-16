@@ -6,7 +6,7 @@
 /*   By: yforeau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 15:05:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/02/07 17:34:03 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:20:43 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	add_to_buf(t_pdata *data, char *add, int c, size_t size)
 	if (data->bufsize < newsize)
 	{
 		newsize = (newsize + BLOCK_SIZE - 1) & ~(BLOCK_SIZE - 1);
-		if (!(newbuf = (char *)malloc(newsize)))
+		if (!(newbuf = (char *)ft_secmalloc(newsize)))
 		{
 			data->n = -1;
 			return ;
 		}
 		ft_memcpy((void *)newbuf, (void *)data->buf, data->n);
-		free(data->abuf);
+		free(heap_collector(data->abuf, HS_GET));
 		data->abuf = newbuf;
 		data->bufsize = newsize;
 		data->buf = data->abuf ? data->abuf : data->sbuf;
@@ -56,5 +56,5 @@ void	print_buf(t_pdata *data, int fd)
 {
 	if (data->n > 0)
 		data->n = write(fd, data->buf, data->n);
-	free(data->abuf);
+	free(heap_collector(data->abuf, HS_GET));
 }

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 05:57:41 by yforeau           #+#    #+#             */
-/*   Updated: 2019/01/17 13:52:43 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:19:16 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		print_ambig_error(t_optdata *d, unsigned char *ambig_set,
 		}
 		getopt_puterr("\n");
 	}
-	free(ambig_set);
+	free(heap_collector(ambig_set, HS_GET));
 	d->nextchar = "\0";
 	++d->optind;
 	d->optopt = 0;

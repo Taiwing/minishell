@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 18:21:10 by yforeau           #+#    #+#             */
-/*   Updated: 2019/01/22 18:23:46 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:21:03 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_lst_discard(t_list *prev, t_list **alst)
 	if (!alst || !*alst)
 		return ;
 	next = (*alst)->next;
-	free((*alst)->content);
-	free(*alst);
+	free(heap_collector((*alst)->content, HS_GET));
+	free(heap_collector(*alst, HS_GET));
 	*alst = next;
 	if (prev)
 		prev->next = next;

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 01:54:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/14 16:07:01 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:25:16 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,15 @@ int						ft_intlen(intmax_t n);
 int						ft_wtlen(char **wt);
 char					**ft_wtdup(char **wt);
 void					ft_wtfree(char **wt);
+
+# define CHECK_SIG		424242
+enum					hs_do {HS_ADD, HS_GET, HS_FREE};
+void					**check_heap_size(void **heap_stack,
+											size_t *size, size_t i);
+void					*get_heap_ptr(void **heap_stack, size_t *i, void *ptr);
+void					*heap_collector(void *ptr, int hs_do);
+//void					*dir_heap_collector(void *ptr, int hs_do);
+void					frexit(void);
+void					*ft_secmalloc(size_t size);
 
 #endif

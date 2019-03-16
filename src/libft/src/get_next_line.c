@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 01:55:35 by yforeau           #+#    #+#             */
-/*   Updated: 2019/01/17 11:29:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:18:38 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		ft_isfd(void *fd, void *content)
 void			rm_cur(t_list **lst, t_gnl *cur)
 {
 	ft_lst_remove_if(lst, (void *)&(cur->fd), ft_isfd);
-	free(cur);
+	free(heap_collector(cur, HS_GET));
 }
 
 static t_gnl	*ft_get_trail(int fd, t_list **lst)

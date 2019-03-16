@@ -6,7 +6,7 @@
 /*   By: yforeau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 20:10:27 by yforeau           #+#    #+#             */
-/*   Updated: 2019/02/14 16:03:06 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:19:50 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	convert(t_pdata *data, t_farg *args, t_params *conv, char **fmt)
 	if (loc_data.n != -1)
 		format_data(data, &loc_data, conv, 0);
 	data->n = loc_data.n == -1 ? -1 : data->n;
-	free(loc_data.abuf);
+	free(heap_collector(loc_data.abuf, HS_GET));
 }
 
 void	convert_str(t_pdata *data, t_farg *args, t_params *conv, char **fmt)
@@ -70,7 +70,7 @@ void	convert_str(t_pdata *data, t_farg *args, t_params *conv, char **fmt)
 	if (loc_data.n != -1)
 		format_data_str(data, &loc_data, conv, 0);
 	data->n = loc_data.n == -1 ? -1 : data->n;
-	free(loc_data.abuf);
+	free(heap_collector(loc_data.abuf, HS_GET));
 }
 
 void	convert_alloc(t_pdata *data, t_farg *args, t_params *conv, char **fmt)
@@ -99,7 +99,7 @@ void	convert_alloc(t_pdata *data, t_farg *args, t_params *conv, char **fmt)
 	if (loc_data.n != -1)
 		format_data_alloc(data, &loc_data, conv, 0);
 	data->n = loc_data.n == -1 ? -1 : data->n;
-	free(loc_data.abuf);
+	free(heap_collector(loc_data.abuf, HS_GET));
 }
 
 void	convert_pbuf(t_pbuf *buf, t_farg *args, t_params *conv, char **fmt)
@@ -128,5 +128,5 @@ void	convert_pbuf(t_pbuf *buf, t_farg *args, t_params *conv, char **fmt)
 	if (loc_data.n != -1)
 		format_data_pbuf(buf, &loc_data, conv, 0);
 	buf->n = loc_data.n == -1 ? -1 : buf->n;
-	free(loc_data.abuf);
+	free(heap_collector(loc_data.abuf, HS_GET));
 }

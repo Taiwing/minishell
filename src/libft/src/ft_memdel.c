@@ -6,7 +6,7 @@
 /*   By: yforeau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:12:08 by yforeau           #+#    #+#             */
-/*   Updated: 2018/11/07 17:44:49 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:17:28 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	ft_memdel(void **ap)
 	if (!ap)
 		return ;
 	if (*ap)
-		free(*ap);
+		free(heap_collector(*ap, HS_GET));
 	*ap = NULL;
 }

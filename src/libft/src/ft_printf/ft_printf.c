@@ -6,7 +6,7 @@
 /*   By: yforeau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:43:15 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/02 17:44:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 12:20:24 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_asprintf(char **str, const char *format, ...)
 		(*str)[data.n] = 0;
 	}
 	else
-		free(data.buf);
+		free(heap_collector(data.buf, HS_GET));
 	va_end(args.cur);
 	va_end(args.ref);
 	return (data.n);
