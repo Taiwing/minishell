@@ -10,7 +10,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		ms_input(&msd);
-		free(msd.input_buffer);
+		free(heap_collector(msd.input_buffer, HS_GET));
 		msd.input_buffer = NULL;
 /*		if (msd.input_buffer)
 			ms_parse(&msd);

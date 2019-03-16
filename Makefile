@@ -42,7 +42,7 @@ main.o: ms_data.h libft.h
 ms_cmd.o: ms_cmd.h ms_data.h libft.h
 ms_data.o: ms_cmd.h ms_data.h libft.h
 ms_init.o: libft.h fatal_error.h ms_data.h
-ms_input.o: fatal_error.h ms_data.h libft.h
+ms_input.o: ms_data.h libft.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 
