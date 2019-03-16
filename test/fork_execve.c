@@ -9,6 +9,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (1);
+	cp = 0;
 	ret = 0;
 	printf("trying to exec '%s' ...\n", argv[1]);
 	if ((cp = fork()) == -1)
@@ -18,16 +19,15 @@ int	main(int argc, char **argv)
 	}
 	else if (!cp)
 	{
-		if ((ret = execve(argv[1], argv + 1, NULL)) == -1)
+		if (execve(argv[1], argv + 1, NULL) == -1)
 			perror("execve");
-		return (ret);
+		return (1);
 	}
 	else if (wait(&ret) == -1)
 	{
 		perror("wait");
 		return (1);
 	}
-	printf("child process returned: %d\n", ret);
 	printf("child pid: %d\n", cp);
 	printf("parent pid: %d\n", getpid());
 	return (0);
