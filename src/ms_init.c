@@ -6,13 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/16 13:05:00 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 18:23:34 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include "libft.h"
-#include "fatal_error.h"
+#include "ms_data.h"
 
 static char	*get_path(t_ms_data *msd)
 {
@@ -33,5 +33,4 @@ void		ms_init(t_ms_data *msd, char **env)
 	msd->envc = env ? ft_wtlen(msd->env) : 0;
 	msd->envsize = env ? msd->envc + 1 : 0;
 	msd->path = get_path(msd);
-	flush_msd(LOAD_MSD, msd);
 }

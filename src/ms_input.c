@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/16 18:10:31 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/16 19:08:27 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void		ms_input(t_ms_data *msd)
 	print_prompt(msd);
 	if ((p = fork()) == -1)
 		frexit();
-	if (!p)
+	else if (!p)
 		read_input(msd, fildes);
-	if (wait(&ret) == -1)
+	else if (wait(&ret) == -1)
 		frexit();
 	msd->input_buffer = !ret ? get_input(fildes) : NULL;
 	close(fildes[0]);
