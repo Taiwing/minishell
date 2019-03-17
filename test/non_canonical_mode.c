@@ -2,10 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <termios.h>
+#include <signal.h>
 
 /* Use this variable to remember original terminal attributes. */
 
 struct termios saved_attributes;
+
+int		sighand(int sig)
+{
+	static int	c = 0;
+
+	if (sig == SIGINT)
+		c = '\003';
+	else if (sig == SIGHUP)
+		c = '\032';
+	else if (sig == SIGQUIT)
+		c = '\034';
+	else if (!sig)
+		c = 0;
+	else if (sig == 42)
+		return (c);
+	return (0);
+}
 
 void	reset_input_mode (void)
 {
@@ -29,7 +47,7 @@ void	set_input_mode (void)
 
 	/* Set the funny terminal modes. */
 	tcgetattr (STDIN_FILENO, &tattr);
-	tattr.c_lflag &= ~(ICANON|ECHO); /* Clear ICANON and ECHO. */
+	tattr.c_lflag &= ~(ICANON|ECHO|ISIG); /* Clear ICANON and ECHO and ISIG. */
 	tattr.c_cc[VMIN] = 1;
 	tattr.c_cc[VTIME] = 0;
 	tcsetattr (STDIN_FILENO, TCSAFLUSH, &tattr);
@@ -41,11 +59,36 @@ int	main (void)
 
 	set_input_mode ();
 
+	signal(SIGINT, (void(*)(int))sighand);
+	signal(SIGHUP, (void(*)(int))sighand);
+	signal(SIGQUIT, (void(*)(int))sighand);
+
 	while (1)
 	{
 		read (STDIN_FILENO, &c, 1);
-		if (c == '\004')			/* C-d */
+		if (sighand(42))
+		{
+			printf("SIGNAL: %o\n", (unsigned int)sighand(42));
+			fflush(stdout);
+			sighand(0);
+		}
+		if (c == '\003')			/* C-c */
+		{
+			printf("Ctrl + C\n");
+			fflush(stdout);
+		}
+		else if (c == '\004')		/* C-d */
 			break;
+		else if (c == '\032')		/* C-z */
+		{
+			printf("Ctrl + Z\n");
+			fflush(stdout);
+		}
+		else if (c == '\034')		/* C-\ */
+		{
+			printf("Ctrl + \\\n");
+			fflush(stdout);
+		}
 		else if (c == '\177')		/*backspace*/
 		{
 			putchar('\010');

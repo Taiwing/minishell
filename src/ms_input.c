@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/16 19:40:21 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/17 11:26:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,31 @@
 #include <signal.h>
 #include "ms_data.h"
 
+void		ms_restart(int iargc, char **iargv, char **ienv, int rs_do)
+{
+	int		argc = 0;
+	char	**argv = NULL;
+	char	**env = NULL;
+
+	if (rs_do == MS_LOAD)
+	{
+		argc = iargc;
+		argv = iargv;
+		ienv = env;
+	}
+	else if (rs_do == MS_RESTART)
+	{
+		if (execve(argv[0], argv, env) == -1)
+			frexit();
+	}
+}
+
 static void	restart_input(int sig)
 {
 	(void)sig;
-	write(1, "\n", 1);
-	frexit();
+	//write(1, "\n", 1);
+	heap_collector(NULL, HS_FREE);
+	ms_restart(0, NULL, NULL, MS_RESTART);
 }
 
 /*right now this function is pretty useless, but there are
@@ -29,55 +49,12 @@ static void	print_prompt(t_ms_data *msd)
 	ft_printf("$> ");
 }
 
-static void	read_input(t_ms_data *msd, int fildes[2])
+void		ms_input(t_ms_data *msd)
 {
-	int	size;
-
-	size = 0;
+	print_prompt(msd);
 	signal(SIGINT, restart_input);
 	get_next_line(0, &msd->input_buffer);
 	signal(SIGINT, SIG_IGN);
-	size = msd->input_buffer ? ft_strlen(msd->input_buffer) + 1 : 0;
-	write(fildes[1], &size, sizeof(int));
-	if (size)
-		write(fildes[1], msd->input_buffer, size);
-	heap_collector(NULL, HS_FREE);
-	exit(EXIT_SUCCESS);
-}
-
-static char	*get_input(int fildes[2])
-{
-	char	*buf;
-	int		size;
-
-	buf = NULL;
-	read(fildes[0], &size, sizeof(int));
-	if (size)
-	{
-		buf = (char *)ft_secmalloc(size * sizeof(char));
-		read(fildes[0], buf, size);
-		ft_printf("input is: '%s'\n", buf);
-	}
-	return (buf);
-}
-
-void		ms_input(t_ms_data *msd)
-{
-	pid_t	p;
-	int		ret;
-	int		fildes[2];
-
-	ret = 0;
-	if (pipe(fildes))
-		frexit();
-	print_prompt(msd);
-	if ((p = fork()) == -1)
-		frexit();
-	else if (!p)
-		read_input(msd, fildes);
-	else if (wait(&ret) == -1)
-		frexit();
-	msd->input_buffer = !ret ? get_input(fildes) : NULL;
-	close(fildes[0]);
-	close(fildes[1]);
+	if (msd->input_buffer)
+		ft_printf("input is: '%s'\n", msd->input_buffer);
 }

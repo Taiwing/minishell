@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/16 19:08:36 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/17 10:40:43 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct		s_ms_command
 	char			**env;
 }					t_ms_command;
 
+enum				rs_do {MS_LOAD, MS_RESTART};
+
+void				ms_restart(int iargc, char **iargv, char **ienv, int rs_do);
 void				ms_init(t_ms_data *msd, char **env);
 void				ms_input(t_ms_data *msd);
 void				ms_parse(t_ms_data *msd);

@@ -1,27 +1,26 @@
 #include "ms_data.h"
 
-int	main(int argc, char **argv, char **env)
+int		main(int argc, char **argv, char **env)
 {
 	t_ms_data	msd;
 
-	(void)argc;
-	(void)argv;
+	ms_restart(argc, argv, env, MS_LOAD);
 	ms_init(&msd, env);
 	while (1)
 	{
 		ms_input(&msd);
+		//TEMP
 		if (msd.input_buffer)
 		{
-			//TEMP
 			if (!ft_strcmp(msd.input_buffer, "exit"))
 			{
 				heap_collector(NULL, HS_FREE);
 				break ;
 			}
-			//TEMP
 			free(heap_collector(msd.input_buffer, HS_GET));
 			msd.input_buffer = NULL;
 		}
+		//TEMP
 /*		if (msd.input_buffer)
 			ms_parse(&msd);
 		if (msd.cmd_list)
