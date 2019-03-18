@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 15:17:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/16 16:14:00 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/18 09:11:06 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		malloc_sigint(int sig)
 
 void	frexit(void)
 {
+	ft_reset_input_mode(RESET_ATTR);
 	heap_collector(NULL, HS_FREE);
 //	dir_heap_collector(NULL, HS_FREE);
 	exit(EXIT_FAILURE);

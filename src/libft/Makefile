@@ -1,8 +1,8 @@
 ############################## COMPILE VAR #####################################
 
 CC			=	gcc
-#CFLAGS		=	-Wall -Wextra -Werror
-CFLAGS		=	-g
+CFLAGS		=	-Wall -Wextra -Werror
+#CFLAGS		=	-g
 HDIR		=	includes
 SRCDIR		=	src
 HFLAGS		=	-I $(HDIR)
@@ -66,6 +66,7 @@ SRCC			=	ft_atoi.c\
 					ft_putnbr_fd.c\
 					ft_putstr.c\
 					ft_putstr_fd.c\
+					ft_reset_input_mode.c\
 					ft_secmalloc.c\
 					ft_split_whitespaces.c\
 					ft_stradd.c\
@@ -276,6 +277,8 @@ ft_putnbr.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_putnbr_fd.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_putstr.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_putstr_fd.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
+ft_reset_input_mode.o: libft.h get_next_line.h ft_getopt.h ft_printf.h\
+	t_pbuf.h
 ft_secmalloc.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_split_whitespaces.o: libft.h get_next_line.h ft_getopt.h ft_printf.h\
 	t_pbuf.h
@@ -311,6 +314,7 @@ ft_strtrim.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_tolower.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_toupper.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 ft_wtdup.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
+ft_wtfree.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 get_next_line.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 heap_collector.o: libft.h get_next_line.h ft_getopt.h ft_printf.h t_pbuf.h
 %.o: %.c

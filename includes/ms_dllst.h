@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_input.c                                         :+:      :+:    :+:   */
+/*   ms_dllst.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/18 12:42:35 by yforeau          ###   ########.fr       */
+/*   Created: 2019/03/18 11:44:58 by yforeau           #+#    #+#             */
+/*   Updated: 2019/03/18 12:38:04 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <signal.h>
-#include "ms_data.h"
+#ifndef MS_DLLST_H
+# define MS_DLLST_H
 
-/*right now this function is pretty useless, but there are
-  cool and easy bonuses to do here*/
-static void	print_prompt(t_ms_data *msd)
+typedef struct		s_dllst
 {
-	(void)msd;
-	ft_printf("$> ");
-}
+	struct s_dllst	*prev;
+	struct s_dllst	*next;
+	char			c;
+}					t_dllst;
 
-void		ms_input(t_ms_data *msd)
-{
-	print_prompt(msd);
-	get_next_line(0, &msd->input_buffer);
-	if (msd->input_buffer)
-		ft_printf("input is: '%s'\n", msd->input_buffer);
-}
+t_dllst				*dllst_new(char c);
+t_dllst				*dllst_insert(t_dllst **alst, char c);
+void				dllst_remove(t_dllst **alst);
+
+#endif

@@ -59,7 +59,7 @@ int	main (void)
 
 	set_input_mode ();
 
-	signal(SIGINT, (void(*)(int))sighand);
+	signal(SIGINT, SIG_IGN);
 	signal(SIGHUP, (void(*)(int))sighand);
 	signal(SIGQUIT, (void(*)(int))sighand);
 

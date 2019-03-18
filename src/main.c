@@ -4,7 +4,8 @@ int		main(int argc, char **argv, char **env)
 {
 	t_ms_data	msd;
 
-	ms_restart(argc, argv, env, MS_LOAD);
+	(void)argc;
+	(void)argv;
 	ms_init(&msd, env);
 	while (1)
 	{
@@ -14,6 +15,7 @@ int		main(int argc, char **argv, char **env)
 		{
 			if (!ft_strcmp(msd.input_buffer, "exit"))
 			{
+				ft_reset_input_mode(RESET_ATTR);
 				heap_collector(NULL, HS_FREE);
 				break ;
 			}
