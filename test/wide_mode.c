@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <termios.h>
 #include <signal.h>
+#include <strings.h>
 
 /* Use this variable to remember original terminal attributes. */
 
@@ -55,7 +56,8 @@ void	set_input_mode (void)
 
 int	main (void)
 {
-	char c;
+	char	c[6];
+	int		rd;
 
 	set_input_mode ();
 
@@ -65,31 +67,38 @@ int	main (void)
 
 	while (1)
 	{
-		read (STDIN_FILENO, &c, 1);
-		if (sighand(42))
+		bzero(c, 6);
+		if ((rd = read (STDIN_FILENO, c, 6)) == -1)
+			break ;
+		else if (rd > 1)
+		{
+			printf("special char: %*s\n", rd, c);
+			fflush(stdout);
+		}
+		/*if (sighand(42))
 		{
 			printf("SIGNAL: %o\n", (unsigned int)sighand(42));
 			fflush(stdout);
 			sighand(0);
-		}
-		if (c == '\003')			/* C-c */
+		}*/
+		else if (*c == '\003')		/* C-c */
 		{
 			printf("Ctrl + C\n");
 			fflush(stdout);
 		}
-		else if (c == '\004')		/* C-d */
+		else if (*c == '\004')		/* C-d */
 			break;
-		else if (c == '\032')		/* C-z */
+		else if (*c == '\032')		/* C-z */
 		{
 			printf("Ctrl + Z\n");
 			fflush(stdout);
 		}
-		else if (c == '\034')		/* C-\ */
+		else if (*c == '\034')		/* C-\ */
 		{
 			printf("Ctrl + \\\n");
 			fflush(stdout);
 		}
-		else if (c == '\177')		/*backspace*/
+		else if (*c == '\177')		/*backspace*/
 		{
 			putchar('\010');
 			putchar(' ');
@@ -98,8 +107,8 @@ int	main (void)
 		}
 		else
 		{
-			putchar (c);
-			printf("\nascii value: %d\n", (int)c);
+			putchar (*c);
+			printf("\nascii value: %d\n", (int)*c);
 			fflush(stdout);
 		}
 	}

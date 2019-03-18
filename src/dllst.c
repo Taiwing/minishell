@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_dllst.c                                         :+:      :+:    :+:   */
+/*   dllst.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/18 11:56:32 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/18 12:42:13 by yforeau          ###   ########.fr       */
+/*   Created: 2019/03/18 14:31:06 by yforeau           #+#    #+#             */
+/*   Updated: 2019/03/18 14:31:32 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_dllst.h"
+#include "dllst.h"
 #include "libft.h"
-
-//TODO: dllst_del to delete the list and dllst_to_str to push it to a string
 
 t_dllst	*dllst_new(char c)
 {
@@ -65,4 +63,19 @@ void	dllst_remove(t_dllst **alst)
 		next->prev = prev;
 	free(*alst);
 	*alst = prev ? prev : next;
+}
+
+void	dllst_del(t_dllst *lst)
+{
+	if (!lst)
+		return ;
+	dllst_del(lst->next);
+	free(lst);
+}
+
+t_dllst	*dllst_first(t_dllst *lst)
+{
+	while (lst && lst->prev)
+		lst = lst->prev;
+	return (lst);
 }
