@@ -1,0 +1,12 @@
+- fix backspace on tab: tab has a variable length which I don't know at the
+  moment I am erasing it from the buffer, so the output doesnt match the ddlst
+  content.
+- reprint what is after the backspace with 1 space after it to erase the last
+  character of the line (more than 1 space must be printed if a tab is printed)
+- implement forward deletion (with delete-> key)
+- also reprint what's after when forward deleting
+- reprint when inserting in the middle of the input (if *lst && (*lst)->next)
+- be careful to keep the cursor coherent (maybe check out with termios)
+- make it possible to erase the first character (it's impossible for now
+  because there is no element in the list before the first, so it just
+  does not do it, maybe create an execption or a head for the list)

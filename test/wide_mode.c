@@ -56,7 +56,7 @@ void	set_input_mode (void)
 
 int	main (void)
 {
-	char	c[6];
+	char	c[16];
 	int		rd;
 
 	set_input_mode ();
@@ -67,12 +67,15 @@ int	main (void)
 
 	while (1)
 	{
-		bzero(c, 6);
-		if ((rd = read (STDIN_FILENO, c, 6)) == -1)
+		bzero(c, 16);
+		if ((rd = read (STDIN_FILENO, c, 16)) == -1)
 			break ;
 		else if (rd > 1)
 		{
-			printf("special char: %*s\n", rd, c);
+			printf("special char:");
+			for (int i = 0; i < rd; ++i)
+				printf(" %d", (int)c[i]);
+			printf("\n");
 			fflush(stdout);
 		}
 		/*if (sighand(42))
