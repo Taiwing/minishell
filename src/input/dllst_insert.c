@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dllst.c                                            :+:      :+:    :+:   */
+/*   dllst_insert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/18 14:31:06 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/19 14:03:42 by yforeau          ###   ########.fr       */
+/*   Created: 2019/03/21 13:49:09 by yforeau           #+#    #+#             */
+/*   Updated: 2019/03/21 13:58:21 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_dllst	*dllst_new(char c)
 	return (new);
 }
 
-t_dllst	*dllst_insert(t_dllst **alst, char c)
+t_dllst	*dllst_insert_forwd(t_dllst **alst, char c)
 {
 	t_dllst	*new;
 
@@ -44,38 +44,16 @@ t_dllst	*dllst_insert(t_dllst **alst, char c)
 	return (new);
 }
 
-/*
-** delete current element and replace it by the preceding one
-** or the next if there is no previous element
-*/
-void	dllst_remove(t_dllst **alst)
+t_dllst	*dllst_insert_back(t_dllst **alst, char c)
 {
-	t_dllst	*prev;
-	t_dllst	*next;
+	t_dllst	*new;
 
-	if (!alst || !*alst)
-		return ;
-	prev = (*alst)->prev;
-	next = (*alst)->next;
-	if (prev)
-		prev->next = next;
-	if (next)
-		next->prev = prev;
-	free(heap_collector(*alst, HS_GET));
-	*alst = prev ? prev : next;
-}
-
-void	dllst_del(t_dllst *lst)
-{
-	if (!lst)
-		return ;
-	dllst_del(lst->next);
-	free(heap_collector(lst, HS_GET));
-}
-
-t_dllst	*dllst_first(t_dllst *lst)
-{
-	while (lst && lst->prev)
-		lst = lst->prev;
-	return (lst);
+	if (!alst || !(new = dllst_new(c)))
+		return (NULL);
+	new->next = *alst;
+	if (*alst)
+		(*alst)->prev = new;
+	new->prev = NULL;
+	*alst = new;
+	return (new);
 }

@@ -6,14 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/18 14:28:47 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/21 19:06:52 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MS_DATA
 # define MS_DATA
-
-# define INPUT_CONTROL_CHARS	"\003\004\177\n"
 
 # include "libft.h"
 

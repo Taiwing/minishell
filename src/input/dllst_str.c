@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:32:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/18 14:47:59 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/21 19:01:55 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_dllst	*str_to_dllst(char *str)
 	lst = NULL;
 	while (str && *str)
 	{
-		if (!dllst_insert(&lst, *str++))
+		if (!dllst_insert_forwd(&lst, *str++))
 		{
 			dllst_del(dllst_first(lst));
 			return (NULL);
