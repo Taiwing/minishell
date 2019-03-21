@@ -12,19 +12,32 @@ NAME		=	minishell
 
 ############################## SOURCES #########################################
 
-SRCC			=	dllst.c\
-					dllst_str.c\
-					main.c\
-					ms_cmd.c\
+EXECTIONDIR		=	exection
+INPUTDIR		=	input
+PARSINGDIR		=	parsing
+
+SRCC			=	main.c\
 					ms_init.c\
+
+EXECTIONC		=	
+INPUTC			=	dllst.c\
+					dllst_str.c\
 					ms_input.c\
 
+PARSINGC		=	ms_cmd.c\
+
 ODIR			=	obj
-OBJ				=	$(patsubst %.c,%.o,$(SRCC))
+OBJ				=	$(patsubst %.c,%.o,$(EXECTIONC))\
+					$(patsubst %.c,%.o,$(INPUTC))\
+					$(patsubst %.c,%.o,$(PARSINGC))\
+					$(patsubst %.c,%.o,$(SRCC))\
 
 vpath			%.o	$(ODIR)
 vpath			%.h	$(HDIR)
 vpath			%.h	$(SRCDIR)/$(SUB1D)/$(HDIR)
+vpath			%.c	$(SRCDIR)/$(EXECTIONDIR)
+vpath			%.c	$(SRCDIR)/$(INPUTDIR)
+vpath			%.c	$(SRCDIR)/$(PARSINGDIR)
 vpath			%.c	$(SRCDIR)
 
 ############################## BUILD ###########################################
@@ -39,10 +52,10 @@ libft.a:
 
 dllst.o: dllst.h libft.h
 dllst_str.o: dllst.h libft.h
-main.o: ms_data.h libft.h
-ms_cmd.o: ms_cmd.h ms_data.h libft.h
-ms_init.o: libft.h ms_data.h
 ms_input.o: ms_data.h libft.h dllst.h
+main.o: ms_data.h libft.h
+ms_init.o: libft.h ms_data.h
+ms_cmd.o: ms_cmd.h ms_data.h libft.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 

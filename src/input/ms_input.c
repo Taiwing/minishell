@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/19 15:34:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/21 09:43:45 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static void	print_prompt(t_ms_data *msd)
 {
 	(void)msd;
-	ft_printf("$> ");
+	ft_dprintf(0, "$> ");
 }
 
 static int	exec_input_control_char(t_ms_data *msd, t_dllst **lst, char c)
@@ -35,14 +35,14 @@ static int	exec_input_control_char(t_ms_data *msd, t_dllst **lst, char c)
 	else if (c == '\004' && !*lst)		/* Ctrl + D */
 	{
 		msd->input_buffer = ft_strdup("exit");
-		ft_putstr("exit");
+		ft_putstr_fd("exit", 0);
 		return (1);
 	}
 	else if (c == '\177' && *lst)		/* backspace */
 	{
 		if ((*lst)->c == '\t')
-			ft_putstr("\10\10\10\10");
-		ft_putstr("\010 \010");
+			ft_putstr_fd("\10\10\10\10", 0);
+		ft_putstr_fd("\010 \010", 0);
 		dllst_remove(lst);
 	}
 	return (0);
@@ -61,14 +61,14 @@ static void	handle_multibyte_chars(char c[8], int rd, t_dllst **lst)
 			*lst = (*lst)->next;
 			write(1, c, rd);
 		}
-		else if (c[2] == 68 && *lst && (*lst)->prev)		/*LEFT*/
+		else if (c[2] == 68 && *lst && (*lst)->prev)	/*LEFT*/
 		{
 			*lst = (*lst)->prev;
 			write(1, c, rd);
 		}
-		else if (c[2] == 70)	/*end*/
+		else if (c[2] == 70)							/*end*/
 			return ;
-		else if (c[2] == 72)	/*home*/
+		else if (c[2] == 72)							/*home*/
 			return ;
 	}
 	else if (rd == 4 && c[0] == 27 && c[1] == 91 && c[2] == 51 && c[3] == 126)
@@ -96,7 +96,7 @@ void		ms_input(t_ms_data *msd)
 		}
 		else
 		{
-			write(1, c, 1);
+			write(0, c, 1);
 			dllst_insert(&lst, *c);
 		}
 		ft_bzero(c, 8);
@@ -105,7 +105,7 @@ void		ms_input(t_ms_data *msd)
 		dllst_to_str(dllst_first(lst)) : msd->input_buffer;
 	dllst_del(dllst_first(lst));
 	if (msd->input_buffer && ft_strcmp(msd->input_buffer, "exit"))
-		ft_printf("\ninput is: '%s'\n", msd->input_buffer);
+		ft_dprintf(0, "\ninput is: '%s'\n", msd->input_buffer);
 	else
-		write(1, "\n", 1);
+		write(0, "\n", 1);
 }
