@@ -12,18 +12,17 @@ NAME		=	minishell
 
 ############################## SOURCES #########################################
 
-EXECUTIONDIR	=	execution
 INPUTDIR		=	input
 PARSINGDIR		=	parsing
 
 SRCC			=	main.c\
 					ms_init.c\
 
-EXECUTIONC		=	
 INPUTC			=	char_functions_1.c\
 					char_functions_2.c\
 					char_functions_3.c\
 					charfunc.c\
+					charfunc_utils.c\
 					dllst_insert.c\
 					dllst_move.c\
 					dllst_remove.c\
@@ -33,15 +32,13 @@ INPUTC			=	char_functions_1.c\
 PARSINGC		=	ms_cmd.c\
 
 ODIR			=	obj
-OBJ				=	$(patsubst %.c,%.o,$(EXECUTIONC))\
-					$(patsubst %.c,%.o,$(INPUTC))\
+OBJ				=	$(patsubst %.c,%.o,$(INPUTC))\
 					$(patsubst %.c,%.o,$(PARSINGC))\
 					$(patsubst %.c,%.o,$(SRCC))\
 
 vpath			%.o	$(ODIR)
 vpath			%.h	$(HDIR)
 vpath			%.h	$(SRCDIR)/$(SUB1D)/$(HDIR)
-vpath			%.c	$(SRCDIR)/$(EXECUTIONDIR)
 vpath			%.c	$(SRCDIR)/$(INPUTDIR)
 vpath			%.c	$(SRCDIR)/$(PARSINGDIR)
 vpath			%.c	$(SRCDIR)
@@ -60,6 +57,7 @@ char_functions_1.o: charfunc.h dllst.h ms_data.h libft.h
 char_functions_2.o: charfunc.h dllst.h ms_data.h libft.h
 char_functions_3.o: charfunc.h dllst.h ms_data.h libft.h
 charfunc.o: charfunc.h dllst.h ms_data.h libft.h
+charfunc_utils.o: charfunc.h dllst.h ms_data.h libft.h
 dllst_insert.o: dllst.h libft.h
 dllst_move.o: dllst.h libft.h
 dllst_remove.o: dllst.h libft.h

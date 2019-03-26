@@ -33,5 +33,6 @@ t_dllst				*dllst_last(t_dllst *lst);
 size_t				dllstlen(t_dllst *lst);
 char				*dllst_to_str(t_dllst *lst);
 t_dllst				*str_to_dllst(char *str);
+size_t				dllst_print(t_dllst *lst);
 
 #endif

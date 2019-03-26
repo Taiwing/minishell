@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:01:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/21 18:34:55 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/26 19:24:37 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	insert_char(char *c, int rd, t_dllst **lst, t_ms_data *msd)
 	(void)msd;
 	write(0, c, 1);
 	dllst_insert_forwd(lst, *c);
+	if ((*lst)->next)
+		reprint_line((*lst)->next);
 	return (CONTINUE_INPUT);
 }
 
@@ -50,5 +52,7 @@ int	back_delete(char *c, int rd, t_dllst **lst, t_ms_data *msd)
 	(void)msd;
 	ft_putstr_fd("\010 \010", 0);
 	dllst_remove_back(lst);
+	if (*lst)
+		reprint_line((*lst)->next);
 	return (CONTINUE_INPUT);
 }

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:32:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/21 19:01:55 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/26 18:56:50 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,31 @@ t_dllst	*str_to_dllst(char *str)
 		}
 	}
 	return (dllst_first(lst));
+}
+
+size_t	dllst_print(t_dllst *lst)
+{
+	char	buf[256];
+	size_t	size;
+	size_t	ret;
+
+	ret = 0;
+	size = 0;
+	while (lst)
+	{
+		if (size == 256)
+		{
+			write(0, buf, size);
+			ret += size;
+			size = 0;
+		}
+		buf[size++] = lst->c;
+		lst = lst->next;
+	}
+	if (size)
+	{
+		write(0, buf, size);
+		ret += size;
+	}
+	return (ret);
 }
