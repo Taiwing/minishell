@@ -23,8 +23,8 @@
 
 # define UP_ARROW		11
 # define DOWN_ARROW		12
-# define LEFT_ARROW		13
-# define RIGHT_ARROW	14
+# define RIGHT_ARROW	13
+# define LEFT_ARROW		14
 # define HOME_KEY		15
 # define END_KEY		16
 # define DELETE_KEY		17
