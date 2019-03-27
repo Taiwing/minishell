@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/21 19:08:10 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/27 13:01:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ void		ms_input(t_ms_data *msd)
 	int		rd;
 	char	c[8];
 	t_dllst	*lst;
+	int		bol;
 
+	bol = 1;
 	lst = NULL;
 	print_prompt(msd);
-	while (g_charfunc[ms_getchar(c, &rd)](c, rd, &lst, msd))
+	while (g_charfunc[ms_getchar(c, &rd)](c, &bol, &lst, msd))
 		ft_bzero(c, 8);
 	msd->input_buffer = !msd->input_buffer ?
 		dllst_to_str(dllst_first(lst)) : msd->input_buffer;

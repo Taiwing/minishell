@@ -1,6 +1,4 @@
 - implement forward deletion (with delete-> key)
 - also reprint what's after when forward deleting
 - be careful to keep the cursor coherent (maybe check out with termios)
-- make it possible to move past the first character (it's impossible for now
-  because there is no element in the list before the first, so it just
-  does not do it, maybe create an exception or a head for the list)
+- make it not possible to go past the first character when deleting
