@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:01:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/27 13:37:37 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/27 17:51:28 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,12 @@ int	back_delete(char *c, int *bol, t_dllst **lst, t_ms_data *msd)
 	(void)msd;
 	if (!*bol)
 	{
+		if (!(*lst)->prev)
+			*bol = 1;
 		ft_putstr_fd("\010 \010", 0);
 		dllst_remove_back(lst);
-		if (*lst && (*lst)->prev)
-			reprint_line((*lst)->next);
-		else
-		{
-			*bol = 1;
-			if (*lst)
-				reprint_line(*lst);
-		}
+		if (*lst)
+			reprint_line(*bol ? *lst : (*lst)->next);
 	}
 	return (CONTINUE_INPUT);
 }
