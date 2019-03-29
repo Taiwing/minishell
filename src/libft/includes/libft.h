@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 01:54:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/18 09:08:17 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/28 13:12:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include "get_next_line.h"
 # include "ft_getopt.h"
 # include "ft_printf.h"
+# ifdef NO_COLLEC
+void					*ft_secmalloc(size_t size);
+# else
+#  include "ft_collector.h"
+# endif
 
 typedef unsigned char	t_uchar;
 
@@ -134,17 +139,5 @@ int						ft_intlen(intmax_t n);
 int						ft_wtlen(char **wt);
 char					**ft_wtdup(char **wt);
 void					ft_wtfree(char **wt);
-
-# define CHECK_SIG		424242
-enum					hs_do {HS_ADD, HS_GET, HS_FREE};
-enum					attr_ops {SAVE_ATTR, RESET_ATTR};
-void					**check_heap_size(void **heap_stack,
-											size_t *size, size_t i);
-void					*get_heap_ptr(void **heap_stack, size_t *i, void *ptr);
-void					*heap_collector(void *ptr, int hs_do);
-//void					*dir_heap_collector(void *ptr, int hs_do);
-void					frexit(void);
-void					*ft_secmalloc(size_t size);
-void					ft_reset_input_mode(int op);
 
 #endif

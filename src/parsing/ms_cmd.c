@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 14:22:44 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/16 12:35:40 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/29 20:40:50 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	del_cmd(void *cmd_ptr, size_t size)
 	cmd = (t_ms_cmd *)cmd_ptr;
 	ft_wtfree(cmd->argv);
 	ft_wtfree(cmd->env);
-	free(heap_collector(cmd, HS_GET));
+	free(ft_heap_collector(cmd, FT_COLLEC_GET));
 }

@@ -1,4 +1,7 @@
+GLOBAL:
+- simplify signal handling
+
+INPUT:
 - implement forward deletion (with delete-> key)
 - also reprint what's after when forward deleting
-- be careful to keep the cursor coherent (maybe check out with termios)
-- make it not possible to go past the first character when deleting
+- be careful to keep the cursor coherent

@@ -15,11 +15,11 @@ int		main(int argc, char **argv, char **env)
 		{
 			if (!ft_strcmp(msd.input_buffer, "exit"))
 			{
-				ft_reset_input_mode(RESET_ATTR);
-				heap_collector(NULL, HS_FREE);
+				ft_atexit(NULL);
+				ft_heap_collector(NULL, FT_COLLEC_FREE);
 				break ;
 			}
-			free(heap_collector(msd.input_buffer, HS_GET));
+			free(ft_heap_collector(msd.input_buffer, FT_COLLEC_GET));
 			msd.input_buffer = NULL;
 		}
 		//TEMP

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:03:57 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/21 14:14:32 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/29 20:39:28 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	dllst_remove_back(t_dllst **alst)
 		prev->next = next;
 	if (next)
 		next->prev = prev;
-	free(heap_collector(*alst, HS_GET));
+	free(ft_heap_collector(*alst, FT_COLLEC_GET));
 	*alst = prev ? prev : next;
 }
 
@@ -49,5 +49,5 @@ void	dllst_del(t_dllst *lst)
 	if (!lst)
 		return ;
 	dllst_del(lst->next);
-	free(heap_collector(lst, HS_GET));
+	free(ft_heap_collector(lst, FT_COLLEC_GET));
 }

@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reset_input_mode.c                              :+:      :+:    :+:   */
+/*   ft_secmalloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/18 09:03:47 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/18 09:13:54 by yforeau          ###   ########.fr       */
+/*   Created: 2019/03/28 08:10:46 by yforeau           #+#    #+#             */
+/*   Updated: 2019/03/28 13:15:40 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <termios.h>
+#include <stdlib.h>
 
-//TODO: check where this function can fail
-void	ft_reset_input_mode(int op)
+#ifdef NO_COLLEC
+# include <string.h>
+
+void	*ft_secmalloc(size_t size)
 {
-	static struct termios	*tattr = NULL;
-
-	if (op == SAVE_ATTR)
-	{
-		tattr = (struct termios *)ft_secmalloc(sizeof(struct termios));
-		tcgetattr(0, tattr);
-	}
-	else if (op == RESET_ATTR && tattr)
-		tcsetattr(0, TCSANOW, tattr);	
+	return (malloc(size));
 }
+
+# else
+# include "ft_collector.h"
+
+void	*ft_secmalloc(size_t size)
+{
+	void	*ptr;
+
+	if (!(ptr = malloc(size)))
+		ft_exit("malloc failure", EXIT_FAILURE);
+	ft_heap_collector(ptr, FT_COLLEC_ADD);
+	return (ptr);
+}
+
+#endif

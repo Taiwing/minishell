@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 05:57:41 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/16 12:19:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/29 20:00:35 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	ambig_option_puterr(char **argv, char *prefix,
 	getopt_puterr("' is ambiguous");
 }
 
+#ifdef NO_COLLEC
+
 void		print_ambig_error(t_optdata *d, unsigned char *ambig_set,
 							char **argv, char *prefix)
 {
@@ -48,11 +50,41 @@ void		print_ambig_error(t_optdata *d, unsigned char *ambig_set,
 		}
 		getopt_puterr("\n");
 	}
-	free(heap_collector(ambig_set, HS_GET));
+	free(ambig_set);
 	d->nextchar = "\0";
 	++d->optind;
 	d->optopt = 0;
 }
+
+#else
+
+void		print_ambig_error(t_optdata *d, unsigned char *ambig_set,
+							char **argv, char *prefix)
+{
+	int	i;
+
+	if (d->opterr)
+	{
+		ambig_option_puterr(argv, prefix, d, ambig_set);
+		if (ambig_set)
+		{
+			getopt_puterr("; possiblities:");
+			i = -1;
+			while (++i < d->lopts_len)
+			{
+				if (ambig_set[i])
+					option_puterr(prefix, d->longopts[i].name);
+			}
+		}
+		getopt_puterr("\n");
+	}
+	free(ft_heap_collector(ambig_set, FT_COLLEC_GET));
+	d->nextchar = "\0";
+	++d->optind;
+	d->optopt = 0;
+}
+
+#endif
 
 int			unknown_long_option_error(t_optdata *d, char **argv, char *prefix)
 {

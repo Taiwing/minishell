@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/27 13:01:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/29 20:40:17 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ms_getchar(char c[8], int *rd)
 	int	i;
 	
 	if ((*rd = read(0, c, 8)) == -1)
-		frexit();
+		ft_exit("read_error", EXIT_FAILURE);
 	if (*rd == 1 && (c[0] > 31 || ft_strchr(INPUT_CONTROL_CHARS, c[0])))
 		return (c[0]);
 	else if (*rd > 1)
