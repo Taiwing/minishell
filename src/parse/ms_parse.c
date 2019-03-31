@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 21:07:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/31 01:35:14 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/31 17:05:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,17 @@ void		ms_parse(t_ms_data *msd)
 	char	*next;
 
 	if ((next = ft_strchr(msd->input_buffer, ';')))
+	{
+		cur = ft_strndup(msd->input_buffer, next - msd->input_buffer);
 		next = ft_strdup(next + 1);
-	cur = next ? ft_strndup(msd->input_buffer, next - msd->input_buffer)
-		: msd->input_buffer;
+	}
+	else
+		cur = msd->input_buffer;
 	msd->cmd = build_arg_vector(cur);
 	ft_memdel((void **)&msd->input_buffer);
 	if (next)
 	{
-		free(cur);
+		free(ft_heap_collector(cur, FT_COLLEC_GET));
 		msd->input_buffer = next;
 	}
 }
