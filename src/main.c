@@ -9,7 +9,8 @@ int		main(int argc, char **argv, char **env)
 	ms_init(&msd, env);
 	while (1)
 	{
-		ms_input(&msd);
+		if (!msd.input_buffer)
+			ms_input(&msd);
 		//TEMP
 		if (msd.input_buffer)
 		{
@@ -19,14 +20,11 @@ int		main(int argc, char **argv, char **env)
 				ft_heap_collector(NULL, FT_COLLEC_FREE);
 				break ;
 			}
-			free(ft_heap_collector(msd.input_buffer, FT_COLLEC_GET));
-			msd.input_buffer = NULL;
 		}
-		//TEMP
-/*		if (msd.input_buffer)
+		if (msd.input_buffer)
 			ms_parse(&msd);
-		if (msd.cmd_list)
-			ms_execute(&msd);*/
+		if (msd.cmd)
+			ms_execute(&msd);
 	}
 	return (0);
 }

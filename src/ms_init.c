@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/29 21:12:36 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/03/31 00:15:32 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void		ms_init(t_ms_data *msd, char **env)
 	signal(SIGHUP, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	ft_exitmsg("minishell");
-	msd->cmd_list = NULL;
 	msd->input_buffer = NULL;
+	msd->cmd = NULL;
 	msd->env = env ? ft_wtdup(env) : NULL;
 	msd->envc = env ? ft_wtlen(msd->env) : 0;
 	msd->envsize = env ? msd->envc + 1 : 0;

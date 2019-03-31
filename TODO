@@ -1,6 +1,3 @@
-GLOBAL:
-- simplify signal handling
-
 INPUT:
 - implement forward deletion (with delete-> key)
 - also reprint what's after when forward deleting
