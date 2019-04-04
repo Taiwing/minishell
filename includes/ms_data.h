@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/31 00:15:15 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 13:46:15 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,5 @@ typedef struct		s_ms_data
 
 void				ms_init(t_ms_data *msd, char **env);
 void				ms_input(t_ms_data *msd);
-void				ms_parse(t_ms_data *msd);
-void				ms_execute(t_ms_data *msd);
 
 #endif

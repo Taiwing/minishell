@@ -20,11 +20,13 @@ int		main(int argc, char **argv, char **env)
 				ft_heap_collector(NULL, FT_COLLEC_FREE);
 				break ;
 			}
+			else
+				ft_memdel((void **)&msd.input_buffer);
 		}
-		if (msd.input_buffer)
+		/*if (msd.input_buffer)
 			ms_parse(&msd);
 		if (msd.cmd)
-			ms_execute(&msd);
+			ms_execute(&msd);*/
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/31 00:16:09 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 13:48:48 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		ms_input(t_ms_data *msd)
 		dllst_to_str(dllst_first(lst)) : msd->input_buffer;
 	dllst_del(dllst_first(lst));
 	if (msd->input_buffer && ft_strcmp(msd->input_buffer, "exit"))
-		ft_dprintf(0, "\ninput is: '%s'\n", msd->input_buffer);
+		ft_dprintf(0, "\n= '%s'\n", msd->input_buffer);
 	else
 		write(0, "\n", 1);
 }
