@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/31 00:15:32 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 23:20:00 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 #include <termios.h>
 #include "libft.h"
 #include "ms_data.h"
-
-static char	*get_path(t_ms_data *msd)
-{
-	char	**env;
-
-	env = msd->env;
-	while (env && ft_strncmp(*env, "PATH=", 5))
-		++env;
-	return (!env || !*env ? NULL : *env + 5);
-}
 
 //TODO: check where this function can fail
 static void	reset_input_mode(void)
@@ -51,12 +41,8 @@ void		ms_init(t_ms_data *msd, char **env)
 	signal(SIGHUP, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	ft_exitmsg("minishell");
-	msd->input_buffer = NULL;
-	msd->cmd = NULL;
 	msd->env = env ? ft_wtdup(env) : NULL;
 	msd->envc = env ? ft_wtlen(msd->env) : 0;
-	msd->envsize = env ? msd->envc + 1 : 0;
-	msd->path = get_path(msd);
 	reset_input_mode();
 	ft_atexit(reset_input_mode);
 }

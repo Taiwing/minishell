@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 17:46:27 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/27 13:02:51 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 22:45:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CHARFUNC_H
 
 # include "dllst.h"
-# include "ms_data.h"
+# include "ms_input.h"
 
 # define INPUT_CONTROL_CHARS	"\003\004\011\n"
 
@@ -33,24 +33,23 @@
 
 extern char	* const g_multibyte_chars[8];
 
-extern int	(* const g_charfunc[256])(char *c, int *bol,
-			t_dllst **lst, t_ms_data *msd);
+extern int	(* const g_charfunc[256])(t_input_data *idat, t_ms_data *msd);
 
 void	reprint_line(t_dllst *lst);
 
-int		discard_input(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		reset_input(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		end_of_transmission(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		tab_completion(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		new_line(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		last_cmd(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		next_cmd(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		move_right(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		move_left(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		move_beg(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		move_end(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		forwd_delete(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		insert_char(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
-int		back_delete(char *c, int *bol, t_dllst **lst, t_ms_data *msd);
+int		discard_input(t_input_data *idat, t_ms_data *msd);
+int		reset_input(t_input_data *idat, t_ms_data *msd);
+int		end_of_transmission(t_input_data *idat, t_ms_data *msd);
+int		tab_completion(t_input_data *idat, t_ms_data *msd);
+int		new_line(t_input_data *idat, t_ms_data *msd);
+int		last_cmd(t_input_data *idat, t_ms_data *msd);
+int		next_cmd(t_input_data *idat, t_ms_data *msd);
+int		move_right(t_input_data *idat, t_ms_data *msd);
+int		move_left(t_input_data *idat, t_ms_data *msd);
+int		move_beg(t_input_data *idat, t_ms_data *msd);
+int		move_end(t_input_data *idat, t_ms_data *msd);
+int		forwd_delete(t_input_data *idat, t_ms_data *msd);
+int		insert_char(t_input_data *idat, t_ms_data *msd);
+int		back_delete(t_input_data *idat, t_ms_data *msd);
 
 #endif

@@ -6,39 +6,36 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:00:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 21:08:45 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 23:14:04 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
+#include "libft.h"
 
-int	discard_input(char *c, int *bol, t_dllst **lst, t_ms_data *msd)
+int	discard_input(t_input_data *idat, t_ms_data *msd)
 {
-	(void)c;
-	(void)bol;
-	(void)lst;
 	(void)msd;
+	(void)idat;
 	return (CONTINUE_INPUT);
 }
 
-int	reset_input(char *c, int *bol, t_dllst **lst, t_ms_data *msd)
+int	reset_input(t_input_data *idat, t_ms_data *msd)
 {
-	(void)c;
-	(void)bol;
-	ft_memdel((void **)&msd->input_buffer);
-	dllst_del(dllst_first(*lst));
-	*lst = NULL;
+	(void)msd;
+	ft_memdel((void **)&idat->buf);
+	dllst_del(dllst_first(idat->lst));
+	idat->lst = NULL;
 	write(0, "\n", 1);
 	return (STOP_INPUT);
 }
 
-int	end_of_transmission(char *c, int *bol, t_dllst **lst, t_ms_data *msd)
+int	end_of_transmission(t_input_data *idat, t_ms_data *msd)
 {
-	(void)c;
-	(void)bol;
-	if (!*lst && !msd->input_buffer)
+	(void)msd;
+	if (!idat->lst && !idat->buf)
 	{
-		msd->input_buffer = ft_strdup("exit\n");
+		idat->buf = ft_strdup("exit\n");
 		ft_putstr_fd("exit\n", 0);
 		return (STOP_INPUT);
 	}
@@ -46,26 +43,21 @@ int	end_of_transmission(char *c, int *bol, t_dllst **lst, t_ms_data *msd)
 }
 
 /*like in bash, do nothing except completion stuff with tab*/
-int	tab_completion(char *c, int *bol, t_dllst **lst, t_ms_data *msd)
+int	tab_completion(t_input_data *idat, t_ms_data *msd)
 {
-	(void)c;
-	(void)bol;
-	(void)lst;
 	(void)msd;
+	(void)idat;
 	return (CONTINUE_INPUT);
 }
 
-int	new_line(char *c, int *bol, t_dllst **lst, t_ms_data *msd)
+int	new_line(t_input_data *idat, t_ms_data *msd)
 {
-	(void)c;
-	(void)bol;
-	
-	if ((*lst = dllst_last(*lst)))
-		insert_char(c, bol, lst, msd);
+	if ((idat->lst = dllst_last(idat->lst)))
+		insert_char(idat, msd);
 	else
 		write(0, "\n", 1);
-	msd->input_buffer = dllst_to_str(dllst_first(*lst));
-	dllst_del(dllst_first(*lst));
-	*lst = NULL;
+	idat->buf = dllst_to_str(dllst_first(idat->lst));
+	dllst_del(dllst_first(idat->lst));
+	idat->lst = NULL;
 	return (STOP_INPUT);
 }

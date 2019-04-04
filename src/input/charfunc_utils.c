@@ -6,10 +6,11 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:40:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/26 18:51:48 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 23:15:39 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "charfunc.h"
 
 /*

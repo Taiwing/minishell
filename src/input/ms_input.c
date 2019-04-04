@@ -6,11 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 21:13:47 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 23:16:37 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
+#include "libft.h"
 
 /*right now this function is pretty useless, but there are
   cool and easy bonuses to do here*/
@@ -41,15 +42,17 @@ static int	ms_getchar(char c[8])
 	return (0);
 }
 
-void		ms_input(t_ms_data *msd)
+char		*ms_input(t_ms_data *msd, int qmode)
 {
-	char	c[8];
-	t_dllst	*lst;
-	int		bol;
+	t_input_data	idat;
 
-	bol = 1;
-	lst = NULL;
+	idat.bol = 1;
+	idat.lst = NULL;
+	idat.buf = NULL;
+	idat.qmode = qmode;
+	ft_bzero(idat.c, 8);
 	print_prompt(msd);
-	while (g_charfunc[ms_getchar(c)](c, &bol, &lst, msd))
-		ft_bzero(c, 8);
+	while (g_charfunc[ms_getchar(idat.c)](&idat, msd))
+		ft_bzero(idat.c, 8);
+	return (idat.buf);
 }

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 17:10:47 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/27 13:04:06 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 23:07:27 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ char	* const g_multibyte_chars[8] = {
 	NULL
 };
 
-int		(* const g_charfunc[256])(char *c, int *bol,
-		t_dllst **lst, t_ms_data *msd) = {
+int		(* const g_charfunc[256])(t_input_data *idat, t_ms_data *msd) = {
 	[0] = discard_input,						/*non-printable characters*/
 	['\003'] = reset_input,						/*Ctrl+C*/
 	['\004'] = end_of_transmission,				/*Ctrl+D*/

@@ -48,17 +48,17 @@ $(NAME): libft.a $(ODIR) $(OBJ)
 libft.a:
 	make -C $(SRCDIR)/$(SUB1D)
 
-char_functions_1.o: charfunc.h dllst.h ms_data.h libft.h
-char_functions_2.o: charfunc.h dllst.h ms_data.h libft.h
-char_functions_3.o: charfunc.h dllst.h ms_data.h libft.h
-charfunc.o: charfunc.h dllst.h ms_data.h libft.h
-charfunc_utils.o: charfunc.h dllst.h ms_data.h libft.h
+char_functions_1.o: charfunc.h dllst.h ms_input.h ms_data.h libft.h
+char_functions_2.o: charfunc.h dllst.h ms_input.h ms_data.h
+char_functions_3.o: charfunc.h dllst.h ms_input.h ms_data.h libft.h
+charfunc.o: charfunc.h dllst.h ms_input.h ms_data.h
+charfunc_utils.o: charfunc.h dllst.h ms_input.h ms_data.h
 dllst_insert.o: dllst.h libft.h
 dllst_move.o: dllst.h libft.h
 dllst_remove.o: dllst.h libft.h
 dllst_str.o: dllst.h libft.h
-ms_input.o: charfunc.h dllst.h ms_data.h libft.h
-main.o: ms_data.h libft.h
+ms_input.o: charfunc.h dllst.h ms_input.h ms_data.h libft.h
+main.o: ms_input.h ms_data.h dllst.h libft.h
 ms_init.o: libft.h ms_data.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@

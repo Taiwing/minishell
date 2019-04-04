@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_data.h                                          :+:      :+:    :+:   */
+/*   ms_input.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 22:00:06 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/04 21:50:15 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/04 23:17:43 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_DATA
-# define MS_DATA
+#ifndef MS_INPUT_H
+# define MS_INPUT_H
 
-/*all the data of minishell*/
-typedef struct		s_ms_data
+# include "ms_data.h"
+# include "dllst.h"
+
+enum			e_qmode {NO_QUOTE, DQUOTE, SQUOTE, BSQUOTE};
+
+typedef struct	s_input_data
 {
-	char			**env;					/*environment*/
-	int				envc;					/*count env vars (max = 255)*/
-}					t_ms_data;
+	char		c[8];
+	int			bol;
+	int			qmode;
+	t_dllst		*lst;
+	char		*buf;
+}				t_input_data;
 
-void				ms_init(t_ms_data *msd, char **env);
+char			*ms_input(t_ms_data *msd, int qmode);
 
 #endif

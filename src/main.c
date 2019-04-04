@@ -1,20 +1,35 @@
-#include "ms_data.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/04 21:58:02 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/04 23:19:39 by yforeau          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ms_input.h"
+#include "libft.h"
 
 int		main(int argc, char **argv, char **env)
 {
 	t_ms_data	msd;
+	char		*input;
 
 	(void)argc;
 	(void)argv;
+	input = NULL;
 	ms_init(&msd, env);
 	while (1)
 	{
-		if (!msd.input_buffer)
-			ms_input(&msd);
+		if (!input)
+			input = ms_input(&msd, NO_QUOTE);
 		//TEMP
-		if (msd.input_buffer)
+		if (input)
 		{
-			if (!ft_strcmp(msd.input_buffer, "exit\n"))
+			if (!ft_strcmp(input, "exit\n"))
 			{
 				ft_atexit(NULL);
 				ft_heap_collector(NULL, FT_COLLEC_FREE);
@@ -22,14 +37,10 @@ int		main(int argc, char **argv, char **env)
 			}
 			else
 			{
-				ft_dprintf(0, "-> %s", msd.input_buffer);
-				ft_memdel((void **)&msd.input_buffer);
+				ft_dprintf(0, "-> %s", input);
+				ft_memdel((void **)&input);
 			}
 		}
-		/*if (msd.input_buffer)
-			ms_parse(&msd);
-		if (msd.cmd)
-			ms_execute(&msd);*/
 	}
 	return (0);
 }
