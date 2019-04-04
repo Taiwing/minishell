@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:00:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 23:14:04 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/05 00:50:44 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ int	reset_input(t_input_data *idat, t_ms_data *msd)
 	ft_memdel((void **)&idat->buf);
 	dllst_del(dllst_first(idat->lst));
 	idat->lst = NULL;
-	write(0, "\n", 1);
+	if (idat->qmode == NO_QUOTE)
+		write(0, "\n", 1);
 	return (STOP_INPUT);
 }
 
 int	end_of_transmission(t_input_data *idat, t_ms_data *msd)
 {
 	(void)msd;
-	if (!idat->lst && !idat->buf)
+	if (!idat->lst && idat->qmode == NO_QUOTE)
 	{
 		idat->buf = ft_strdup("exit\n");
 		ft_putstr_fd("exit\n", 0);
@@ -52,12 +53,26 @@ int	tab_completion(t_input_data *idat, t_ms_data *msd)
 
 int	new_line(t_input_data *idat, t_ms_data *msd)
 {
-	if ((idat->lst = dllst_last(idat->lst)))
+	int		curmode;
+	char	*recbuf;
+
+	curmode = idat->qmode;
+	if ((idat->lst = dllst_last(idat->lst)) || idat->qmode != NO_QUOTE)
 		insert_char(idat, msd);
 	else
 		write(0, "\n", 1);
 	idat->buf = dllst_to_str(dllst_first(idat->lst));
 	dllst_del(dllst_first(idat->lst));
 	idat->lst = NULL;
+	if ((idat->qmode = get_quote_mode(idat->qmode, idat->buf)) != NO_QUOTE)
+	{
+		if (!(recbuf = ms_input(msd, idat->qmode)))
+		{
+			idat->qmode = curmode;
+			return (reset_input(idat, msd));
+		}
+		idat->buf = ft_stradd(&idat->buf, recbuf, ft_strlen(recbuf));
+		free(ft_heap_collector(recbuf, FT_COLLEC_GET));
+	}
 	return (STOP_INPUT);
 }

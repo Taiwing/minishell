@@ -6,19 +6,26 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 23:16:37 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/05 01:07:54 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
 #include "libft.h"
 
+const char	*g_inputstr[4] = {
+	"$",
+	"dquote",
+	"squote",
+	""
+};
+
 /*right now this function is pretty useless, but there are
   cool and easy bonuses to do here*/
-static void	print_prompt(t_ms_data *msd)
+static void	print_prompt(t_ms_data *msd, int qmode)
 {
 	(void)msd;
-	ft_dprintf(0, "$> ");
+	ft_dprintf(0, "%s> ", g_inputstr[qmode]);
 }
 
 static int	ms_getchar(char c[8])
@@ -46,12 +53,12 @@ char		*ms_input(t_ms_data *msd, int qmode)
 {
 	t_input_data	idat;
 
+	print_prompt(msd, qmode);
 	idat.bol = 1;
 	idat.lst = NULL;
 	idat.buf = NULL;
-	idat.qmode = qmode;
 	ft_bzero(idat.c, 8);
-	print_prompt(msd);
+	idat.qmode = qmode == BSQUOTE ? NO_QUOTE : qmode;
 	while (g_charfunc[ms_getchar(idat.c)](&idat, msd))
 		ft_bzero(idat.c, 8);
 	return (idat.buf);
