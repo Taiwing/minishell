@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 16:50:20 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/04 21:13:47 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,4 @@ void		ms_input(t_ms_data *msd)
 	print_prompt(msd);
 	while (g_charfunc[ms_getchar(c)](c, &bol, &lst, msd))
 		ft_bzero(c, 8);
-	if (msd->input_buffer && ft_strcmp(msd->input_buffer, "exit"))	//TEMP
-		ft_dprintf(0, "\n= '%s'\n", msd->input_buffer);				//TEMP
-	else															//TEMP
-		write(0, "\n", 1);
 }

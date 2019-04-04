@@ -14,14 +14,17 @@ int		main(int argc, char **argv, char **env)
 		//TEMP
 		if (msd.input_buffer)
 		{
-			if (!ft_strcmp(msd.input_buffer, "exit"))
+			if (!ft_strcmp(msd.input_buffer, "exit\n"))
 			{
 				ft_atexit(NULL);
 				ft_heap_collector(NULL, FT_COLLEC_FREE);
 				break ;
 			}
 			else
+			{
+				ft_dprintf(0, "-> %s", msd.input_buffer);
 				ft_memdel((void **)&msd.input_buffer);
+			}
 		}
 		/*if (msd.input_buffer)
 			ms_parse(&msd);
