@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:01:02 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 23:14:37 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/05 16:41:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,22 @@ int	move_right(t_input_data *idat, t_ms_data *msd)
 	return (CONTINUE_INPUT);
 }
 
-/*TODO: implement this shit (must keep track of the cursor somehow)*/
 int	move_beg(t_input_data *idat, t_ms_data *msd)
 {
+	size_t	sz;
+
 	(void)msd;
-	(void)idat;
+	if (!idat->bol)
+	{
+		sz = 1;
+		while (idat->lst->prev)
+		{
+			idat->lst = idat->lst->prev;
+			++sz;
+		}
+		while (sz--)
+			write(0, g_multibyte_chars[LEFT_ARROW - 11], 3);
+		idat->bol = 1;
+	}
 	return (CONTINUE_INPUT);
 }
