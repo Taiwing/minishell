@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 21:58:02 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 23:19:39 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/05 15:49:55 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ int		main(int argc, char **argv, char **env)
 				ft_heap_collector(NULL, FT_COLLEC_FREE);
 				break ;
 			}
-			else
-			{
+			else if (ft_strcmp(input, "\n"))
 				ft_dprintf(0, "-> %s", input);
-				ft_memdel((void **)&input);
-			}
+			ft_memdel((void **)&input);
 		}
 	}
 	return (0);
