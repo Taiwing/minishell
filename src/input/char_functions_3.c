@@ -6,14 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:01:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/05 17:01:14 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/05 17:38:43 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
 #include "libft.h"
 
-/*TODO: implement this shit (must keep track of the cursor somehow)*/
 int	move_end(t_input_data *idat, t_ms_data *msd)
 {
 	size_t	sz;
@@ -34,13 +33,24 @@ int	move_end(t_input_data *idat, t_ms_data *msd)
 	return (CONTINUE_INPUT);
 }
 
-/*TODO: same as above, also we will have to reprint the line when*/
-/*when deleting forward, backward and inserting in the middle of the line*/
-/*this will have to be checked for*/
 int	forwd_delete(t_input_data *idat, t_ms_data *msd)
 {
 	(void)msd;
-	(void)idat;
+	if (idat->lst && (idat->lst->next || idat->bol))
+	{
+		ft_putstr_fd(" \10", 0);
+		if (idat->bol)
+			dllst_remove_back(&idat->lst);
+		else
+			dllst_remove_forwd(&idat->lst);
+		if (idat->lst)
+		{
+			if (idat->bol)
+				reprint_line(idat->lst);
+			else if (idat->lst->next)
+				reprint_line(idat->lst->next);
+		}
+	}
 	return (CONTINUE_INPUT);
 }
 

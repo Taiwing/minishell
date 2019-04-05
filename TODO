@@ -1,4 +1,0 @@
-INPUT:
-- implement forward deletion (with delete-> key)
-- also reprint what's after when forward deleting
-- be careful to keep the cursor coherent

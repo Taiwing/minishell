@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:40:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/05 16:00:54 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/05 17:10:58 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ this function reprints the entire line after the last edited character
 and adds the number one space and as many backspaces as there were characters
 in the list (so that the cursor moves back into the right position)
 */
+
 void		reprint_line(t_dllst *lst)
 {
 	size_t	sz;
