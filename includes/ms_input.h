@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 21:50:15 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/05 15:46:54 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/06 20:03:38 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MS_INPUT_H
 
 # include "ms_data.h"
-# include "dllst.h"
+# include "t_dllst.h"
 
 enum			e_qmode {NO_QUOTE = 0, DQUOTE, SQUOTE, BSQUOTE};
 

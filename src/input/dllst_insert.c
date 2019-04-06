@@ -6,11 +6,11 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 13:49:09 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/21 13:58:21 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/06 20:06:01 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dllst.h"
+#include "t_dllst.h"
 #include "libft.h"
 
 t_dllst	*dllst_new(char c)

@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dllst_move.c                                       :+:      :+:    :+:   */
+/*   t_shvar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/21 14:05:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 20:06:06 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/06 20:15:11 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/06 20:57:58 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_dllst.h"
-#include "libft.h"
+#ifndef T_SHVAR_H
+# define T_SHVAR_H
 
-t_dllst	*dllst_first(t_dllst *lst)
-{
-	while (lst && lst->prev)
-		lst = lst->prev;
-	return (lst);
-}
+# define ENV_GLOBAL		0x01
+# define ENV_LOCAL		0x02
+# define ENV_VARIABLE	0x04
 
-t_dllst	*dllst_last(t_dllst *lst)
+typedef struct	s_shvar
 {
-	while (lst && lst->next)
-		lst = lst->next;
-	return (lst);
-}
+	char		*name;
+	char		*value;
+	int			type;
+}				t_shvar;
+
+int				shvar_cmp(void *svar1, void *svar2);
+void			shvar_del(void *content, size_t content_size);
+
+#endif

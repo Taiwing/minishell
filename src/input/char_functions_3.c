@@ -6,12 +6,11 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:01:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/05 17:38:43 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/06 20:11:19 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
-#include "libft.h"
 
 int	move_end(t_input_data *idat, t_ms_data *msd)
 {

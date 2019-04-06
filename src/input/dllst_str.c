@@ -6,11 +6,11 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:32:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/03/26 18:56:50 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/06 20:06:18 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dllst.h"
+#include "t_dllst.h"
 #include "libft.h"
 
 size_t	dllstlen(t_dllst *lst)

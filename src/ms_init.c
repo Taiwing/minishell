@@ -6,16 +6,37 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 00:59:45 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/06 20:44:17 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <termios.h>
-#include "libft.h"
 #include "ms_data.h"
+#include "t_shvar.h"
 
-static void	reset_input_mode(void)
+static t_list	*init_env(char **env)
+{
+	t_list	*lst;
+	t_shvar	envar;
+	char	*delim;
+
+	lst = NULL;
+	envar.type = ENV_GLOBAL;
+	while (*env)
+	{
+		delim = ft_strchr(*env, '=');
+		envar.name = ft_strsub(*env, 0, delim - *env);
+		envar.value = delim[1] ?
+			ft_strsub(delim + 1, 0, ft_strlen(delim + 1)) : NULL;
+		ft_lst_sorted_insert(&lst, ft_lstnew((void *)&envar, sizeof(t_shvar)),
+			shvar_cmp);
+		++env;
+	}
+	return (lst);
+}
+
+static void		reset_input_mode(void)
 {
 	static struct termios	*old_tattr = NULL;
 	struct termios			new_tattr;
@@ -36,7 +57,7 @@ static void	reset_input_mode(void)
 		tcsetattr(0, TCSANOW, old_tattr); 
 }
 
-void		ms_init(t_ms_data *msd, char **env)
+void			ms_init(t_ms_data *msd, char **env)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGHUP, SIG_IGN);
@@ -44,8 +65,7 @@ void		ms_init(t_ms_data *msd, char **env)
 	ft_exitmsg("minishell");
 	if (!isatty(0))
 		ft_exit("not a terminal", EXIT_FAILURE);
-	msd->env = env ? ft_wtdup(env) : NULL;
-	msd->envc = env ? ft_wtlen(msd->env) : 0;
 	reset_input_mode();
 	ft_atexit(reset_input_mode);
+	msd->env = init_env(env);
 }

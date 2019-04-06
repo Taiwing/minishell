@@ -16,6 +16,7 @@ INPUTDIR		=	input
 
 SRCC			=	main.c\
 					ms_init.c\
+					shvar.c\
 
 INPUTC			=	char_functions_1.c\
 					char_functions_2.c\
@@ -48,18 +49,19 @@ $(NAME): libft.a $(ODIR) $(OBJ)
 libft.a:
 	make -C $(SRCDIR)/$(SUB1D)
 
-char_functions_1.o: charfunc.h ms_input.h ms_data.h dllst.h libft.h
-char_functions_2.o: charfunc.h ms_input.h ms_data.h dllst.h
-char_functions_3.o: charfunc.h ms_input.h ms_data.h dllst.h libft.h
-charfunc.o: charfunc.h ms_input.h ms_data.h dllst.h
-charfunc_utils.o: charfunc.h ms_input.h ms_data.h dllst.h libft.h
-dllst_insert.o: dllst.h libft.h
-dllst_move.o: dllst.h libft.h
-dllst_remove.o: dllst.h libft.h
-dllst_str.o: dllst.h libft.h
-ms_input.o: charfunc.h ms_input.h ms_data.h dllst.h libft.h
-main.o: ms_input.h ms_data.h dllst.h libft.h
-ms_init.o: libft.h ms_data.h
+char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
+char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
+char_functions_3.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
+charfunc.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
+charfunc_utils.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
+dllst_insert.o: t_dllst.h libft.h
+dllst_move.o: t_dllst.h libft.h
+dllst_remove.o: t_dllst.h libft.h
+dllst_str.o: t_dllst.h libft.h
+ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
+main.o: ms_input.h ms_data.h libft.h t_dllst.h
+ms_init.o: ms_data.h libft.h t_shvar.h
+shvar.o: libft.h t_shvar.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 
