@@ -6,77 +6,64 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:48:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/09 23:45:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/10 17:43:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "token.h"
 #include "quotes.h"
 #include "ms_parsing.h"
 
-static void		del_token(void *content, size_t size)
+static char	*join_lines(char *raw_input)
 {
-	t_token	*tok;
-
-	(void)size;
-	tok = (t_token *)content;
-	ft_memdel((void **)&(tok->str));
-	ft_memdel((void **)&tok);
-}
-
-static void		add_token(t_list **lst, int id, char *str)
-{
-	t_token	tok;
-
-	tok.id = id;
-	tok.str = str;
-	ft_lst_push_back(lst, (void *)&tok, sizeof(t_token));	
-}
-
-static t_list	*tokenize(char *input)
-{
-	size_t	i;
-	size_t	len;
-	t_list	*lst;
-	int		qmode;
+	int	i;
+	int	qmode;
 
 	i = 0;
-	len = 0;
-	lst = NULL;
 	qmode = NO_QUOTE;
-	while (input[i])
+	while (raw_input && raw_input[i])
 	{
-		qmode = get_qmode(qmode, input[i]);
-		if (qmode || !ft_strchr(" \t\n;", input[i]))
-			++len;
-		else if (!qmode && len)
+		if (raw_input[i] == '\n' && (qmode & BSQUOTE))
 		{
-			add_token(&lst, T_WORD, ft_strsub(input + i - len, 0, len));
-			len = 0;
+			raw_input = ft_strrm(&raw_input, i - 1, 2);
+			qmode &= ~BSQUOTE;
 		}
-		if (!qmode && (input[i] == '\n' || input[i] == ';'))
-			add_token(&lst, T_SEPARATOR, NULL);
-		++i;
+		else
+			qmode = get_qmode(qmode, raw_input[i++]);
 	}
-	return (lst);
+	return (raw_input);
 }
 
-//TEMP
-static void		print_tokens(t_list *lst)
+/*t_list		*build_cmd_list(t_list *lst)
 {
+	t_list	*cmd_list;
+	t_list	*cmd;
 	t_token	*tok;
 
+	cmd_list = NULL;
+	cmd = NULL;
 	while (lst)
 	{
 		tok = (t_token *)lst->content;
-		ft_printf(tok->id == T_WORD ? "T_WORD: " : "T_SEPARATOR\n");
-		if (tok->str)
-			ft_putendl(tok->str);
+		if (!cmd && tok->id == T_WORD)
+		{
+			cmd = lst;
+			ft_lst_push_back(&cmd_list, NULL, 0)->content = (void *)cmd;
+		}
+		else if (cmd && tok->id == T_WORD)
+			cmd = cmd->next;
+		else if (tok->id == T_SEPARATOR)
+		{
+			if (cmd)
+				cmd->next = NULL;
+			cmd = NULL;
+				
+		}
 		lst = lst->next;
 	}
-}
-//TEMP
+}*/
 
-t_list			*ms_parsing(t_ms_data *msd, char **input)
+t_list		*ms_parsing(t_ms_data *msd, char **input)
 {
 	t_list	*lst;
 

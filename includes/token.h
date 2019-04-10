@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_lines.c                                       :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 18:42:55 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/09 22:33:02 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/10 17:33:22 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/10 17:42:35 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "quotes.h"
+#ifndef TOKEN_H
+# define TOKEN_H
 
-char	*join_lines(char *raw_input)
+# include "libft.h"
+
+enum			e_tokenid {T_WORD, T_SEPARATOR};
+
+typedef struct	s_token
 {
-	int	i;
-	int	qmode;
+	int			id;
+	char		*str;
+}				t_token;
 
-	i = 0;
-	qmode = NO_QUOTE;
-	while (raw_input && raw_input[i])
-	{
-		if (raw_input[i] == '\n' && (qmode & BSQUOTE))
-		{
-			raw_input = ft_strrm(&raw_input, i - 1, 2);
-			qmode &= ~BSQUOTE;
-		}
-		else
-			qmode = get_qmode(qmode, raw_input[i++]);
-	}
-	return (raw_input);
-}
+void			del_token(void *content, size_t size);
+void			add_token(t_list **lst, int id, char *str);
+t_list			*tokenize(char *input);
+
+//TEMP
+void			print_tokens(t_list *lst);
+
+#endif

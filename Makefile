@@ -31,8 +31,8 @@ INPUTC			=	char_functions_1.c\
 					dllst_str.c\
 					ms_input.c\
 
-PARSINGC		=	join_lines.c\
-					ms_parsing.c\
+PARSINGC		=	ms_parsing.c\
+					token.c\
 
 ODIR			=	obj
 OBJ				=	$(patsubst %.c,%.o,$(INPUTC))\
@@ -68,8 +68,8 @@ dllst_str.o: t_dllst.h libft.h
 ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_parsing.h
 ms_init.o: ms_data.h libft.h t_shvar.h
-join_lines.o: libft.h quotes.h
-ms_parsing.o: quotes.h ms_parsing.h ms_data.h libft.h
+ms_parsing.o: token.h libft.h quotes.h ms_parsing.h ms_data.h
+token.o: token.h libft.h quotes.h
 quotes.o: quotes.h
 shvar.o: libft.h t_shvar.h
 %.o: %.c
