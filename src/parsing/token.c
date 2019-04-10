@@ -6,12 +6,22 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 17:29:41 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/10 17:43:00 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/10 19:55:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
 #include "quotes.h"
+
+void	discard_token(t_list **alst)
+{
+	t_list	*next;
+
+	next = (*alst)->next;
+	del_token((*alst)->content, 0);
+	free(ft_heap_collector(*alst, FT_COLLEC_GET));
+	*alst = next;
+}
 
 void	del_token(void *content, size_t size)
 {
