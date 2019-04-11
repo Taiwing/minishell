@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tilde_exp.c                                        :+:      :+:    :+:   */
+/*   param_exp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 18:44:28 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/11 18:44:29 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/11 18:45:56 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/11 22:30:23 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_data.h"
-#include "t_shvar.h"
+#include "quotes.h"
 
-void		tilde_exp(t_ms_data *msd, char **str)
+void		param_exp(t_ms_data *msd, char **str)
 {
-	char	*dir;
-	char	*slash;
+	char	*ptr;
+	int		qmode;
 
-	if (!*str || **str != '~' || ((*str)[1] && (*str)[1] != '/'))
+	if (!*str)
 		return ;
-	slash = (*str)[1] == '/' ? *str + 1 : NULL;
-	dir = get_shvar_val("HOME", msd->env);
-	dir = ft_strdup(dir ? dir : "");
-	dir = slash ? ft_stradd(&dir, slash, ft_strlen(slash)) : dir;
-	if (!ft_strcmp(dir, ""))
-		ft_memdel((void **)dir);
-	ft_memdel((void **)str);
-	*str = dir;
+	ptr = *str;
+	qmode = NO_QUOTE;
+	while (*ptr)
+	{
+		qmode = get_qmode(qmode, *ptr);
+		if (*ptr == '$' && (qmode == NO_QUOTE || qmode == DQUOTE))
+			
+		++ptr;
+	}
 }
