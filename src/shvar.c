@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 20:39:50 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/11 15:43:44 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/11 18:38:04 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	shvar_del(void *content, size_t content_size)
 
 t_shvar	*get_shvar(char *name, t_list *env)
 {
+	t_shvar	sv;
 	t_list	*lst;
 
-	if (!(lst = ft_lst_find(env, (void *)name, shvar_cmp)))
+	sv.name = name;
+	if (!(lst = ft_lst_find(env, (void *)&sv, shvar_cmp)))
 		return (NULL);
 	return ((t_shvar *)lst->content);
 }
