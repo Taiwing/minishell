@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 20:15:11 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 20:57:58 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/11 15:43:39 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define ENV_LOCAL		0x02
 # define ENV_VARIABLE	0x04
 
+# include "libft.h"
+
 typedef struct	s_shvar
 {
 	char		*name;
@@ -26,5 +28,7 @@ typedef struct	s_shvar
 
 int				shvar_cmp(void *svar1, void *svar2);
 void			shvar_del(void *content, size_t content_size);
+t_shvar			*get_shvar(char *name, t_list *env);
+char			*get_shvar_val(char *name, t_list *env);
 
 #endif

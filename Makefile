@@ -14,6 +14,7 @@ NAME		=	minishell
 
 INPUTDIR		=	input
 LEXINGDIR		=	lexing
+PARSINGDIR		=	parsing
 
 SRCC			=	main.c\
 					ms_init.c\
@@ -34,9 +35,13 @@ INPUTC			=	char_functions_1.c\
 LEXINGC			=	ms_lexing.c\
 					token.c\
 
+PARSINGC		=	ms_parsing.c\
+					tiled_exp.c\
+
 ODIR			=	obj
 OBJ				=	$(patsubst %.c,%.o,$(INPUTC))\
 					$(patsubst %.c,%.o,$(LEXINGC))\
+					$(patsubst %.c,%.o,$(PARSINGC))\
 					$(patsubst %.c,%.o,$(SRCC))\
 
 vpath			%.o	$(ODIR)
@@ -44,6 +49,7 @@ vpath			%.h	$(HDIR)
 vpath			%.h	$(SRCDIR)/$(SUB1D)/$(HDIR)
 vpath			%.c	$(SRCDIR)/$(INPUTDIR)
 vpath			%.c	$(SRCDIR)/$(LEXINGDIR)
+vpath			%.c	$(SRCDIR)/$(PARSINGDIR)
 vpath			%.c	$(SRCDIR)
 
 ############################## BUILD ###########################################
@@ -70,8 +76,10 @@ ms_lexing.o: token.h libft.h quotes.h ms_lexing.h ms_data.h
 token.o: token.h libft.h quotes.h
 main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h
 ms_init.o: ms_data.h libft.h t_shvar.h
+ms_parsing.o: ms_data.h libft.h token.h
+tiled_exp.o: ms_data.h libft.h t_shvar.h
 quotes.o: quotes.h
-shvar.o: libft.h t_shvar.h
+shvar.o: t_shvar.h libft.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 

@@ -6,11 +6,10 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 20:39:50 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 20:52:46 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/11 15:43:44 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "t_shvar.h"
 
 int		shvar_cmp(void *svar1, void *svar2)
@@ -29,4 +28,23 @@ void	shvar_del(void *content, size_t content_size)
 	if (svar->value)
 		free(ft_heap_collector((void *)svar->value, FT_COLLEC_GET));
 	free(ft_heap_collector(content, FT_COLLEC_GET));
+}
+
+t_shvar	*get_shvar(char *name, t_list *env)
+{
+	t_list	*lst;
+
+	if (!(lst = ft_lst_find(env, (void *)name, shvar_cmp)))
+		return (NULL);
+	return ((t_shvar *)lst->content);
+}
+
+char	*get_shvar_val(char *name, t_list *env)
+{
+	t_shvar	*ptr;
+
+	if (!(ptr = get_shvar(name, env)))
+		return (NULL);
+	else
+		return (ptr->value);
 }
