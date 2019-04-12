@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 15:33:05 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 17:02:18 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 22:25:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		exec_on_path(t_ms_data *msd, char **argv)
 	char	**wt;
 
 	wt = msd->path;
-	while (*wt)
+	while (wt && *wt)
 	{
 		fp = ft_strnew(ft_strlen(*wt) + 1 + ft_strlen(argv[0]));
 		ft_strcat(ft_strcat(ft_strcat(fp, *wt), "/"), argv[0]);
