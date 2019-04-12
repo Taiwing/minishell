@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 16:40:08 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/13 00:07:55 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,29 @@ static t_list	*init_env(char **env)
 	return (lst);
 }
 
-static void		reset_input_mode(void)
+void		set_custom_input_mode(void)
+{
+	struct termios			new_tattr;
+	
+	if (tcgetattr(0, &new_tattr) == -1)
+		ft_exit("failed to get terminal attributes", EXIT_FAILURE);
+	new_tattr.c_lflag &= ~(ICANON | ECHO | ISIG);
+	new_tattr.c_cc[VMIN] = 1;
+	new_tattr.c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSAFLUSH, &new_tattr) == -1)
+		ft_exit("failed to set terminal attributes", EXIT_FAILURE);
+}
+
+void		reset_input_mode(void)
 {
 	static struct termios	*old_tattr = NULL;
-	struct termios			new_tattr;
 
 	if (!old_tattr)
 	{
-		if (tcgetattr(0, &new_tattr) == -1)
-			ft_exit("failed to get terminal attributes", EXIT_FAILURE);
 		old_tattr = (struct termios *)ft_secmalloc(sizeof(struct termios));
-		ft_memcpy(old_tattr, &new_tattr, sizeof(struct termios));
-		new_tattr.c_lflag &= ~(ICANON | ECHO | ISIG);
-		new_tattr.c_cc[VMIN] = 1;
-		new_tattr.c_cc[VTIME] = 0;
-		if (tcsetattr(0, TCSAFLUSH, &new_tattr) == -1)
-			ft_exit("failed to set terminal attributes", EXIT_FAILURE);
+		if (tcgetattr(0, old_tattr) == -1)
+			ft_exit("failed to get terminal attributes", EXIT_FAILURE);
+		set_custom_input_mode();
 	}
 	else 
 		tcsetattr(0, TCSANOW, old_tattr); 

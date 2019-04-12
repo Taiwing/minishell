@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 15:33:05 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 22:25:20 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/13 00:11:32 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,17 @@ static int	exec_file(char *file_path, char **argv, char **env)
 		ft_putstr_fd("minishell: error while forking ;)\n", 2);
 	else if (!cp)
 	{
+		reset_input_mode();
 		if (execve(file_path, argv, env) == -1)
 			ft_putstr_fd("minishell: execve() error\n", 2);
+		exit(EXIT_FAILURE);
 	}
-	else if (wait(&ret) == -1)
-		ft_putstr_fd("minishell: wait() error\n", 2);
+	else
+	{
+		if (wait(&ret) == -1)
+			ft_putstr_fd("minishell: wait() error\n", 2);
+		set_custom_input_mode();
+	}
 	return (ret);
 }
 

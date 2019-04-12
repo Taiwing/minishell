@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	{
 		if (execve(argv[1], argv + 1, NULL) == -1)
 			perror("execve");
+		printf("gagagagaaaaah\n");
 		return (1);
 	}
 	else if (wait(&ret) == -1)
