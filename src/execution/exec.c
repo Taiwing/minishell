@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 15:33:05 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 16:18:40 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 17:02:18 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,33 @@ void		exec_local_file(t_ms_data *msd, char **argv)
 		msd->cmd_exit = exec_file(argv[0], argv, env);
 		ft_wtfree(env);
 	}
+}
+
+void		exec_on_path(t_ms_data *msd, char **argv)
+{
+	char	*fp;
+	char	**wt;
+
+	wt = msd->path;
+	while (*wt)
+	{
+		fp = ft_strnew(ft_strlen(*wt) + 1 + ft_strlen(argv[0]));
+		ft_strcat(ft_strcat(ft_strcat(fp, *wt), "/"), argv[0]);
+		if (!access(fp, F_OK))
+		{
+			if (access(fp, X_OK) == -1)
+				ft_dprintf(2, "minishell: %s: permission denied\n", argv[0]);
+			else
+			{
+				wt = load_env(msd->env);
+				msd->cmd_exit = exec_file(fp, argv, wt);
+				ft_wtfree(wt);
+			}
+			ft_memdel((void **)&fp);
+			return ;
+		}
+		ft_memdel((void **)&fp);
+		++wt;
+	}
+	ft_dprintf(2, "minishell: %s: command not found\n", argv[0]);
 }
