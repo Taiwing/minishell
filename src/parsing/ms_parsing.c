@@ -6,13 +6,43 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:31:22 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 12:04:21 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 13:21:25 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
 #include "tilde_exp.h"
 #include "param_exp.h"
+#include "quotes.h"
+
+static void	rm_quotes(char **str)
+{
+	char	*dup;
+	char	*pdup;
+	char	*pstr;
+	int		qmode;
+	int		old_qmode;
+	
+	if (!*str)
+		return ;
+	pstr = *str;
+	dup = NULL;
+	old_qmode = NO_QUOTE;
+	while (*pstr)
+	{
+		if ((qmode = get_qmode(old_qmode, *pstr)) != old_qmode && !dup)
+		{
+			dup = ft_strncat(ft_strnew(ft_strlen(*str)), *str, pstr - *str);
+			pdup = dup + (pstr - *str);
+		}
+		else if ((qmode == old_qmode || qmode == (old_qmode & ~BSQUOTE)) && dup)
+			*pdup++ = *pstr;
+		old_qmode = qmode;
+		++pstr;
+	}
+	*str = dup ? ft_strcpy(*str, dup) : *str;
+	ft_memdel((void **)&dup);
+}
 
 static int	expand(t_ms_data *msd, t_list *cmd_list)
 {
@@ -25,7 +55,7 @@ static int	expand(t_ms_data *msd, t_list *cmd_list)
 	{
 		tilde_exp(msd, &tok->str);
 		param_exp(msd, &tok->str);
-//		rm_quotes(&tok->str);
+		rm_quotes(&tok->str);
 		cmd_list = cmd_list->next;
 		argc = tok->str ? argc + 1 : argc;
 	}
