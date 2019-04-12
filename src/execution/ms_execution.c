@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:29:38 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 17:03:11 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 17:51:04 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	builtin_match(char *name)
 	while (++i < BUILTIN_COUNT)
 	{
 		if (!ft_strcmp(name, g_builtins[i].name))
-			return (0);
+			return (i);
 	}
 	return (-1);
 }

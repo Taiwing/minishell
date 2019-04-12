@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:57:24 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 14:10:03 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 17:19:41 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 const t_builtid	g_builtins[BUILTIN_COUNT] =
 {
+	{"echo", msb_echo},
 	{"exit", msb_exit}
 };

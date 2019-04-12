@@ -24,6 +24,7 @@ SRCC			=	main.c\
 					shvar.c\
 
 BUILTINSC		=	g_builtins.c\
+					msb_echo.c\
 					msb_exit.c\
 
 EXECUTIONC		=	exec.c\
@@ -76,6 +77,7 @@ libft.a:
 	make -C $(SRCDIR)/$(SUB1D)
 
 g_builtins.o: g_builtins.h ms_data.h libft.h
+msb_echo.o: ms_data.h libft.h
 msb_exit.o: ms_data.h libft.h
 exec.o: ms_data.h libft.h t_shvar.h
 ms_execution.o: exec.h ms_data.h libft.h g_builtins.h
