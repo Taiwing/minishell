@@ -6,10 +6,11 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:29:38 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 14:59:38 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 16:12:50 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "exec.h"
 #include "g_builtins.h"
 
 static int	builtin_match(char *name)
@@ -31,9 +32,9 @@ void		ms_execution(t_ms_data *msd, char ***cmd)
 	int		buid;
 
 	argv = *cmd;
-	/*if (ft_strchr(argv[0], '/'))
+	if (ft_strchr(argv[0], '/'))
 		exec_local_file(msd, argv);
-	else*/ if ((buid = builtin_match(argv[0])) >= 0)
+	else if ((buid = builtin_match(argv[0])) >= 0)
 		msd->cmd_exit = g_builtins[buid].bi(argv, msd);
 	else			//TEMP (to avoid freeing cmd at the end)
 		return ;	//TEMP

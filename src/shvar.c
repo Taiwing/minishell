@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 20:39:50 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/11 18:38:04 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 16:15:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,32 @@ char	*get_shvar_val(char *name, t_list *env)
 		return (NULL);
 	else
 		return (ptr->value);
+}
+
+char	**load_env(t_list *lst)
+{
+	int		i;
+	int		size;
+	char	**env;
+	t_shvar	*svar;
+
+	if (!(size = ft_lst_size(lst)))
+		return (NULL);
+	env = ft_secmalloc((size + 1) * sizeof(char *));
+	i = -1;
+	while (++i < size)
+	{
+		svar = (t_shvar *)lst->content;
+		env[i] = !(svar->name && svar->value) ? ft_strjoin(svar->name, "=") :
+			ft_strnew(ft_strlen(svar->name) + ft_strlen(svar->value) + 1);
+		if (svar->value)
+		{
+			ft_strcat(env[i], svar->name);
+			ft_strcat(env[i], "=");
+			ft_strcat(env[i], svar->value);
+		}
+		lst = lst->next;
+	}
+	env[i] = NULL;
+	return (env);
 }

@@ -26,7 +26,8 @@ SRCC			=	main.c\
 BUILTINSC		=	g_builtins.c\
 					msb_exit.c\
 
-EXECUTIONC		=	ms_execution.c\
+EXECUTIONC		=	exec.c\
+					ms_execution.c\
 
 INPUTC			=	char_functions_1.c\
 					char_functions_2.c\
@@ -76,7 +77,8 @@ libft.a:
 
 g_builtins.o: g_builtins.h ms_data.h libft.h
 msb_exit.o: ms_data.h libft.h
-ms_execution.o: g_builtins.h ms_data.h libft.h
+exec.o: ms_data.h libft.h t_shvar.h
+ms_execution.o: exec.h ms_data.h libft.h g_builtins.h
 char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 char_functions_3.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
