@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 21:58:02 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/11 22:16:20 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 13:35:18 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,19 @@ int		main(int argc, char **argv, char **env)
 				//ms_execute(&msd, &cmd);
 				//TEMP
 			{
+				if (!ft_strcmp(cmd[0], "exit"))
+					break ;
 				ft_dprintf(0, "command %d: %#*t%s \n", ++c, ft_wtlen(cmd), cmd);
 				ft_wtfree(cmd);
 				cmd = NULL;
 			}
 		}
 		//TEMP
-		if (input)
+		if (cmd)
 		{
-			if (!ft_strcmp(input, "exit\n"))
-			{
-				ft_atexit(NULL);
-				ft_heap_collector(NULL, FT_COLLEC_FREE);
-				break ;
-			}
-			else if (ft_strcmp(input, "\n"))
-				ft_dprintf(0, "-> %s", input);
-			ft_memdel((void **)&input);
+			ft_atexit(NULL);
+			ft_heap_collector(NULL, FT_COLLEC_FREE);
+			break ;
 		}
 	}
 	return (0);
