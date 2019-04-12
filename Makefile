@@ -36,6 +36,7 @@ LEXINGC			=	ms_lexing.c\
 					token.c\
 
 PARSINGC		=	ms_parsing.c\
+					param_exp.c\
 					tilde_exp.c\
 
 ODIR			=	obj
@@ -74,9 +75,10 @@ dllst_str.o: t_dllst.h libft.h
 ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 ms_lexing.o: token.h libft.h quotes.h ms_lexing.h ms_data.h
 token.o: token.h libft.h quotes.h
-main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h
+main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h
 ms_init.o: ms_data.h libft.h t_shvar.h
-ms_parsing.o: token.h libft.h tilde_exp.h ms_data.h
+ms_parsing.o: token.h libft.h tilde_exp.h ms_data.h param_exp.h
+param_exp.o: ms_data.h libft.h quotes.h t_shvar.h
 tilde_exp.o: ms_data.h libft.h t_shvar.h
 quotes.o: quotes.h
 shvar.o: t_shvar.h libft.h

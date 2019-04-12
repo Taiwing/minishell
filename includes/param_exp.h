@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_data.h                                          :+:      :+:    :+:   */
+/*   param_exp.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 11:19:33 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/12 12:03:42 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/12 12:04:10 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_DATA
-# define MS_DATA
+#ifndef PARAM_EXP_H
+# define PARAM_EXP_H
 
-# include "libft.h"
+# include "ms_data.h"
 
-/*all the data of minishell*/
-typedef struct	s_ms_data
-{
-	t_list		*env;					/*environment*/
-	int			cmd_exit;				/*exit of las command ($?)*/
-	int			process_id;				/*process number ($$)*/
-}				t_ms_data;
-
-void			ms_init(t_ms_data *msd, char **env);
+void	param_exp(t_ms_data *msd, char **str);
 
 #endif
