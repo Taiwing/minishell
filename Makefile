@@ -12,6 +12,8 @@ NAME		=	minishell
 
 ############################## SOURCES #########################################
 
+BUILTINSDIR		=	builtins
+EXECUTIONDIR	=	execution
 INPUTDIR		=	input
 LEXINGDIR		=	lexing
 PARSINGDIR		=	parsing
@@ -20,6 +22,11 @@ SRCC			=	main.c\
 					ms_init.c\
 					quotes.c\
 					shvar.c\
+
+BUILTINSC		=	g_builtins.c\
+					msb_exit.c\
+
+EXECUTIONC		=	ms_execution.c\
 
 INPUTC			=	char_functions_1.c\
 					char_functions_2.c\
@@ -40,7 +47,9 @@ PARSINGC		=	ms_parsing.c\
 					tilde_exp.c\
 
 ODIR			=	obj
-OBJ				=	$(patsubst %.c,%.o,$(INPUTC))\
+OBJ				=	$(patsubst %.c,%.o,$(BUILTINSC))\
+					$(patsubst %.c,%.o,$(EXECUTIONC))\
+					$(patsubst %.c,%.o,$(INPUTC))\
 					$(patsubst %.c,%.o,$(LEXINGC))\
 					$(patsubst %.c,%.o,$(PARSINGC))\
 					$(patsubst %.c,%.o,$(SRCC))\
@@ -48,6 +57,8 @@ OBJ				=	$(patsubst %.c,%.o,$(INPUTC))\
 vpath			%.o	$(ODIR)
 vpath			%.h	$(HDIR)
 vpath			%.h	$(SRCDIR)/$(SUB1D)/$(HDIR)
+vpath			%.c	$(SRCDIR)/$(BUILTINSDIR)
+vpath			%.c	$(SRCDIR)/$(EXECUTIONDIR)
 vpath			%.c	$(SRCDIR)/$(INPUTDIR)
 vpath			%.c	$(SRCDIR)/$(LEXINGDIR)
 vpath			%.c	$(SRCDIR)/$(PARSINGDIR)
@@ -63,6 +74,9 @@ $(NAME): libft.a $(ODIR) $(OBJ)
 libft.a:
 	make -C $(SRCDIR)/$(SUB1D)
 
+g_builtins.o: g_builtins.h ms_data.h libft.h
+msb_exit.o: ms_data.h libft.h
+ms_execution.o: g_builtins.h ms_data.h libft.h
 char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 char_functions_3.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
@@ -75,9 +89,10 @@ dllst_str.o: t_dllst.h libft.h
 ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 ms_lexing.o: token.h libft.h quotes.h ms_lexing.h ms_data.h
 token.o: token.h libft.h quotes.h
-main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h
+main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h\
+	ms_execution.h
 ms_init.o: ms_data.h libft.h t_shvar.h
-ms_parsing.o: token.h libft.h tilde_exp.h ms_data.h param_exp.h
+ms_parsing.o: token.h libft.h tilde_exp.h ms_data.h param_exp.h quotes.h
 param_exp.o: ms_data.h libft.h quotes.h t_shvar.h
 tilde_exp.o: ms_data.h libft.h t_shvar.h
 quotes.o: quotes.h

@@ -6,13 +6,14 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 21:58:02 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 13:35:18 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 14:48:17 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 #include "ms_lexing.h"
 #include "ms_parsing.h"
+#include "ms_execution.h"
 
 int		main(int argc, char **argv, char **env)
 {
@@ -40,22 +41,13 @@ int		main(int argc, char **argv, char **env)
 		while (cmd_list)
 		{
 			if ((cmd = ms_parsing(&msd, &cmd_list)))
-				//ms_execute(&msd, &cmd);
-				//TEMP
+				ms_execution(&msd, &cmd);
+			if (cmd)
 			{
-				if (!ft_strcmp(cmd[0], "exit"))
-					break ;
 				ft_dprintf(0, "command %d: %#*t%s \n", ++c, ft_wtlen(cmd), cmd);
 				ft_wtfree(cmd);
 				cmd = NULL;
 			}
-		}
-		//TEMP
-		if (cmd)
-		{
-			ft_atexit(NULL);
-			ft_heap_collector(NULL, FT_COLLEC_FREE);
-			break ;
 		}
 	}
 	return (0);
