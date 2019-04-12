@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:14:36 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 14:28:39 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/12 14:58:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int			msb_exit(char **argv, t_ms_data *msd)
 		ret = ft_atoi(argv[1]);
 	else
 	{
-		ft_putstr_fd("minishell: exit: numeric argument required\n", 0);
+		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 		return (1);
 	}
 	if (ft_wtlen(argv) > 2)
 	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", 0);
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
 	}
 	ft_exit(NULL, ret);
