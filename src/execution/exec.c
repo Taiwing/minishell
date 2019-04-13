@@ -6,14 +6,15 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 15:33:05 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/13 00:11:32 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/13 01:44:06 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_data.h"
 #include "t_shvar.h"
+#include "ms_signals.h"
 
-static int	exec_file(char *file_path, char **argv, char **env)
+static int		exec_file(char *file_path, char **argv, char **env)
 {
 	pid_t	cp;
 	int		ret;
@@ -31,14 +32,16 @@ static int	exec_file(char *file_path, char **argv, char **env)
 	}
 	else
 	{
+		stat_pid(cp);
 		if (wait(&ret) == -1)
 			ft_putstr_fd("minishell: wait() error\n", 2);
 		set_custom_input_mode();
+		stat_pid(-1);
 	}
 	return (ret);
 }
 
-void		exec_local_file(t_ms_data *msd, char **argv)
+void			exec_local_file(t_ms_data *msd, char **argv)
 {
 	char	**env;
 
@@ -54,7 +57,7 @@ void		exec_local_file(t_ms_data *msd, char **argv)
 	}
 }
 
-void		exec_on_path(t_ms_data *msd, char **argv)
+void			exec_on_path(t_ms_data *msd, char **argv)
 {
 	char	*fp;
 	char	**wt;

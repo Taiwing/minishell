@@ -6,14 +6,14 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/13 00:07:55 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/13 01:45:21 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
 #include <termios.h>
 #include "ms_data.h"
 #include "t_shvar.h"
+#include "ms_signals.h"
 
 static t_list	*init_env(char **env)
 {
@@ -66,9 +66,7 @@ void		reset_input_mode(void)
 
 void			ms_init(t_ms_data *msd, char **env)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGHUP, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	init_signals();
 	ft_exitmsg("minishell");
 	if (!isatty(0))
 		ft_exit("not a terminal", EXIT_FAILURE);

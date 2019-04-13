@@ -20,6 +20,7 @@ PARSINGDIR		=	parsing
 
 SRCC			=	main.c\
 					ms_init.c\
+					ms_signals.c\
 					quotes.c\
 					shvar.c\
 
@@ -79,7 +80,7 @@ libft.a:
 g_builtins.o: g_builtins.h ms_data.h libft.h
 msb_echo.o: ms_data.h libft.h
 msb_exit.o: ms_data.h libft.h
-exec.o: ms_data.h libft.h t_shvar.h
+exec.o: ms_data.h libft.h t_shvar.h ms_signals.h
 ms_execution.o: exec.h ms_data.h libft.h g_builtins.h
 char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
@@ -95,7 +96,7 @@ ms_lexing.o: token.h libft.h quotes.h ms_lexing.h ms_data.h
 token.o: token.h libft.h quotes.h
 main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h\
 	ms_execution.h
-ms_init.o: ms_data.h libft.h t_shvar.h
+ms_init.o: ms_data.h libft.h t_shvar.h ms_signals.h
 ms_parsing.o: token.h libft.h tilde_exp.h ms_data.h param_exp.h quotes.h
 param_exp.o: ms_data.h libft.h quotes.h t_shvar.h
 tilde_exp.o: ms_data.h libft.h t_shvar.h
