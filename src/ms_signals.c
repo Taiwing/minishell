@@ -6,11 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 01:33:16 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/13 01:48:38 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/16 19:04:04 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
+#include "libft.h"
 
 pid_t	stat_pid(pid_t in)
 {
@@ -28,7 +29,11 @@ void	signal_hand(int sig)
 	pid_t	cp;
 
 	if ((cp = stat_pid(0)))
+	{
 		kill(cp, sig);
+		if (sig == SIGINT)
+			ft_putchar_fd('\n', 0);
+	}
 }
 
 void	init_signals(void)

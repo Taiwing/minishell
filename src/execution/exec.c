@@ -6,13 +6,27 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 15:33:05 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/13 01:44:06 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/16 19:17:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_data.h"
 #include "t_shvar.h"
 #include "ms_signals.h"
+
+static int		wait_cp(pid_t cp, char *name)
+{
+	int		status;
+
+	status = 0;
+	if (waitpid(cp, &status, WUNTRACED) == -1)
+		ft_putstr_fd("minishell: wait() error\n", 2);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else if (WIFSTOPPED(status))
+		ft_dprintf(0, "\nProcess %d (%s) stopped\n", cp, name);
+	return (status);
+}
 
 static int		exec_file(char *file_path, char **argv, char **env)
 {
@@ -33,8 +47,7 @@ static int		exec_file(char *file_path, char **argv, char **env)
 	else
 	{
 		stat_pid(cp);
-		if (wait(&ret) == -1)
-			ft_putstr_fd("minishell: wait() error\n", 2);
+		ret = wait_cp(cp, argv[0]);
 		set_custom_input_mode();
 		stat_pid(-1);
 	}
