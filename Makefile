@@ -22,7 +22,7 @@ SRCC			=	main.c\
 					ms_init.c\
 					ms_signals.c\
 					quotes.c\
-					shvar.c\
+					t_shvar.c\
 
 BUILTINSC		=	g_builtins.c\
 					msb_echo.c\
@@ -97,11 +97,12 @@ token.o: token.h libft.h quotes.h
 main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h\
 	ms_execution.h
 ms_init.o: ms_data.h libft.h t_shvar.h ms_signals.h
+ms_signals.o: libft.h
 ms_parsing.o: token.h libft.h tilde_exp.h ms_data.h param_exp.h quotes.h
 param_exp.o: ms_data.h libft.h quotes.h t_shvar.h
 tilde_exp.o: ms_data.h libft.h t_shvar.h
 quotes.o: quotes.h
-shvar.o: t_shvar.h libft.h
+t_shvar.o: t_shvar.h libft.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 
