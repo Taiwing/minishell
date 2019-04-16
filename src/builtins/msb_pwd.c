@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_builtins.c                                       :+:      :+:    :+:   */
+/*   msb_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/12 13:57:24 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/16 20:31:31 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/16 20:33:34 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/16 21:17:05 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "g_builtins.h"
+#include "ms_data.h"
+#include "t_shvar.h"
+#include <sys/syslimits.h>
 
-const t_builtid	g_builtins[BUILTIN_COUNT] =
+int	msb_pwd(char **argv, t_ms_data *msd)
 {
-	//{"cd", msb_cd},
-	{"echo", msb_echo},
-	{"exit", msb_exit},
-	{"pwd", msb_pwd}
-};
+	char	curdir[PATH_MAX];
+
+	(void)argv;
+	(void)msd;
+	if (!getcwd(curdir, PATH_MAX))
+	{
+		set_shvar("PWD", NULL, &msd->env);
+		return (1);
+	}
+	ft_printf("%s\n", curdir);
+	set_shvar("PWD", curdir, &msd->env);
+	return (0);
+}

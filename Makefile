@@ -18,7 +18,8 @@ INPUTDIR		=	input
 LEXINGDIR		=	lexing
 PARSINGDIR		=	parsing
 
-SRCC			=	main.c\
+SRCC			=	env.c\
+					main.c\
 					ms_init.c\
 					ms_signals.c\
 					quotes.c\
@@ -27,6 +28,7 @@ SRCC			=	main.c\
 BUILTINSC		=	g_builtins.c\
 					msb_echo.c\
 					msb_exit.c\
+					msb_pwd.c\
 
 EXECUTIONC		=	exec.c\
 					ms_execution.c\
@@ -80,6 +82,8 @@ libft.a:
 g_builtins.o: g_builtins.h ms_data.h libft.h
 msb_echo.o: ms_data.h libft.h
 msb_exit.o: ms_data.h libft.h
+msb_pwd.o: ms_data.h libft.h t_shvar.h
+env.o: t_shvar.h libft.h
 exec.o: ms_data.h libft.h t_shvar.h ms_signals.h
 ms_execution.o: exec.h ms_data.h libft.h g_builtins.h
 char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h

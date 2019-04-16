@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 20:24:44 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/16 20:24:48 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/16 21:18:21 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,30 +51,22 @@ char	*get_shvar_val(char *name, t_list *env)
 		return (ptr->value);
 }
 
-char	**load_env(t_list *lst)
+void	set_shvar(const char *name, const char *value, t_list **env)
 {
-	int		i;
-	int		size;
-	char	**env;
 	t_shvar	*svar;
+	t_shvar	envar;
 
-	if (!(size = ft_lst_size(lst)))
-		return (NULL);
-	env = ft_secmalloc((size + 1) * sizeof(char *));
-	i = -1;
-	while (++i < size)
+	if (!(svar = get_shvar((char *)name, *env)))
 	{
-		svar = (t_shvar *)lst->content;
-		env[i] = !(svar->name && svar->value) ? ft_strjoin(svar->name, "=") :
-			ft_strnew(ft_strlen(svar->name) + ft_strlen(svar->value) + 1);
-		if (svar->value)
-		{
-			ft_strcat(env[i], svar->name);
-			ft_strcat(env[i], "=");
-			ft_strcat(env[i], svar->value);
-		}
-		lst = lst->next;
+		envar.name = ft_strdup((char *)name);
+		envar.value = value ? ft_strdup((char *)value) : NULL;
+		envar.type = ENV_GLOBAL;
+		ft_lst_sorted_insert(env, ft_lstnew((void *)&envar, sizeof(t_shvar)),
+			shvar_cmp);
 	}
-	env[i] = NULL;
-	return (env);
+	else
+	{
+		ft_memdel((void **)&svar->value);
+		svar->value = value ? ft_strdup((char *)value) : NULL;
+	}
 }

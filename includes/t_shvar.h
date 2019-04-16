@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 20:15:11 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 15:58:18 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/16 21:09:02 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int				shvar_cmp(void *svar1, void *svar2);
 void			shvar_del(void *content, size_t content_size);
 t_shvar			*get_shvar(char *name, t_list *env);
 char			*get_shvar_val(char *name, t_list *env);
+void			set_shvar(const char *name, const char *value, t_list **env);
 char			**load_env(t_list *lst);
 
 #endif
