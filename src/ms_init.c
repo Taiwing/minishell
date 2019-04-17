@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/13 01:45:21 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/18 00:35:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,6 @@
 #include "ms_data.h"
 #include "t_shvar.h"
 #include "ms_signals.h"
-
-static t_list	*init_env(char **env)
-{
-	t_list	*lst;
-	t_shvar	envar;
-	char	*delim;
-
-	lst = NULL;
-	envar.type = ENV_GLOBAL;
-	while (*env)
-	{
-		delim = ft_strchr(*env, '=');
-		envar.name = ft_strsub(*env, 0, delim - *env);
-		envar.value = delim[1] ?
-			ft_strsub(delim + 1, 0, ft_strlen(delim + 1)) : NULL;
-		ft_lst_sorted_insert(&lst, ft_lstnew((void *)&envar, sizeof(t_shvar)),
-			shvar_cmp);
-		++env;
-	}
-	return (lst);
-}
 
 void		set_custom_input_mode(void)
 {
@@ -72,7 +51,7 @@ void			ms_init(t_ms_data *msd, char **env)
 		ft_exit("not a terminal", EXIT_FAILURE);
 	reset_input_mode();
 	ft_atexit(reset_input_mode);
-	msd->env = init_env(env);
+	msd->env = env_to_list(env);
 	msd->path = ft_strsplit(get_shvar_val("PATH", msd->env), ':');
 	msd->cmd_exit = 0;
 	msd->process_id = 0;	//TEMP (see how to get this shit)

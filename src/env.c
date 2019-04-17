@@ -6,13 +6,42 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 20:50:06 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/16 20:50:31 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/18 00:44:45 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_shvar.h"
 
-char	**load_env(t_list *lst)
+t_shvar	*str_to_shvar(t_shvar *dest, char *str)
+{
+	char *delim;
+
+	if (!str || !(delim = ft_strchr(str, '=')) || delim == str)
+		return (NULL);
+	dest->name = ft_strsub(str, 0, delim - str);
+	dest->value = delim[1] ?
+		ft_strsub(delim + 1, 0, ft_strlen(delim + 1)) : NULL;
+	dest->type = ENV_GLOBAL;
+	return (dest);
+}
+
+t_list	*env_to_list(char **env)
+{
+	t_list	*lst;
+	t_shvar	envar;
+
+	lst = NULL;
+	while (*env)
+	{
+		if (str_to_shvar(&envar, *env))
+			ft_lst_sorted_insert(&lst,
+				ft_lstnew((void *)&envar, sizeof(t_shvar)), shvar_cmp);
+		++env;
+	}
+	return (lst);
+}
+
+char	**list_to_env(t_list *lst)
 {
 	int		i;
 	int		size;

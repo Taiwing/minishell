@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 15:33:05 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/16 19:17:49 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/18 00:34:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			exec_local_file(t_ms_data *msd, char **argv)
 		ft_dprintf(2, "minishell: %s: permission denied\n", argv[0]);
 	else
 	{
-		env = load_env(msd->env);
+		env = list_to_env(msd->env);
 		msd->cmd_exit = exec_file(argv[0], argv, env);
 		ft_wtfree(env);
 	}
@@ -86,7 +86,7 @@ void			exec_on_path(t_ms_data *msd, char **argv)
 				ft_dprintf(2, "minishell: %s: permission denied\n", argv[0]);
 			else
 			{
-				wt = load_env(msd->env);
+				wt = list_to_env(msd->env);
 				msd->cmd_exit = exec_file(fp, argv, wt);
 				ft_wtfree(wt);
 			}
