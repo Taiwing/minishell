@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:46:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 14:47:56 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/17 16:52:14 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "ms_data.h"
 
-void	ms_execution(t_ms_data *msd, char ***cmd);
+enum	e_cmdfree {CMD_FREE, CMD_KEEP};
+
+void	ms_execution(t_ms_data *msd, char ***cmd, int free_cmd);
 
 #endif
