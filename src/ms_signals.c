@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 01:33:16 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/16 19:04:04 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/18 05:48:55 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_signals(void)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	while (++i < 31)
-		signal(i, &signal_hand);
+		signal(i, signal_hand);
 }
