@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:57:24 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/17 17:16:11 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/18 02:53:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@ const t_builtid	g_builtins[BUILTIN_COUNT] =
 	{"echo", msb_echo},
 	{"env", msb_env},
 	{"exit", msb_exit},
-	{"pwd", msb_pwd}
+	{"pwd", msb_pwd},
+	{"setenv", msb_setenv},
+	{"unsetenv", msb_unsetenv}
 };

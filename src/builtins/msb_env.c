@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:17:06 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/18 02:29:38 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/18 03:53:15 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,7 @@ static int		is_local_env(void *ref, void *content)
 	svar = (t_shvar *)content;
 	if (svar->type != ENV_LOCAL)
 		return (1);
-	if (svar->name)
-		free(ft_heap_collector((void *)svar->name, FT_COLLEC_GET));
-	if (svar->value)
-		free(ft_heap_collector((void *)svar->value, FT_COLLEC_GET));
-	svar->name = NULL;
-	svar->value = NULL;
+	shvar_del(content, 0);
 	return (0);
 }
 
@@ -78,18 +73,30 @@ static void		reset_env(t_ms_data *msd, t_list *env_backup, int empty_env)
 
 static void		exec_with_tmp_env(char **argv, t_ms_data *msd, int empty_env)
 {
+	char	**path_backup;
 	t_list	*env_backup;
 
 	env_backup = NULL;
+	path_backup = NULL;
 	if (empty_env)
 	{
 		env_backup = msd->env;
 		msd->env = NULL;
 	}
 	set_tmp_env(&argv, msd, &env_backup);
+	if (get_shvar("PATH", env_backup))
+	{
+		path_backup = msd->path;
+		msd->path = ft_strsplit(get_shvar_val("PATH", msd->env), ':');
+	}
 	if (*argv)
 		ms_execution(msd, &argv, CMD_KEEP);
 	reset_env(msd, env_backup, empty_env);
+	if (path_backup || (!get_shvar_val("PATH", msd->env) && msd->path))
+	{
+		ft_wtfree(msd->path);
+		msd->path = path_backup;
+	}
 }
 
 int				msb_env(char **argv, t_ms_data *msd)

@@ -31,6 +31,8 @@ BUILTINSC		=	g_builtins.c\
 					msb_env.c\
 					msb_exit.c\
 					msb_pwd.c\
+					msb_setenv.c\
+					msb_unsetenv.c\
 
 EXECUTIONC		=	exec.c\
 					ms_execution.c\
@@ -87,6 +89,8 @@ msb_echo.o: ms_data.h libft.h
 msb_env.o: t_shvar.h libft.h ms_execution.h ms_data.h
 msb_exit.o: ms_data.h libft.h
 msb_pwd.o: ms_data.h libft.h t_shvar.h
+msb_setenv.o: t_shvar.h libft.h ms_data.h
+msb_unsetenv.o: t_shvar.h libft.h ms_data.h
 env.o: t_shvar.h libft.h
 exec.o: ms_data.h libft.h t_shvar.h ms_signals.h
 ms_execution.o: exec.h ms_data.h libft.h g_builtins.h ms_execution.h
