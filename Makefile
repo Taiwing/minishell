@@ -84,12 +84,12 @@ libft.a:
 g_builtins.o: g_builtins.h ms_data.h libft.h
 msb_cd.o: ms_data.h libft.h t_shvar.h
 msb_echo.o: ms_data.h libft.h
-msb_env.o: ms_data.h libft.h t_shvar.h
+msb_env.o: t_shvar.h libft.h ms_execution.h ms_data.h
 msb_exit.o: ms_data.h libft.h
 msb_pwd.o: ms_data.h libft.h t_shvar.h
 env.o: t_shvar.h libft.h
 exec.o: ms_data.h libft.h t_shvar.h ms_signals.h
-ms_execution.o: exec.h ms_data.h libft.h g_builtins.h
+ms_execution.o: exec.h ms_data.h libft.h g_builtins.h ms_execution.h
 char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 char_functions_3.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h

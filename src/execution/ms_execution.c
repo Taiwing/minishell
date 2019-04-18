@@ -6,12 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:29:38 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/17 16:52:42 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/18 02:35:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "g_builtins.h"
+#include "ms_execution.h"
 
 static int	builtin_match(char *name)
 {
@@ -38,7 +39,7 @@ void		ms_execution(t_ms_data *msd, char ***cmd, int free_cmd)
 		msd->cmd_exit = g_builtins[buid].bi(argv, msd);
 	else
 		exec_on_path(msd, argv);
-	if (free_cmd)
+	if (free_cmd == CMD_FREE)
 	{
 		ft_wtfree(argv);
 		*cmd = NULL;
