@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 20:12:04 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 19:27:22 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	ms_getchar(char c[8])
 	return (0);
 }
 
-char		*ms_input(t_ms_data *msd, int qmode)
+char		*ms_input(t_ms_data *msd, int qmode, int word)
 {
 	t_input_data	idat;
 
@@ -56,6 +56,7 @@ char		*ms_input(t_ms_data *msd, int qmode)
 	idat.bol = 1;
 	idat.lst = NULL;
 	idat.buf = NULL;
+	idat.word = word;
 	ft_bzero(idat.c, 8);
 	idat.qmode = qmode == BSQUOTE ? NO_QUOTE : qmode;
 	while (g_charfunc[ms_getchar(idat.c)](&idat, msd))

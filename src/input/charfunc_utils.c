@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:40:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 18:52:46 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 19:26:29 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,36 @@ void	reprint_line(t_dllst *lst)
 		write(0, g_multibyte_chars[LEFT_ARROW - 11], 3);
 }
 
+int		get_word_qmode(int *word, int qmode, char *str)
+{
+	if (!str)
+		return (NO_QUOTE);
+	while (*str && *str != '\n')
+	{
+		qmode = get_qmode(qmode, *str);
+		if (!qmode && !ft_strchr(" \t\n", *str))
+		{
+			if (*str++ == ';')
+				*word = 0;
+			else if (*str && ft_strchr(" \t\n", *str))
+				++(*word);
+		}
+		else
+			++str;
+	}
+	if ((qmode & ~BSQUOTE))
+		qmode &= ~BSQUOTE;
+	return (qmode);
+}
 
 void	check_input(t_input_data *idat, t_ms_data *msd)
 {
 	char	*recbuf;
 
-	if ((idat->qmode = get_str_qmode(idat->qmode, idat->buf)) != NO_QUOTE)
+	if ((idat->qmode = get_word_qmode(&idat->word, idat->qmode, idat->buf))
+		!= NO_QUOTE)
 	{
-		if (!(recbuf = ms_input(msd, idat->qmode)))
+		if (!(recbuf = ms_input(msd, idat->qmode, idat->word)))
 		{
 			ft_memdel((void **)&idat->buf);
 			dllst_del(dllst_first(idat->lst));
