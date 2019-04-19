@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes.h                                           :+:      :+:    :+:   */
+/*   tab_completion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 17:12:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 18:51:17 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/18 13:38:12 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/19 18:54:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUOTES_H
-# define QUOTES_H
+#include "tab_completion.h"
+#include "quotes.h"
+/*
+int		check_completion(t_input_data *idat, char **part)
+{
+	if (idat->bol || ft_strchr(" \t\n", idat->lst->c)
+		|| (idat->lst->next && !ft_strchr(" \t\n", idat->lst->next->c)))	
+		return (NO_COMP);
+	
+}
 
-#define NO_QUOTE	0x00
-#define DQUOTE		0x01
-#define SQUOTE		0x02
-#define BSQUOTE		0x04
-
-int		get_qmode(int qmode, char c);
-int		get_str_qmode(int qmode, char *str);
-
-#endif
+void	complete_input(int completion, char *part,
+			t_input_data *idat, t_ms_data *msd)
+{
+	
+}*/

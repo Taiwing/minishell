@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:00:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 20:11:06 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 18:53:51 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,14 @@ int	end_of_transmission(t_input_data *idat, t_ms_data *msd)
 /*like in bash, do nothing except completion stuff with tab*/
 int	tab_completion(t_input_data *idat, t_ms_data *msd)
 {
-	(void)msd;
 	(void)idat;
+	(void)msd;
+/*	char	*part;
+	int		completion;
+
+	if ((completion = check_completion(idat, &part)))
+		complete_input(completion, part, idat, msd);
+*/
 	return (CONTINUE_INPUT);
 }
 
@@ -56,6 +62,6 @@ int	new_line(t_input_data *idat, t_ms_data *msd)
 	idat->buf = dllst_to_str(dllst_first(idat->lst));
 	dllst_del(dllst_first(idat->lst));
 	idat->lst = NULL;
-	eval_quote_mode(idat, msd);
+	check_input(idat, msd);
 	return (STOP_INPUT);
 }

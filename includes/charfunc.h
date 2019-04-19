@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 17:46:27 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/05 16:01:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 18:50:50 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ extern char	* const g_multibyte_chars[8];
 extern int	(* const g_charfunc[256])(t_input_data *idat, t_ms_data *msd);
 
 void	reprint_line(t_dllst *lst);
-void	eval_quote_mode(t_input_data *idat, t_ms_data *msd);
+void	check_input(t_input_data *idat, t_ms_data *msd);
 
 int		discard_input(t_input_data *idat, t_ms_data *msd);
 int		reset_input(t_input_data *idat, t_ms_data *msd);

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes.h                                           :+:      :+:    :+:   */
+/*   tab_completion.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 17:12:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 18:51:17 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/18 13:41:26 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/18 13:47:09 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUOTES_H
-# define QUOTES_H
+#ifndef TAB_COMPLETION_H
+# define TAB_COMPLETION_H
 
-#define NO_QUOTE	0x00
-#define DQUOTE		0x01
-#define SQUOTE		0x02
-#define BSQUOTE		0x04
+# include "ms_input.h"
 
-int		get_qmode(int qmode, char c);
-int		get_str_qmode(int qmode, char *str);
+enum	e_comp {NO_COMP, ENV_COMP, DIR_COMP, EXEC_COMP, LOCAL_COMP};
+
+int		check_completion(t_input_data *idat, char **part);
+void	complete_input(int completion, char *part,
+			t_input_data *idat, t_ms_data *msd);
 
 #endif

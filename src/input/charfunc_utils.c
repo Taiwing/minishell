@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:40:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/09 18:37:56 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 18:52:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ and adds the number one space and as many backspaces as there were characters
 in the list (so that the cursor moves back into the right position)
 */
 
-void		reprint_line(t_dllst *lst)
+void	reprint_line(t_dllst *lst)
 {
 	size_t	sz;
 
@@ -29,22 +29,12 @@ void		reprint_line(t_dllst *lst)
 		write(0, g_multibyte_chars[LEFT_ARROW - 11], 3);
 }
 
-static int	get_input_qmode(int qmode, char *input)
-{
-	if (!input)
-		return (NO_QUOTE);
-	while (*input && *input != '\n')
-		qmode = get_qmode(qmode, *input++);
-	if ((qmode & ~BSQUOTE))
-		qmode &= ~BSQUOTE;
-	return (qmode);
-}
 
-void		eval_quote_mode(t_input_data *idat, t_ms_data *msd)
+void	check_input(t_input_data *idat, t_ms_data *msd)
 {
 	char	*recbuf;
 
-	if ((idat->qmode = get_input_qmode(idat->qmode, idat->buf)) != NO_QUOTE)
+	if ((idat->qmode = get_str_qmode(idat->qmode, idat->buf)) != NO_QUOTE)
 	{
 		if (!(recbuf = ms_input(msd, idat->qmode)))
 		{

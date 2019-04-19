@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 17:11:28 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/09 18:34:39 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 18:51:35 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,16 @@ int		get_qmode(int qmode, char c)
 		return (qmode == DQUOTE ? NO_QUOTE : DQUOTE);
 	else if (c == '\'' && qmode != DQUOTE)
 		return (qmode == SQUOTE ? NO_QUOTE : SQUOTE);
+	return (qmode);
+}
+
+int		get_str_qmode(int qmode, char *str)
+{
+	if (!str)
+		return (NO_QUOTE);
+	while (*str && *str != '\n')
+		qmode = get_qmode(qmode, *str++);
+	if ((qmode & ~BSQUOTE))
+		qmode &= ~BSQUOTE;
 	return (qmode);
 }

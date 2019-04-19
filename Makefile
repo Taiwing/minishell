@@ -47,6 +47,7 @@ INPUTC			=	char_functions_1.c\
 					dllst_remove.c\
 					dllst_str.c\
 					ms_input.c\
+					tab_completion.c\
 
 LEXINGC			=	ms_lexing.c\
 					token.c\
@@ -104,6 +105,8 @@ dllst_move.o: t_dllst.h libft.h
 dllst_remove.o: t_dllst.h libft.h
 dllst_str.o: t_dllst.h libft.h
 ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
+tab_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
+	quotes.h
 ms_lexing.o: token.h libft.h quotes.h ms_lexing.h ms_data.h
 token.o: token.h libft.h quotes.h
 main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h\
