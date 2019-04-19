@@ -6,16 +6,18 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 19:27:22 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 22:58:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
+#include "quotes.h"
 
-const char	*g_inputstr[4] = {
+const char	*g_inputstr[5] = {
 	"$",
 	"dquote",
 	"squote",
+	NULL,
 	""
 };
 

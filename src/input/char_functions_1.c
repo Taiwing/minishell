@@ -6,11 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:00:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 18:53:51 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 22:58:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
+#include "quotes.h"
 
 int	discard_input(t_input_data *idat, t_ms_data *msd)
 {

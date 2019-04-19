@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 21:50:15 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 19:26:44 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 22:57:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "ms_data.h"
 # include "t_dllst.h"
-
-enum			e_qmode {NO_QUOTE = 0, DQUOTE, SQUOTE, BSQUOTE};
 
 typedef struct	s_input_data
 {

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:02:54 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 13:36:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 23:22:00 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*join_lines(char *raw_input)
 	{
 		if (raw_input[i] == '\n' && (qmode & BSQUOTE))
 		{
-			raw_input = ft_strrm(&raw_input, i - 1, 2);
+			raw_input = ft_strrm(&raw_input, --i, 2);
 			qmode &= ~BSQUOTE;
 		}
 		else
@@ -43,6 +43,7 @@ t_list		*ms_lexing(char **input)
 	*input = join_lines(*input);
 	if (*input)
 	{
+		ft_dprintf(0, "input: %s\n", *input); //TEST
 		lst = tokenize(*input);
 		ft_memdel((void **)input);
 	}

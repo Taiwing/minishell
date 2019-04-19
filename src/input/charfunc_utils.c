@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:40:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 19:26:29 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 23:13:13 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ and adds the number one space and as many backspaces as there were characters
 in the list (so that the cursor moves back into the right position)
 */
 
-void	reprint_line(t_dllst *lst)
+void		reprint_line(t_dllst *lst)
 {
 	size_t	sz;
 
@@ -29,29 +29,33 @@ void	reprint_line(t_dllst *lst)
 		write(0, g_multibyte_chars[LEFT_ARROW - 11], 3);
 }
 
-int		get_word_qmode(int *word, int qmode, char *str)
+static int	get_word_qmode(int *word, int qmode, char *str)
 {
+	int	i;
+
 	if (!str)
 		return (NO_QUOTE);
-	while (*str && *str != '\n')
+	i = 0;
+	while (str[i] && str[i] != '\n')
 	{
-		qmode = get_qmode(qmode, *str);
-		if (!qmode && !ft_strchr(" \t\n", *str))
+		if (!qmode && (!i || ft_strchr(" \t\n;", str[i]))) 
 		{
-			if (*str++ == ';')
+			while (str[i] && ft_strchr(" \t\n", str[i]))
+				++i;
+			if (str[i] == ';')
 				*word = 0;
-			else if (*str && ft_strchr(" \t\n", *str))
+			else if (str[i])
 				++(*word);
 		}
-		else
-			++str;
+		if (str[i])
+			qmode = get_qmode(qmode, str[i++]);
 	}
 	if ((qmode & ~BSQUOTE))
 		qmode &= ~BSQUOTE;
 	return (qmode);
 }
 
-void	check_input(t_input_data *idat, t_ms_data *msd)
+void		check_input(t_input_data *idat, t_ms_data *msd)
 {
 	char	*recbuf;
 
