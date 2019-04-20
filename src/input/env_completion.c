@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 18:28:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/20 19:27:31 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/20 20:31:07 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*env_completion(char *part, t_list *env)
 	{
 		name = ((t_shvar *)env->content)->name;
 		comp = part_match(comp, name, part, len);
+		env = env->next;
 	}
 	return (comp);
 }
