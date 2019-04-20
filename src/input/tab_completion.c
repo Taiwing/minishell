@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:38:12 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/20 19:31:04 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/20 20:56:51 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ static int	get_dllst_word_qmode(int *word, int qmode, t_dllst *lst)
 	{
 		if (!qmode && (!ptr->prev || ft_strchr(" \t\n;", ptr->c))) 
 		{
-			while (ptr != lst->next && ft_strchr(" \t\n", ptr->c))
+			while (ptr != lst->next && ft_strchr(" \t\n;", ptr->c))
+			{
+				*word = ptr->c == ';' ? 0 : *word;
 				ptr = ptr->next;
-			if (ptr != lst->next && ptr->c == ';')
-				*word = 0;
-			else if (ptr != lst->next)
+			}
+			if (ptr != lst->next)
 				++(*word);
 		}
 		if (ptr != lst->next)

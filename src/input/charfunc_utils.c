@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:40:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 23:13:13 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/20 21:00:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ static int	get_word_qmode(int *word, int qmode, char *str)
 	{
 		if (!qmode && (!i || ft_strchr(" \t\n;", str[i]))) 
 		{
-			while (str[i] && ft_strchr(" \t\n", str[i]))
+			while (str[i] && ft_strchr(" \t\n;", str[i]))
+			{
+				*word = str[i] == ';' ? 0 : *word;
 				++i;
-			if (str[i] == ';')
-				*word = 0;
-			else if (str[i])
+			}
+			if (str[i] && !(str[i] == '\\' && str[i + 1] == '\n'))
 				++(*word);
 		}
 		if (str[i])
