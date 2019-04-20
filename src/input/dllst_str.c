@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:32:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 20:06:18 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/19 23:51:21 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ char	*dllst_to_str(t_dllst *lst)
 		return (NULL);
 	i = 0;
 	while (lst)
+	{
+		str[i++] = lst->c;
+		lst = lst->next;
+	}
+	return (str);
+}
+
+char	*dllst_to_nstr(t_dllst *lst, size_t size)
+{
+	char	*str;
+	size_t	i;
+
+	if (!lst || !(str = ft_strnew(size)))
+		return (NULL);
+	i = 0;
+	while (lst && size--)
 	{
 		str[i++] = lst->c;
 		lst = lst->next;

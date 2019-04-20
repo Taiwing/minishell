@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tab_completion.h                                   :+:      :+:    :+:   */
+/*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/18 13:41:26 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/20 12:36:39 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/20 16:54:47 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/20 16:55:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAB_COMPLETION_H
-# define TAB_COMPLETION_H
+#ifndef FT_LS_H
+# define FT_LS_H
 
-# include "ms_input.h"
-
-enum	e_comp {NO_COMP, ENV_COMP, EXEC_COMP, FILE_COMP};
-
-int		check_completion(t_input_data *idat, char **part);
-void	complete_input(int completion, char *part,
-			t_input_data *idat, t_ms_data *msd);
+t_list		*ft_ls_files(char *path, int type)
 
 #endif
