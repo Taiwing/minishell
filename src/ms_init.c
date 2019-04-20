@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/18 05:42:02 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/20 17:53:54 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void			ms_init(t_ms_data *msd, char **env)
 {
 	init_signals();
 	ft_exitmsg("minishell");
+	ft_dir_container();
+	ft_atexit(ft_close_dir_stack);
 	if (!isatty(0))
 		ft_exit("not a terminal", EXIT_FAILURE);
 	reset_input_mode();

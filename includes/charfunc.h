@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 17:46:27 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 18:50:50 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/20 19:29:28 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # define HOME_KEY		15
 # define END_KEY		16
 # define DELETE_KEY		17
-
-/*TODO: rd is not really necessary, it could be removed for another variable*/
 
 extern char	* const g_multibyte_chars[8];
 

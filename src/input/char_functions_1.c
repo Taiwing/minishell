@@ -6,12 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:00:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 22:58:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/20 19:26:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
 #include "quotes.h"
+#include "tab_completion.h"
 
 int	discard_input(t_input_data *idat, t_ms_data *msd)
 {
@@ -45,14 +46,12 @@ int	end_of_transmission(t_input_data *idat, t_ms_data *msd)
 /*like in bash, do nothing except completion stuff with tab*/
 int	tab_completion(t_input_data *idat, t_ms_data *msd)
 {
-	(void)idat;
-	(void)msd;
-/*	char	*part;
+	char	*part;
 	int		completion;
 
+	part = NULL;
 	if ((completion = check_completion(idat, &part)))
 		complete_input(completion, part, idat, msd);
-*/
 	return (CONTINUE_INPUT);
 }
 

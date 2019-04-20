@@ -6,11 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:38:12 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/20 17:31:38 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/20 19:31:04 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tab_completion.h"
+#include "charfunc.h"
 #include "quotes.h"
 
 static int	get_dllst_word_qmode(int *word, int qmode, t_dllst *lst)
@@ -38,7 +39,7 @@ static int	get_dllst_word_qmode(int *word, int qmode, t_dllst *lst)
 	return (qmode);
 }
 
-int		check_completion(t_input_data *idat, char **part)
+int			check_completion(t_input_data *idat, char **part)
 {
 	int		word;
 	int		qmode;
@@ -67,8 +68,32 @@ int		check_completion(t_input_data *idat, char **part)
 		return (FILE_COMP);
 }
 
-/*void	complete_input(int completion, char *part,
-			t_input_data *idat, t_ms_data *msd)
+static void	insert_comp(char *comp, t_input_data *idat)
 {
-	
-}*/
+	while (*comp)
+	{
+		write(0, comp, 1);
+		dllst_insert_forwd(&idat->lst, *comp);
+		++comp;
+	}
+	if (idat->lst->next)
+		reprint_line(idat->lst->next);
+}
+
+void		complete_input(int completion, char *part,
+				t_input_data *idat, t_ms_data *msd)
+{
+	char	*comp;
+
+	comp = NULL;
+	if (completion == ENV_COMP)
+		comp = env_completion(part, msd->env);
+	else if (completion == EXEC_COMP)
+		comp = exec_completion(part, msd->path);
+	else if (completion == FILE_COMP)
+		comp = file_completion(part);
+	ft_memdel((void **)&part);
+	if (comp && *comp)
+		insert_comp(comp, idat);
+	ft_memdel((void **)&comp);
+}
