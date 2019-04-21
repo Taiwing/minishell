@@ -19,6 +19,7 @@ LEXINGDIR		=	lexing
 PARSINGDIR		=	parsing
 
 SRCC			=	env.c\
+					history.c\
 					main.c\
 					ms_init.c\
 					ms_signals.c\
@@ -99,6 +100,7 @@ msb_unsetenv.o: t_shvar.h libft.h ms_data.h
 env.o: t_shvar.h libft.h
 exec.o: ms_data.h libft.h t_shvar.h ms_signals.h
 ms_execution.o: exec.h ms_data.h libft.h g_builtins.h ms_execution.h
+history.o: ms_data.h libft.h
 char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h\
 	tab_completion.h
 char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
@@ -127,7 +129,7 @@ ms_signals.o: libft.h
 ms_parsing.o: token.h libft.h tilde_exp.h ms_data.h param_exp.h quotes.h
 param_exp.o: ms_data.h libft.h quotes.h t_shvar.h
 tilde_exp.o: ms_data.h libft.h t_shvar.h
-quotes.o: quotes.h
+quotes.o: quotes.h libft.h
 t_shvar.o: t_shvar.h libft.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@

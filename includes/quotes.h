@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 17:12:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 19:34:57 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/21 14:34:19 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #define BSQUOTE		0x04
 
 int		get_qmode(int qmode, char c);
+char	*join_lines(char *str, int qmode);
 //int		get_str_qmode(int qmode, char *str);
 
 #endif

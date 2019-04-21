@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:03:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/10 22:03:59 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/21 14:44:30 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "ms_data.h"
 
-t_list	*ms_lexing(char **input);
+t_list	*ms_lexing(t_ms_data *msd, char **input);
 
 #endif

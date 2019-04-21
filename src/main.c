@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 21:58:02 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 23:13:06 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/21 14:44:10 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		main(int argc, char **argv, char **env)
 		if (!input)
 			input = ms_input(&msd, 0, 0);
 		if (input)
-			cmd_list = ms_lexing(&input);
+			cmd_list = ms_lexing(&msd, &input);
 		while (cmd_list)
 		{
 			if ((cmd = ms_parsing(&msd, &cmd_list)))
