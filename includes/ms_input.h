@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 21:50:15 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 22:57:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/21 20:03:17 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_input_data
 	int			word;
 	t_dllst		*lst;
 	char		*buf;
+	int			hi;
 }				t_input_data;
 
 char			*ms_input(t_ms_data *msd, int qmode, int word);

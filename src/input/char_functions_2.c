@@ -6,28 +6,36 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:01:02 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/05 16:41:20 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/22 09:00:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "charfunc.h"
+#include "input_history.h"
 
 int	last_cmd(t_input_data *idat, t_ms_data *msd)
 {
-	(void)msd;
-	(void)idat;
+	if ((size_t)idat->hi < msd->hist.size)
+	{
+		save_current_line(idat, &msd->hist);
+		++idat->hi;
+		restore(idat, &msd->hist, msd);
+	}
 	return (CONTINUE_INPUT);
 }
 
 int	next_cmd(t_input_data *idat, t_ms_data *msd)
 {
-	(void)msd;
-	(void)idat;
+	if (idat->hi)
+	{
+		save_current_line(idat, &msd->hist);
+		--idat->hi;
+		restore(idat, &msd->hist, msd);
+	}
 	return (CONTINUE_INPUT);
 }
 
-/*TODO: modify this so that it can move back at the first position on the line*/
 int	move_left(t_input_data *idat, t_ms_data *msd)
 {
 	(void)msd;

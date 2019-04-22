@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 22:58:49 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/21 20:08:28 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char		*ms_input(t_ms_data *msd, int qmode, int word)
 	t_input_data	idat;
 
 	print_prompt(msd, qmode);
+	idat.hi = 0;
 	idat.bol = 1;
 	idat.lst = NULL;
 	idat.buf = NULL;

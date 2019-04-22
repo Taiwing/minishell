@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:00:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/20 19:26:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/22 08:05:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	end_of_transmission(t_input_data *idat, t_ms_data *msd)
 	(void)msd;
 	if (!idat->lst && idat->qmode == NO_QUOTE)
 	{
+		ft_memdel((void **)&idat->buf);
 		idat->buf = ft_strdup("exit\n");
 		ft_putstr_fd("exit\n", 0);
 		return (STOP_INPUT);
@@ -59,6 +60,7 @@ int	new_line(t_input_data *idat, t_ms_data *msd)
 {
 	idat->lst = dllst_last(idat->lst);
 	insert_char(idat, msd);
+	ft_memdel((void **)&idat->buf);
 	idat->buf = dllst_to_str(dllst_first(idat->lst));
 	dllst_del(dllst_first(idat->lst));
 	idat->lst = NULL;

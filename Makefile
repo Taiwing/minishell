@@ -51,6 +51,7 @@ INPUTC			=	char_functions_1.c\
 					env_completion.c\
 					exec_completion.c\
 					file_completion.c\
+					input_history.c\
 					ms_input.c\
 					tab_completion.c\
 
@@ -103,7 +104,8 @@ ms_execution.o: exec.h ms_data.h libft.h g_builtins.h ms_execution.h
 history.o: ms_data.h libft.h
 char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h\
 	tab_completion.h
-char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
+char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h\
+	input_history.h
 char_functions_3.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 charfunc.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h
 charfunc_utils.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h
@@ -117,10 +119,11 @@ env_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 exec_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 	g_builtins.h
 file_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h
+input_history.o: ms_input.h ms_data.h libft.h t_dllst.h charfunc.h
 ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h
 tab_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 	charfunc.h quotes.h
-ms_lexing.o: token.h libft.h quotes.h ms_lexing.h ms_data.h
+ms_lexing.o: token.h libft.h quotes.h t_shvar.h ms_lexing.h ms_data.h
 token.o: token.h libft.h quotes.h
 main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h\
 	ms_execution.h

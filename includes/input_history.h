@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lexing.c                                        :+:      :+:    :+:   */
+/*   input_history.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 22:02:54 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/22 09:01:35 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/22 08:54:28 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/22 08:56:06 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
-#include "quotes.h"
-#include "t_shvar.h"
-#include "ms_lexing.h"
+#ifndef INPUT_HISTORY_H
+# define INPUT_HISTORY_H
 
-t_list		*ms_lexing(t_ms_data *msd, char **input)
-{
-	t_list	*lst;
+# include "ms_input.h"
 
-	lst = NULL;
-	if (ft_strlen(*input) > 1)
-		add_to_history(*input, &msd->hist, get_shvar_val("HOME", msd->env));
-	*input = join_lines(*input, NO_QUOTE);
-	if (*input)
-	{
-		lst = tokenize(*input);
-		ft_memdel((void **)input);
-	}
-	return (lst);
-}
+void	save_current_line(t_input_data *idat, t_ms_history *hist);
+void	restore(t_input_data *idat, t_ms_history *hist, t_ms_data *msd);
+
+#endif
