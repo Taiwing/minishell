@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/20 17:53:54 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/22 10:08:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void			ms_init(t_ms_data *msd, char **env)
 	msd->path = ft_strsplit(get_shvar_val("PATH", msd->env), ':');
 	msd->cmd_exit = 0;
 	msd->process_id = 0;	//TEMP (see how to get this shit)
+	load_history(&msd->hist, get_shvar_val("HOME", msd->env));
+	msd->cmd_c = 0;
 }

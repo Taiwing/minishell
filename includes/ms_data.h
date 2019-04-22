@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/21 19:51:00 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/22 10:36:14 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void				del_history(t_ms_history *hist, size_t start, size_t len);
 void				write_history(int fd, t_ms_history *hist,
 						size_t start, size_t len);
 void				flush_history(t_ms_history *hist,
-						size_t len, char *home_path);
+						size_t len, char *path);
 
 /*all the data of minishell*/
 typedef struct		s_ms_data
@@ -41,6 +41,7 @@ typedef struct		s_ms_data
 	int				cmd_exit;		/*exit of las command ($?)*/
 	int				process_id;		/*process number ($$)*/
 	t_ms_history	hist;			/*command line history*/
+	size_t			cmd_c;			/*command count*/
 }					t_ms_data;
 
 void				reset_input_mode(void);
