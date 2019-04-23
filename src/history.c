@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:47:30 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/23 08:20:17 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/23 08:36:52 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ void	write_history(int fd, t_ms_history *hist, size_t start, size_t len)
 	}
 }
 
-//TODO: THIS IS SHIT
-//WHEN FLUSHING AT THE END IT MUST FLUSH STARTING FROM THE END
-//OF THE HISTORY (MAYBE MAKE TWO DIFFERENT FUNCTIONS...)
 void	flush_history(t_ms_history *hist, size_t len, char *path)
 {
 	int				fd;
@@ -113,12 +110,10 @@ void	flush_history(t_ms_history *hist, size_t len, char *path)
 	{
 		write_history(fd, &old, 0, old.size);
 		write_history(fd, hist, hist->size - len, len);
-	}
-	else
-		del_history(hist, 0, len);
-	del_history(&old, 0, old.size);
-	ft_memdel((void **)&path);
-	if (fd != -1)
 		close(fd);
+	}
+	del_history(&old, 0, old.size);
+	del_history(hist, 0, hist->size);
+	ft_memdel((void **)&path);
 }
 
