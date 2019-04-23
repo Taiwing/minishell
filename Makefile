@@ -94,7 +94,7 @@ g_builtins.o: g_builtins.h ms_data.h libft.h
 msb_cd.o: ms_data.h libft.h t_shvar.h
 msb_echo.o: ms_data.h libft.h
 msb_env.o: t_shvar.h libft.h ms_execution.h ms_data.h
-msb_exit.o: ms_data.h libft.h
+msb_exit.o: ms_data.h libft.h t_shvar.h
 msb_pwd.o: ms_data.h libft.h t_shvar.h
 msb_setenv.o: t_shvar.h libft.h ms_data.h
 msb_unsetenv.o: t_shvar.h libft.h ms_data.h
@@ -120,7 +120,8 @@ exec_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 	g_builtins.h
 file_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h
 input_history.o: ms_input.h ms_data.h libft.h t_dllst.h charfunc.h
-ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h
+ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h\
+	t_shvar.h
 tab_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 	charfunc.h quotes.h
 ms_lexing.o: token.h libft.h quotes.h t_shvar.h ms_lexing.h ms_data.h

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:29:38 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/18 02:35:46 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/23 10:01:22 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,17 @@ void		ms_execution(t_ms_data *msd, char ***cmd, int free_cmd)
 
 	argv = *cmd;
 	if (ft_strchr(argv[0], '/'))
+	{
+		msd->cmd_exit = 1;	/*default is failure*/
 		exec_local_file(msd, argv);
+	}
 	else if ((buid = builtin_match(argv[0])) >= 0)
 		msd->cmd_exit = g_builtins[buid].bi(argv, msd);
 	else
+	{
+		msd->cmd_exit = 1;	/*default is failure*/
 		exec_on_path(msd, argv);
+	}
 	if (free_cmd == CMD_FREE)
 	{
 		ft_wtfree(argv);

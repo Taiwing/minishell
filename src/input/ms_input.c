@@ -6,12 +6,14 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/21 20:08:28 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/23 09:43:03 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
 #include "quotes.h"
+#include "t_shvar.h"
+#include "c_colors.h"
 
 const char	*g_inputstr[5] = {
 	"$",
@@ -25,8 +27,20 @@ const char	*g_inputstr[5] = {
   cool and easy bonuses to do here*/
 static void	print_prompt(t_ms_data *msd, int qmode)
 {
-	(void)msd;
-	ft_dprintf(0, "%s> ", g_inputstr[qmode]);
+	char	*sl;
+	char	*curdir;
+
+	if (!qmode)
+	{
+		if ((curdir = get_shvar_val("PWD", msd->env)))
+			while ((sl = ft_strchr(curdir, '/')) && sl[1] && sl[1] != '/')
+				curdir = sl + 1;
+		ft_dprintf(0, C_BOLD "%s%lc  ", msd->cmd_exit ? C_RED : C_GREEN, L'➜');
+		ft_dprintf(0, C_CYAN "%s " C_BLUE "%s> " C_RESET,
+				curdir, g_inputstr[qmode]);
+	}
+	else
+		ft_dprintf(0, "%s> ", g_inputstr[qmode]);
 }
 
 static int	ms_getchar(char c[8])
