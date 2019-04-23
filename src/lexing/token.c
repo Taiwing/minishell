@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 17:29:41 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/10 19:55:46 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/23 11:24:23 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,33 @@ void	add_token(t_list **lst, int id, char *str)
 	ft_lst_push_back(lst, (void *)&tok, sizeof(t_token));	
 }
 
-t_list	*tokenize(char *input)
+void	check_alias(t_ms_data *msd)
+
+t_list	*tokenize(t_ms_data *msd, char *input, int qmode, int alias)
 {
-	size_t	i;
+	int		i;
 	size_t	len;
 	t_list	*lst;
-	int		qmode;
 
-	i = 0;
+	i = -1;
 	len = 0;
 	lst = NULL;
-	qmode = NO_QUOTE;
-	while (input[i])
+	while (input[++i])
 	{
 		qmode = get_qmode(qmode, input[i]);
 		if (qmode || !ft_strchr(" \t\n;", input[i]))
 			++len;
 		else if (!qmode && len)
 		{
-			add_token(&lst, T_WORD, ft_strsub(input + i - len, 0, len));
+			if (alias && (!lst || ((t_token *)lst->content)->id == T_SEPARATOR))
+				check_alias(msd->alias, &lst,
+					ft_strsub(input + i - len, 0, len));
+			else
+				add_token(&lst, T_WORD, ft_strsub(input + i - len, 0, len));
 			len = 0;
 		}
 		if (!qmode && (input[i] == '\n' || input[i] == ';'))
 			add_token(&lst, T_SEPARATOR, NULL);
-		++i;
 	}
 	return (lst);
 }

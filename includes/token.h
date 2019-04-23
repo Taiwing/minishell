@@ -6,16 +6,17 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 17:33:22 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/10 19:53:13 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/23 11:23:39 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 
-# include "libft.h"
+# include "ms_data.h"
 
 enum			e_tokenid {T_WORD, T_SEPARATOR};
+enum			e_alias_mode {ALIAS_OFF, ALIAS_ON};
 
 typedef struct	s_token
 {
@@ -26,7 +27,9 @@ typedef struct	s_token
 void			discard_token(t_list **alst);
 void			del_token(void *content, size_t size);
 void			add_token(t_list **lst, int id, char *str);
-t_list			*tokenize(char *input);
+void			check_alias(t_list *alias, t_list **lst, char *word);
+t_list			*tokenize(t_ms_data *msd, char *input,
+					int qmode, int alias);
 
 //TEMP
 void			print_tokens(t_list *lst);

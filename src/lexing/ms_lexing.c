@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:02:54 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/23 10:18:57 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/23 11:04:12 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_list		*ms_lexing(t_ms_data *msd, char **input)
 	}
 	if (*input)
 	{
-		lst = tokenize(*input);
+		lst = tokenize(*input, NO_QUOTE, ALIAS_ON);
 		ft_memdel((void **)input);
 	}
 	return (lst);
