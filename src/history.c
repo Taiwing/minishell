@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:47:30 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/22 10:46:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/23 08:20:17 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,24 @@ void	load_history(t_ms_history *hist, char *path)
 	ft_memdel((void **)&path);	
 }
 
-void	add_to_history(char *input, t_ms_history *hist, char *home_path)
+void	add_to_history(char *input, t_ms_history *hist,
+			char *path, size_t *cmd_c)
 {
+	int	fd;
+
+	fd = -1;
 	if (hist->size == HISTMAX)
-		flush_history(hist, HISTMAX / 2, home_path);
+	{
+		del_history(hist, 0, HISTMAX / 2);
+		if ((path = path ? ft_strjoin(path, "/.minihistory") : NULL)
+			&& (fd = open(path, O_TRUNC | O_WRONLY | O_CREAT, 0600)) != -1)
+		{
+			write_history(fd, hist, 0, HISTMAX / 2);
+			close(fd);
+			*cmd_c = 0;
+		}
+		ft_memdel((void **)&path);
+	}
 	hist->cmd[hist->size++] = ft_strdup(input);
 }
 
@@ -77,16 +91,9 @@ void	write_history(int fd, t_ms_history *hist, size_t start, size_t len)
 		write(fd, hist->cmd[start + i], cmd_len);
 		++i;
 	}
-	del_history(hist, start, len);
 }
 
-
 //TODO: THIS IS SHIT
-//REMAKE IT SO THAT IN THE CASE OF MID-PROGRAM FLUSHING
-//IT ONLY WRITES THE FIRST HALF OF THE HISTORY AND KEEPS
-//THE REMAINING COMMANDS (DO NOT FORGET TO UPDATE CMD_C
-//IN THIS CASE)
-//
 //WHEN FLUSHING AT THE END IT MUST FLUSH STARTING FROM THE END
 //OF THE HISTORY (MAYBE MAKE TWO DIFFERENT FUNCTIONS...)
 void	flush_history(t_ms_history *hist, size_t len, char *path)

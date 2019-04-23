@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/22 10:36:14 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/23 08:19:11 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct		s_ms_history
 }					t_ms_history;
 
 void				load_history(t_ms_history *hist, char *home_path);
-void				add_to_history(char *input,
-						t_ms_history *hist, char *home_path);
+void				add_to_history(char *input, t_ms_history *hist,
+						char *path, size_t *cmd_c);
 void				del_history(t_ms_history *hist, size_t start, size_t len);
 void				write_history(int fd, t_ms_history *hist,
 						size_t start, size_t len);
