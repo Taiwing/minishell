@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:47:30 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/23 08:36:52 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:05:12 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	load_history(t_ms_history *hist, char *path)
 	}
 	if (fd != -1)
 		close(fd);
-	ft_memdel((void **)&path);	
+	ft_memdel((void **)&path);
 }
 
 void	add_to_history(char *input, t_ms_history *hist,
-			char *path, size_t *cmd_c)
+						char *path, size_t *cmd_c)
 {
 	int	fd;
 
@@ -59,7 +59,6 @@ void	add_to_history(char *input, t_ms_history *hist,
 	}
 	hist->cmd[hist->size++] = ft_strdup(input);
 }
-
 
 void	del_history(t_ms_history *hist, size_t start, size_t len)
 {
@@ -116,4 +115,3 @@ void	flush_history(t_ms_history *hist, size_t len, char *path)
 	del_history(hist, 0, hist->size);
 	ft_memdel((void **)&path);
 }
-

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 17:11:28 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 11:16:35 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:00:42 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,3 @@ char	*unquote_str(char *quoted_str)
 	cpy[i] = 0;
 	return (cpy);
 }
-
-/*
-int		get_str_qmode(int qmode, char *str)
-{
-	if (!str)
-		return (NO_QUOTE);
-	while (*str && *str != '\n')
-		qmode = get_qmode(qmode, *str++);
-	if ((qmode & ~BSQUOTE))
-		qmode &= ~BSQUOTE;
-	return (qmode);
-}
-*/
