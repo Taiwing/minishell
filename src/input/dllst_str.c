@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:32:33 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/19 23:51:21 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:05:22 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	*dllst_to_str(t_dllst *lst)
 	size_t	size;
 	size_t	i;
 
-	if (!(size = dllstlen(lst)) || !(str = ft_strnew(size)))
+	if (!(size = dllstlen(lst))
+		|| !(str = ft_strnew(size)))
 		return (NULL);
 	i = 0;
 	while (lst)

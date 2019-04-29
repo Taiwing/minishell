@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:00:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/22 08:05:46 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:59:37 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	end_of_transmission(t_input_data *idat, t_ms_data *msd)
 	return (CONTINUE_INPUT);
 }
 
-/*like in bash, do nothing except completion stuff with tab*/
 int	tab_completion(t_input_data *idat, t_ms_data *msd)
 {
 	char	*part;

@@ -6,18 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:40:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/20 21:00:46 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:04:18 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "charfunc.h"
 #include "quotes.h"
-
-/*
-this function reprints the entire line after the last edited character
-and adds the number one space and as many backspaces as there were characters
-in the list (so that the cursor moves back into the right position)
-*/
 
 void		reprint_line(t_dllst *lst)
 {
@@ -38,7 +32,7 @@ static int	get_word_qmode(int *word, int qmode, char *str)
 	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
-		if (!qmode && (!i || ft_strchr(" \t\n;", str[i]))) 
+		if (!qmode && (!i || ft_strchr(" \t\n;", str[i])))
 		{
 			while (str[i] && ft_strchr(" \t\n;", str[i]))
 			{

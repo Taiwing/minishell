@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/23 09:43:03 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:06:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ const char	*g_inputstr[5] = {
 	""
 };
 
-/*right now this function is pretty useless, but there are
-  cool and easy bonuses to do here*/
 static void	print_prompt(t_ms_data *msd, int qmode)
 {
 	char	*sl;
@@ -47,7 +45,7 @@ static int	ms_getchar(char c[8])
 {
 	int	i;
 	int	rd;
-	
+
 	if ((rd = read(0, c, 8)) == -1)
 		ft_exit("read_error", EXIT_FAILURE);
 	if (rd == 1 && (c[0] > 31 || ft_strchr(INPUT_CONTROL_CHARS, c[0])))
@@ -59,7 +57,7 @@ static int	ms_getchar(char c[8])
 		{
 			if (!ft_strcmp(g_multibyte_chars[i], c))
 				return (i + 11);
-		}	
+		}
 	}
 	return (0);
 }

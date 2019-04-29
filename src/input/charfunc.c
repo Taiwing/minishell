@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 17:10:47 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/04 23:07:27 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:01:05 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ char	* const g_multibyte_chars[8] = {
 };
 
 int		(* const g_charfunc[256])(t_input_data *idat, t_ms_data *msd) = {
-	[0] = discard_input,						/*non-printable characters*/
-	['\003'] = reset_input,						/*Ctrl+C*/
-	['\004'] = end_of_transmission,				/*Ctrl+D*/
+	[0] = discard_input,
+	['\003'] = reset_input,
+	['\004'] = end_of_transmission,
 	['\t'] = tab_completion,
 	['\n'] = new_line,
-	[UP_ARROW] = last_cmd,						/*UP AND DOWN not implemented*/
-	[DOWN_ARROW] = next_cmd,					/*yet, these are history func*/
+	[UP_ARROW] = last_cmd,
+	[DOWN_ARROW] = next_cmd,
 	[LEFT_ARROW] = move_left,
 	[RIGHT_ARROW] = move_right,
 	[HOME_KEY] = move_beg,

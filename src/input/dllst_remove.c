@@ -6,17 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:03:57 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 20:06:13 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:04:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_dllst.h"
 #include "libft.h"
 
-/*
-** delete current element and replace it by the preceding one
-** or the next if there is no previous element
-*/
 void	dllst_remove_back(t_dllst **alst)
 {
 	t_dllst	*prev;
