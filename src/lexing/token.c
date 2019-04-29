@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 17:29:41 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 15:36:12 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:09:07 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	add_token(t_list **lst, int id, char *str)
 
 	tok.id = id;
 	tok.str = str;
-	ft_lst_push_back(lst, (void *)&tok, sizeof(t_token));	
+	ft_lst_push_back(lst, (void *)&tok, sizeof(t_token));
 }
 
 void	check_alias(t_ms_data *msd, t_list **toks, char *word)
@@ -91,20 +91,3 @@ t_list	*tokenize(t_ms_data *msd, char *input, int qmode, int alias)
 	}
 	return (lst);
 }
-
-//TEMP
-void	print_tokens(t_list *lst)
-{
-	t_token	*tok;
-
-	while (lst)
-	{
-		tok = (t_token *)lst->content;
-		ft_printf(tok->id == T_WORD ? "T_WORD: " : "T_SEPARATOR\n");
-		if (tok->str)
-			ft_putendl(tok->str);
-		lst = lst->next;
-	}
-}
-//TEMP
-
