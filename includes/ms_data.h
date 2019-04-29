@@ -6,18 +6,17 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 10:46:14 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:52:14 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_DATA
-# define MS_DATA
+#ifndef MS_DATA_H
+# define MS_DATA_H
 
 # include "libft.h"
 
-# define HISTMAX	2048		/*maximum number of commands in history*/
+# define HISTMAX	2048
 
-/*history structure*/
 typedef struct		s_ms_history
 {
 	char			*cmd[HISTMAX];
@@ -33,16 +32,15 @@ void				write_history(int fd, t_ms_history *hist,
 void				flush_history(t_ms_history *hist,
 						size_t len, char *path);
 
-/*all the data of minishell*/
 typedef struct		s_ms_data
 {
-	t_list			*env;			/*environment*/
-	t_list			*alias;			/*alias list*/
-	char			**path;			/*easely usable version of PATH variable*/
-	int				cmd_exit;		/*exit of las command ($?)*/
-	int				process_id;		/*TODO: process number ($$)*/
-	t_ms_history	hist;			/*command line history*/
-	size_t			cmd_c;			/*command count*/
+	t_list			*env;
+	t_list			*alias;
+	char			**path;
+	int				cmd_exit;
+	int				process_id;
+	t_ms_history	hist;
+	size_t			cmd_c;
 }					t_ms_data;
 
 void				reset_input_mode(void);

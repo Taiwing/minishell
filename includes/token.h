@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 17:33:22 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 15:07:42 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:53:32 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,5 @@ void			add_token(t_list **lst, int id, char *str);
 void			check_alias(t_ms_data *msd, t_list **lst, char *word);
 t_list			*tokenize(t_ms_data *msd, char *input,
 					int qmode, int alias);
-
-//TEMP
-void			print_tokens(t_list *lst);
 
 #endif
