@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:31:22 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/12 13:21:25 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:10:44 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	rm_quotes(char **str)
 	char	*pstr;
 	int		qmode;
 	int		old_qmode;
-	
+
 	if (!*str)
 		return ;
 	pstr = *str;
@@ -67,7 +67,7 @@ char		**ms_parsing(t_ms_data *msd, t_list **cmd_list)
 	t_token	*tok;
 	int		argc;
 	char	**argv;
-	
+
 	argc = expand(msd, *cmd_list);
 	argv = argc ? ft_secmalloc((argc + 1) * sizeof(char *)) : NULL;
 	argc = 0;
