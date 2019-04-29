@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 15:56:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 20:07:50 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,19 @@ void	reset_input_mode(void)
 		tcsetattr(0, TCSANOW, old_tattr);
 }
 
-void	ms_init(t_ms_data *msd, char **env)
+static void	set_needed_env(t_ms_data *msd)
+{
+	char	name[1024];
+
+	if (!get_shvar("HOST", msd->env) && !gethostname(name, 1024))
+		set_shvar("HOST", name, &msd->env, ENV_VAR);
+	if (!get_shvar("PWD", msd->env) && getcwd(name, 1024))
+		set_shvar("PWD", name, &msd->env, ENV_VAR);
+	if (!get_shvar("USER", msd->env))
+		set_shvar("USER", "john_doe", &msd->env, ENV_VAR);
+}
+
+void		ms_init(t_ms_data *msd, char **env)
 {
 	init_signals();
 	ft_exitmsg("minishell");
@@ -55,6 +67,7 @@ void	ms_init(t_ms_data *msd, char **env)
 	ft_atexit(reset_input_mode);
 	msd->alias = NULL;
 	msd->env = env_to_list(env);
+	set_needed_env(msd);
 	msd->path = ft_strsplit(get_shvar_val("PATH", msd->env), ':');
 	msd->cmd_exit = 0;
 	msd->process_id = 0;

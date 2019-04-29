@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 17:06:49 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 20:43:15 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ const char	*g_inputstr[5] = {
 	NULL,
 	""
 };
+
+static int	user_host_prompt(t_ms_data *msd)
+{
+	char	*user;
+	char	*host;
+	char	*cwd;
+
+	
+	if (!(user = get_shvar_val("USER", msd->env))
+		|| !(host = get_shvar_val("HOST", msd->env)))
+}
 
 static void	print_prompt(t_ms_data *msd, int qmode)
 {
