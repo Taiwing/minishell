@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 01:55:42 by yforeau           #+#    #+#             */
-/*   Updated: 2019/01/17 11:26:22 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:48:15 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 # define GNL_BUFF_SIZE 32
 
+# include "libft.h"
+
 typedef struct	s_gnl
 {
 	int			fd;
 	char		*trail;
 }				t_gnl;
 
-int				get_next_line(const int fd, char **line);
+int				ft_isfd(void *fd, void *content);
+void			rm_cur(t_list **lst, t_gnl *cur);
 
 #endif

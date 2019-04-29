@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_pbuf.h                                           :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/14 14:30:14 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 17:26:16 by yforeau          ###   ########.fr       */
+/*   Created: 2019/04/29 17:48:27 by yforeau           #+#    #+#             */
+/*   Updated: 2019/04/29 17:59:35 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_PBUF_H
-# define T_PBUF_H
+#include "get_next_line.h"
 
-# define PBUF_SIZE 1048576
-
-# include <stddef.h>
-
-typedef struct	s_pbuf
+int		ft_isfd(void *fd, void *content)
 {
-	char		b[PBUF_SIZE];
-	int			fd;
-	int			n;
-}				t_pbuf;
+	return (*(int *)fd != ((t_gnl *)content)->fd);
+}
 
-void			init_pbuf(t_pbuf *buf, int fd);
-void			add_to_pbuf(t_pbuf *buf, char *add, int c, size_t size);
-void			flush_pbuf(t_pbuf *buf);
+#ifdef NO_COLLEC
+
+void	rm_cur(t_list **lst, t_gnl *cur)
+{
+	ft_lst_remove_if(lst, (void *)&(cur->fd), ft_isfd);
+	free(cur);
+}
+
+#else
+
+void	rm_cur(t_list **lst, t_gnl *cur)
+{
+	ft_lst_remove_if(lst, (void *)&(cur->fd), ft_isfd);
+	free(ft_heap_collector(cur, FT_COLLEC_GET));
+}
 
 #endif

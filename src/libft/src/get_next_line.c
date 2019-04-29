@@ -6,22 +6,11 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 01:55:35 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 17:21:09 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 17:50:00 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-static int		ft_isfd(void *fd, void *content)
-{
-	return (*(int *)fd != ((t_gnl *)content)->fd);
-}
-
-void			rm_cur(t_list **lst, t_gnl *cur)
-{
-	ft_lst_remove_if(lst, (void *)&(cur->fd), ft_isfd);
-	ft_memdel((void **)&cur);
-}
+#include "get_next_line.h"
 
 static t_gnl	*ft_get_trail(int fd, t_list **lst)
 {
