@@ -6,22 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 02:55:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/18 03:36:48 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 12:55:07 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_shvar.h"
 #include "ms_data.h"
-
-static int	name_shvar_cmp(void *name, void *svar)
-{
-	if (!ft_strcmp((char *)name, ((t_shvar *)svar)->name))
-	{
-		shvar_del(svar, 0);
-		return (0);
-	}
-	return (1);
-}
 
 int	msb_unsetenv(char **argv, t_ms_data *msd)
 {

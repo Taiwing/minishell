@@ -14,29 +14,34 @@ NAME		=	minishell
 
 BUILTINSDIR		=	builtins
 EXECUTIONDIR	=	execution
+GLOBALDIR		=	global
 INPUTDIR		=	input
 LEXINGDIR		=	lexing
 PARSINGDIR		=	parsing
 
-SRCC			=	env.c\
-					history.c\
-					main.c\
+SRCC			=	main.c\
 					ms_init.c\
-					ms_signals.c\
-					quotes.c\
-					t_shvar.c\
 
 BUILTINSC		=	g_builtins.c\
+					msb_alias.c\
 					msb_cd.c\
 					msb_echo.c\
 					msb_env.c\
 					msb_exit.c\
 					msb_pwd.c\
 					msb_setenv.c\
+					msb_unalias.c\
 					msb_unsetenv.c\
 
 EXECUTIONC		=	exec.c\
 					ms_execution.c\
+
+GLOBALC			=	env.c\
+					history.c\
+					ms_signals.c\
+					quotes.c\
+					t_shvar_list.c\
+					t_shvar_utils.c\
 
 INPUTC			=	char_functions_1.c\
 					char_functions_2.c\
@@ -65,6 +70,7 @@ PARSINGC		=	ms_parsing.c\
 ODIR			=	obj
 OBJ				=	$(patsubst %.c,%.o,$(BUILTINSC))\
 					$(patsubst %.c,%.o,$(EXECUTIONC))\
+					$(patsubst %.c,%.o,$(GLOBALC))\
 					$(patsubst %.c,%.o,$(INPUTC))\
 					$(patsubst %.c,%.o,$(LEXINGC))\
 					$(patsubst %.c,%.o,$(PARSINGC))\
@@ -75,6 +81,7 @@ vpath			%.h	$(HDIR)
 vpath			%.h	$(SRCDIR)/$(SUB1D)/$(HDIR)
 vpath			%.c	$(SRCDIR)/$(BUILTINSDIR)
 vpath			%.c	$(SRCDIR)/$(EXECUTIONDIR)
+vpath			%.c	$(SRCDIR)/$(GLOBALDIR)
 vpath			%.c	$(SRCDIR)/$(INPUTDIR)
 vpath			%.c	$(SRCDIR)/$(LEXINGDIR)
 vpath			%.c	$(SRCDIR)/$(PARSINGDIR)
@@ -91,17 +98,23 @@ libft.a:
 	make -C $(SRCDIR)/$(SUB1D)
 
 g_builtins.o: g_builtins.h ms_data.h libft.h
+msb_alias.o: t_shvar.h libft.h ms_data.h quotes.h
 msb_cd.o: ms_data.h libft.h t_shvar.h
 msb_echo.o: ms_data.h libft.h
 msb_env.o: t_shvar.h libft.h ms_execution.h ms_data.h
 msb_exit.o: ms_data.h libft.h t_shvar.h
 msb_pwd.o: ms_data.h libft.h t_shvar.h
 msb_setenv.o: t_shvar.h libft.h ms_data.h
+msb_unalias.o: t_shvar.h libft.h ms_data.h
 msb_unsetenv.o: t_shvar.h libft.h ms_data.h
-env.o: t_shvar.h libft.h
 exec.o: ms_data.h libft.h t_shvar.h ms_signals.h
 ms_execution.o: exec.h ms_data.h libft.h g_builtins.h ms_execution.h
+env.o: t_shvar.h libft.h
 history.o: ms_data.h libft.h
+ms_signals.o: libft.h
+quotes.o: quotes.h libft.h
+t_shvar_list.o: t_shvar.h libft.h
+t_shvar_utils.o: t_shvar.h libft.h
 char_functions_1.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h\
 	tab_completion.h
 char_functions_2.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h\
@@ -121,20 +134,17 @@ exec_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 file_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h
 input_history.o: ms_input.h ms_data.h libft.h t_dllst.h charfunc.h
 ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h\
-	t_shvar.h
+	t_shvar.h c_colors.h
 tab_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 	charfunc.h quotes.h
-ms_lexing.o: token.h libft.h quotes.h t_shvar.h ms_lexing.h ms_data.h
-token.o: token.h libft.h quotes.h
+ms_lexing.o: token.h ms_data.h libft.h quotes.h t_shvar.h ms_lexing.h
+token.o: token.h ms_data.h libft.h quotes.h t_shvar.h
 main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h\
 	ms_execution.h
 ms_init.o: ms_data.h libft.h t_shvar.h ms_signals.h
-ms_signals.o: libft.h
-ms_parsing.o: token.h libft.h tilde_exp.h ms_data.h param_exp.h quotes.h
+ms_parsing.o: token.h ms_data.h libft.h tilde_exp.h param_exp.h quotes.h
 param_exp.o: ms_data.h libft.h quotes.h t_shvar.h
 tilde_exp.o: ms_data.h libft.h t_shvar.h
-quotes.o: quotes.h libft.h
-t_shvar.o: t_shvar.h libft.h
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 

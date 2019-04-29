@@ -6,12 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 17:29:41 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/23 11:24:23 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:36:12 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
 #include "quotes.h"
+#include "t_shvar.h"
 
 void	discard_token(t_list **alst)
 {
@@ -42,7 +43,25 @@ void	add_token(t_list **lst, int id, char *str)
 	ft_lst_push_back(lst, (void *)&tok, sizeof(t_token));	
 }
 
-void	check_alias(t_ms_data *msd)
+void	check_alias(t_ms_data *msd, t_list **toks, char *word)
+{
+	t_list	*lst;
+	char	*alias;
+
+	if ((alias = get_shvar_val(word, msd->alias)))
+	{
+		alias = ft_strjoin(alias, " ");
+		lst = tokenize(msd, alias, NO_QUOTE, ALIAS_OFF);
+		if (!*toks)
+			*toks = lst;
+		else
+			ft_lst_last(*toks)->next = lst;
+		ft_memdel((void **)&alias);
+		ft_memdel((void **)&word);
+	}
+	else
+		add_token(toks, T_WORD, word);
+}
 
 t_list	*tokenize(t_ms_data *msd, char *input, int qmode, int alias)
 {
@@ -60,9 +79,9 @@ t_list	*tokenize(t_ms_data *msd, char *input, int qmode, int alias)
 			++len;
 		else if (!qmode && len)
 		{
-			if (alias && (!lst || ((t_token *)lst->content)->id == T_SEPARATOR))
-				check_alias(msd->alias, &lst,
-					ft_strsub(input + i - len, 0, len));
+			if (alias == ALIAS_ON && (!lst
+				|| ((t_token *)ft_lst_last(lst)->content)->id == T_SEPARATOR))
+				check_alias(msd, &lst, ft_strsub(input + i - len, 0, len));
 			else
 				add_token(&lst, T_WORD, ft_strsub(input + i - len, 0, len));
 			len = 0;

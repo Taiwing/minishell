@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/22 10:08:49 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 10:46:52 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void			ms_init(t_ms_data *msd, char **env)
 		ft_exit("not a terminal", EXIT_FAILURE);
 	reset_input_mode();
 	ft_atexit(reset_input_mode);
+	msd->alias = NULL;
 	msd->env = env_to_list(env);
 	msd->path = ft_strsplit(get_shvar_val("PATH", msd->env), ':');
 	msd->cmd_exit = 0;

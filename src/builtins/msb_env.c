@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:17:06 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/18 03:53:15 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 14:15:15 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static void		set_tmp_env(char ***argv, t_ms_data *msd, t_list **backup)
 	t_shvar	newvar;
 	t_shvar	*oldvar;
 
-	while (str_to_shvar(&newvar, **argv))
+	while (str_to_env(&newvar, **argv))
 	{
 		if (!(oldvar = get_shvar(newvar.name, msd->env)))
 		{
-			newvar.type = ENV_LOCAL;
+			newvar.type = ENV_LOCAL_VAR;
 			ft_lst_sorted_insert(&msd->env, ft_lstnew((void *)&newvar,
 				sizeof(t_shvar)), shvar_cmp);
 		}
@@ -30,7 +30,7 @@ static void		set_tmp_env(char ***argv, t_ms_data *msd, t_list **backup)
 		{
 			ft_lst_sorted_insert(backup, ft_lstnew((void *)oldvar,
 				sizeof(t_shvar)), shvar_cmp);
-			oldvar->type = ENV_LOCAL;
+			oldvar->type = ENV_LOCAL_VAR;
 			oldvar->name = newvar.name;
 			oldvar->value = newvar.value;
 		}
@@ -44,7 +44,7 @@ static int		is_local_env(void *ref, void *content)
 
 	(void)ref;
 	svar = (t_shvar *)content;
-	if (svar->type != ENV_LOCAL)
+	if (svar->type != ENV_LOCAL_VAR)
 		return (1);
 	shvar_del(content, 0);
 	return (0);

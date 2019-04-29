@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 02:55:18 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/18 03:07:05 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 12:18:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	msb_setenv(char **argv, t_ms_data *msd)
 		ft_putstr_fd("setenv: too many arguments\n", 2);
 	else
 	{
-		set_shvar(argv[1], argv[2], &msd->env);
+		set_shvar(argv[1], argv[2], &msd->env, ENV_VAR);
 		if (!ft_strcmp(argv[1], "PATH"))
 		{
 			ft_wtfree(msd->path);

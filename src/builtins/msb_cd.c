@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 21:32:03 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/18 05:56:55 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 12:05:36 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ int	msb_cd(char **argv, t_ms_data *msd)
 		return (1);
 	else if (!getcwd(newdir, PATH_MAX))
 	{
-		set_shvar("OLDPWD", get_shvar_val("PWD", msd->env), &msd->env);
-		set_shvar("PWD", NULL, &msd->env);
+		set_shvar("OLDPWD", get_shvar_val("PWD", msd->env), &msd->env, ENV_VAR);
+		set_shvar("PWD", NULL, &msd->env, ENV_VAR);
 		ft_putstr_fd("cd: could not get current working directory\n", 2);
 		return (1);
 	}
 	else
 	{
-		set_shvar("OLDPWD", get_shvar_val("PWD", msd->env), &msd->env);
-		set_shvar("PWD", newdir, &msd->env);
+		set_shvar("OLDPWD", get_shvar_val("PWD", msd->env), &msd->env, ENV_VAR);
+		set_shvar("PWD", newdir, &msd->env, ENV_VAR);
 	}
 	return (0);
 }

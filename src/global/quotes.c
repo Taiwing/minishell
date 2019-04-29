@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 17:11:28 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/21 14:35:57 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 11:16:35 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,28 @@ char	*join_lines(char *str, int qmode)
 			qmode = get_qmode(qmode, str[i++]);
 	}
 	return (str);
+}
+
+char	*unquote_str(char *quoted_str)
+{
+	char	*cpy;
+	int		i;
+	int		qmode;
+	int		old_qmode;
+
+	if (!quoted_str || !(cpy = ft_strnew(ft_strlen(quoted_str))))
+		return (NULL);
+	i = 0;
+	old_qmode = NO_QUOTE;
+	while (*quoted_str)
+	{
+		qmode = get_qmode(old_qmode, *quoted_str);
+		if (qmode == old_qmode || qmode == (old_qmode & ~BSQUOTE))
+			cpy[i++] = *quoted_str;
+		++quoted_str;
+	}
+	cpy[i] = 0;
+	return (cpy);
 }
 
 /*

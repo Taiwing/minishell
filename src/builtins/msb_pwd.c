@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 20:33:34 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/16 21:17:05 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 12:16:45 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	msb_pwd(char **argv, t_ms_data *msd)
 	(void)msd;
 	if (!getcwd(curdir, PATH_MAX))
 	{
-		set_shvar("PWD", NULL, &msd->env);
+		set_shvar("PWD", NULL, &msd->env, ENV_VAR);
 		return (1);
 	}
 	ft_printf("%s\n", curdir);
-	set_shvar("PWD", curdir, &msd->env);
+	set_shvar("PWD", curdir, &msd->env, ENV_VAR);
 	return (0);
 }

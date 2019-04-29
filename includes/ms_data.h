@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/23 08:19:11 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 10:46:14 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ void				flush_history(t_ms_history *hist,
 typedef struct		s_ms_data
 {
 	t_list			*env;			/*environment*/
+	t_list			*alias;			/*alias list*/
 	char			**path;			/*easely usable version of PATH variable*/
 	int				cmd_exit;		/*exit of las command ($?)*/
-	int				process_id;		/*process number ($$)*/
+	int				process_id;		/*TODO: process number ($$)*/
 	t_ms_history	hist;			/*command line history*/
 	size_t			cmd_c;			/*command count*/
 }					t_ms_data;
