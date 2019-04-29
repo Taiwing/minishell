@@ -6,14 +6,14 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 11:25:05 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 14:16:41 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:58:38 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_shvar.h"
 #include "ms_data.h"
 
-static char	**unalias_opt(t_ms_data *msd, int argc, char **argv) 
+static char	**unalias_opt(t_ms_data *msd, int argc, char **argv)
 {
 	t_optdata	od;
 	int			unset_all;

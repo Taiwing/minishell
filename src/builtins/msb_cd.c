@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 21:32:03 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 12:05:36 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:57:56 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	change_dir(char **argv, t_ms_data *msd)
 	return (-1);
 }
 
-int	msb_cd(char **argv, t_ms_data *msd)
+int			msb_cd(char **argv, t_ms_data *msd)
 {
 	int		argc;
 	char	newdir[PATH_MAX];

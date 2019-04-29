@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 02:55:59 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 12:55:07 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:58:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	msb_unsetenv(char **argv, t_ms_data *msd)
 		if (!ft_strcmp(argv[1], "PATH"))
 		{
 			ft_wtfree(msd->path);
-			msd->path = NULL; 
+			msd->path = NULL;
 		}
 		return (0);
 	}
