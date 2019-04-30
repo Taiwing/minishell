@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:44:28 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/11 18:44:29 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/30 13:55:34 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		tilde_exp(t_ms_data *msd, char **str)
 	dir = ft_strdup(dir ? dir : "");
 	dir = slash ? ft_stradd(&dir, slash, ft_strlen(slash)) : dir;
 	if (!ft_strcmp(dir, ""))
-		ft_memdel((void **)dir);
+		ft_memdel((void **)&dir);
 	ft_memdel((void **)str);
 	*str = dir;
 }

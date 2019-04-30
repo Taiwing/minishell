@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 20:43:15 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/30 13:47:19 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,46 @@ const char	*g_inputstr[5] = {
 	""
 };
 
+static char	*get_current_dir(t_ms_data *msd, char *cwd)
+{
+	char	*home;
+	char	*sl;
+
+	home = get_shvar_val("HOME", msd->env);
+	if (home && !ft_strcmp(home, cwd))
+		cwd = "~";
+	else
+	{
+		while ((sl = ft_strchr(cwd, '/')) && sl[1] && sl[1] != '/')
+			cwd = sl + 1;
+	}
+	return (cwd);
+}
+
 static int	user_host_prompt(t_ms_data *msd)
 {
 	char	*user;
 	char	*host;
 	char	*cwd;
 
-	
 	if (!(user = get_shvar_val("USER", msd->env))
-		|| !(host = get_shvar_val("HOST", msd->env)))
+		|| !(host = get_shvar_val("HOST", msd->env))
+		|| !(cwd = get_shvar_val("PWD", msd->env)))
+		return (1);
+	cwd = get_current_dir(msd, cwd);
+	ft_dprintf(0, C_BOLD C_BLUE "%s@%s:" C_NO_BOLD, user, host);
+	ft_dprintf(0, C_BOLD C_CYAN " %s" C_BLUE " %s> " C_NO_BOLD C_RESET,
+		cwd, g_inputstr[NO_QUOTE]);
+	return (0);
 }
 
 static void	print_prompt(t_ms_data *msd, int qmode)
 {
-	char	*sl;
-	char	*curdir;
-
 	if (!qmode)
 	{
-		if ((curdir = get_shvar_val("PWD", msd->env)))
-			while ((sl = ft_strchr(curdir, '/')) && sl[1] && sl[1] != '/')
-				curdir = sl + 1;
-		ft_dprintf(0, C_BOLD "%s%lc  ", msd->cmd_exit ? C_RED : C_GREEN, L'➜');
-		ft_dprintf(0, C_CYAN "%s " C_BLUE "%s> " C_RESET,
-				curdir, g_inputstr[qmode]);
+		if (user_host_prompt(msd))
+			ft_dprintf(0, C_BOLD C_BLUE "%s> " C_NO_BOLD C_RESET,
+				g_inputstr[qmode]);
 	}
 	else
 		ft_dprintf(0, "%s> ", g_inputstr[qmode]);
