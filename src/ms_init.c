@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 20:07:50 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/04/30 14:06:14 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	reset_input_mode(void)
 static void	set_needed_env(t_ms_data *msd)
 {
 	char	name[1024];
+	char	*shlvl;
 
 	if (!get_shvar("HOST", msd->env) && !gethostname(name, 1024))
 		set_shvar("HOST", name, &msd->env, ENV_VAR);
@@ -53,6 +54,14 @@ static void	set_needed_env(t_ms_data *msd)
 		set_shvar("PWD", name, &msd->env, ENV_VAR);
 	if (!get_shvar("USER", msd->env))
 		set_shvar("USER", "john_doe", &msd->env, ENV_VAR);
+	if (!(shlvl = get_shvar_val("SHLVL", msd->env)))
+		set_shvar("SHLVL", "1", &msd->env, ENV_VAR);
+	else
+	{
+		shlvl = ft_itoa(ft_atoi(shlvl) + 1);
+		set_shvar("SHLVL", shlvl, &msd->env, ENV_VAR);
+		ft_memdel((void **)&shlvl);
+	}
 }
 
 void		ms_init(t_ms_data *msd, char **env)
