@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/30 13:47:19 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/01 17:15:12 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	user_host_prompt(t_ms_data *msd)
 		return (1);
 	cwd = get_current_dir(msd, cwd);
 	ft_dprintf(0, C_BOLD C_BLUE "%s@%s:" C_NO_BOLD, user, host);
-	ft_dprintf(0, C_BOLD C_CYAN " %s" C_BLUE " %s> " C_NO_BOLD C_RESET,
+	ft_dprintf(0, C_BOLD C_CYAN "%s" C_BLUE "%s> " C_NO_BOLD C_RESET,
 		cwd, g_inputstr[NO_QUOTE]);
 	return (0);
 }
