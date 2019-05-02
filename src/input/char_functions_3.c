@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:01:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/06 20:11:19 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/03 01:02:48 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,11 @@
 
 int	move_end(t_input_data *idat, t_ms_data *msd)
 {
-	size_t	sz;
-
-	(void)msd;
 	if (idat->lst && (idat->lst->next || idat->bol))
 	{
-		sz = idat->bol ? 1 : 0;
-		idat->bol = 0;
-		while (idat->lst->next)
-		{
-			idat->lst = idat->lst->next;
-			++sz;
-		}
-		while (sz--)
-			write(0, g_multibyte_chars[RIGHT_ARROW - 11], 3);
+		ft_strcpy(idat->c, g_multibyte_chars[RIGHT_ARROW - 11]);
+		while (idat->lst->next || idat->bol)
+			move_right(idat, msd);
 	}
 	return (CONTINUE_INPUT);
 }
@@ -55,7 +46,13 @@ int	forwd_delete(t_input_data *idat, t_ms_data *msd)
 
 int	insert_char(t_input_data *idat, t_ms_data *msd)
 {
-	(void)msd;
+	if (idat->cursor_pos[X] == msd->term_width)
+	{
+		idat->cursor_pos[X] = 1;
+		++idat->cursor_pos[Y];
+	}
+	else
+		++idat->cursor_pos[X];
 	write(0, idat->c, 1);
 	if (!idat->bol)
 		dllst_insert_forwd(&idat->lst, *idat->c);
@@ -69,11 +66,17 @@ int	insert_char(t_input_data *idat, t_ms_data *msd)
 
 int	back_delete(t_input_data *idat, t_ms_data *msd)
 {
-	(void)msd;
 	if (!idat->bol)
 	{
 		if (!idat->lst->prev)
 			idat->bol = 1;
+		if (idat->cursor_pos[X] == 1)
+		{
+			--idat->cursor_pos[Y];
+			idat->cursor_pos[X] = msd->term_width;
+		}
+		else
+			--idat->cursor_pos[X];
 		ft_putstr_fd("\010 \010", 0);
 		dllst_remove_back(&idat->lst);
 		if (idat->lst)

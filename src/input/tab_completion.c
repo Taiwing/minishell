@@ -6,13 +6,14 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:38:12 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 17:07:14 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/02 23:56:43 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tab_completion.h"
 #include "charfunc.h"
 #include "quotes.h"
+#include "terminal_cursor.h"
 
 static int	get_dllst_word_qmode(int *word, int qmode, t_dllst *lst)
 {
@@ -79,6 +80,7 @@ static void	insert_comp(char *comp, t_input_data *idat)
 	}
 	if (idat->lst->next)
 		reprint_line(idat->lst->next);
+	get_curs_pos(idat->cursor_pos);
 }
 
 void		complete_input(int completion, char *part,
