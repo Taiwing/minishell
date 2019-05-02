@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 15:52:14 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/02 21:32:42 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_ms_data
 	int				process_id;
 	t_ms_history	hist;
 	size_t			cmd_c;
+	int				term_width;
 }					t_ms_data;
 
 void				reset_input_mode(void);

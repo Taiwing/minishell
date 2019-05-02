@@ -42,6 +42,7 @@ GLOBALC			=	env.c\
 					quotes.c\
 					t_shvar_list.c\
 					t_shvar_utils.c\
+					terminal_size.c\
 
 INPUTC			=	char_functions_1.c\
 					char_functions_2.c\
@@ -59,6 +60,7 @@ INPUTC			=	char_functions_1.c\
 					input_history.c\
 					ms_input.c\
 					tab_completion.c\
+					terminal_cursor.c\
 
 LEXINGC			=	ms_lexing.c\
 					token.c\
@@ -111,7 +113,7 @@ exec.o: ms_data.h libft.h t_shvar.h ms_signals.h
 ms_execution.o: exec.h ms_data.h libft.h g_builtins.h ms_execution.h
 env.o: t_shvar.h libft.h
 history.o: ms_data.h libft.h
-ms_signals.o: libft.h
+ms_signals.o: libft.h terminal_size.h terminal_cursor.h
 quotes.o: quotes.h libft.h
 t_shvar_list.o: t_shvar.h libft.h
 t_shvar_utils.o: t_shvar.h libft.h
@@ -134,14 +136,15 @@ exec_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 file_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h
 input_history.o: ms_input.h ms_data.h libft.h t_dllst.h charfunc.h
 ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h\
-	t_shvar.h c_colors.h
+	t_shvar.h c_colors.h terminal_cursor.h
 tab_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 	charfunc.h quotes.h
+terminal_cursor.o: libft.h ms_input.h ms_data.h t_dllst.h
 ms_lexing.o: token.h ms_data.h libft.h quotes.h t_shvar.h ms_lexing.h
 token.o: token.h ms_data.h libft.h quotes.h t_shvar.h
 main.o: ms_input.h ms_data.h libft.h t_dllst.h ms_lexing.h ms_parsing.h\
 	ms_execution.h
-ms_init.o: ms_data.h libft.h t_shvar.h ms_signals.h
+ms_init.o: ms_data.h libft.h t_shvar.h ms_signals.h terminal_size.h
 ms_parsing.o: token.h ms_data.h libft.h tilde_exp.h param_exp.h quotes.h
 param_exp.o: ms_data.h libft.h quotes.h t_shvar.h
 tilde_exp.o: ms_data.h libft.h t_shvar.h

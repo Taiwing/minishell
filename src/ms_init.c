@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/30 14:06:14 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/02 21:47:23 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ms_data.h"
 #include "t_shvar.h"
 #include "ms_signals.h"
+#include "terminal_size.h"
 
 void	set_custom_input_mode(void)
 {
@@ -82,4 +83,6 @@ void		ms_init(t_ms_data *msd, char **env)
 	msd->process_id = 0;
 	load_history(&msd->hist, get_shvar_val("HOME", msd->env));
 	msd->cmd_c = 0;
+	msd->term_width = get_terminal_width();
+	term_width_container(&msd->term_width);
 }

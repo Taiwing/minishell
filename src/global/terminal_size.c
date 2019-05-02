@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_input.h                                         :+:      :+:    :+:   */
+/*   terminal_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 21:50:15 by yforeau           #+#    #+#             */
-/*   Updated: 2019/05/02 21:39:21 by yforeau          ###   ########.fr       */
+/*   Created: 2019/05/02 20:58:53 by yforeau           #+#    #+#             */
+/*   Updated: 2019/05/02 21:53:01 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_INPUT_H
-# define MS_INPUT_H
+#include <sys/ioctl.h>
+#include <stddef.h>
 
-# include "ms_data.h"
-# include "t_dllst.h"
-
-enum			e_xy {X = 0, Y = 1};
-
-typedef struct	s_input_data
+int		*term_width_container(int *in)
 {
-	char		c[8];
-	int			bol;
-	int			qmode;
-	int			word;
-	t_dllst		*lst;
-	char		*buf;
-	int			hi;
-	int			cursor_pos[2];
-}				t_input_data;
+	static int	*tw = NULL;
 
-char			*ms_input(t_ms_data *msd, int qmode, int word);
+	if (in)
+		tw = in;
+	return (tw);
+}
 
-#endif
+int		get_terminal_width(void)
+{
+	struct winsize	w;
+
+	ioctl(0, TIOCGWINSZ, &w);
+	return (w.ws_col);
+}
