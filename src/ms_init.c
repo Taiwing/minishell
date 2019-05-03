@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 10:30:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/05/02 21:47:23 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/03 22:25:03 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ms_signals.h"
 #include "terminal_size.h"
 
-void	set_custom_input_mode(void)
+void		set_custom_input_mode(void)
 {
 	struct termios			new_tattr;
 
@@ -29,7 +29,7 @@ void	set_custom_input_mode(void)
 		ft_exit("failed to set terminal attributes", EXIT_FAILURE);
 }
 
-void	reset_input_mode(void)
+void		reset_input_mode(void)
 {
 	static struct termios	*old_tattr = NULL;
 

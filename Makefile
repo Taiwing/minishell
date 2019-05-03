@@ -113,8 +113,7 @@ exec.o: ms_data.h libft.h t_shvar.h ms_signals.h
 ms_execution.o: exec.h ms_data.h libft.h g_builtins.h ms_execution.h
 env.o: t_shvar.h libft.h
 history.o: ms_data.h libft.h
-ms_signals.o: libft.h terminal_size.h terminal_cursor.h ms_input.h ms_data.h\
-	t_dllst.h
+ms_signals.o: libft.h terminal_size.h terminal_cursor.h
 quotes.o: quotes.h libft.h
 t_shvar_list.o: t_shvar.h libft.h
 t_shvar_utils.o: t_shvar.h libft.h
