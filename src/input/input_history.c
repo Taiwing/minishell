@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 07:54:37 by yforeau           #+#    #+#             */
-/*   Updated: 2019/05/03 00:25:53 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/03 19:30:33 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,7 @@ static void	erase_current_line(t_input_data *idat, t_ms_data *msd)
 		return ;
 	move_end(idat, msd);
 	while (!idat->bol)
-	{
-		if (!idat->lst->prev)
-			idat->bol = 1;
-		if (idat->cursor_pos[X] == 1)
-		{
-			--idat->cursor_pos[Y];
-			idat->cursor_pos[X] = msd->term_width;
-		}
-		else
-			--idat->cursor_pos[X];
-		ft_putstr_fd("\010 \010", 0);
-		dllst_remove_back(&idat->lst);
-	}
+		back_delete(idat, msd);
 }
 
 void		restore(t_input_data *idat, t_ms_history *hist, t_ms_data *msd)

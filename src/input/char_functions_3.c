@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:01:04 by yforeau           #+#    #+#             */
-/*   Updated: 2019/05/03 01:02:48 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/03 18:58:09 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ int	back_delete(t_input_data *idat, t_ms_data *msd)
 		}
 		else
 			--idat->cursor_pos[X];
-		ft_putstr_fd("\010 \010", 0);
+		if (!idat->lst->prev && idat->cursor_pos[X] != msd->term_width)
+			ft_putstr_fd("\010 \010", 0);
+		else
+			write(0, "\010", 1);
 		dllst_remove_back(&idat->lst);
 		if (idat->lst)
 			reprint_line(idat->bol ? idat->lst : idat->lst->next);
