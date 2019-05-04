@@ -93,10 +93,10 @@ vpath			%.c	$(SRCDIR)
 
 all: $(NAME)
 
-$(NAME): libft.a $(ODIR) $(OBJ)
+$(NAME): $(SRCDIR)/$(SUB1D)/libft.a $(ODIR) $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(patsubst %.o,$(ODIR)/%.o,$(OBJ)) $(LIBS)
 
-libft.a:
+$(SRCDIR)/$(SUB1D)/libft.a:
 	make -C $(SRCDIR)/$(SUB1D)
 
 g_builtins.o: g_builtins.h ms_data.h libft.h
