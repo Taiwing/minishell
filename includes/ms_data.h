@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 09:00:45 by yforeau           #+#    #+#             */
-/*   Updated: 2019/05/02 21:32:42 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/04 20:03:28 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 
 # define HISTMAX	2048
+# define CMDMAX		4097
 
 typedef struct		s_ms_history
 {

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:47:30 by yforeau           #+#    #+#             */
-/*   Updated: 2019/04/29 16:05:12 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/04 20:02:08 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	load_history(t_ms_history *hist, char *path)
 	fd = -1;
 	hist->size = 0;
 	if ((path = path ? ft_strjoin(path, "/.minihistory") : NULL)
-		&& (fd = open(path, O_RDONLY)) != -1)
+		&& (fd = open(path, O_RDONLY | O_NOFOLLOW)) != -1)
 	{
 		while (read(fd, &cmd_len, sizeof(ssize_t)) == sizeof(ssize_t)
-				&& hist->size < (HISTMAX / 2))
+				&& hist->size < (HISTMAX / 2) && cmd_len < CMDMAX)
 		{
 			hist->cmd[hist->size] = ft_strnew(cmd_len);
 			if (read(fd, hist->cmd[hist->size++], cmd_len) != cmd_len)
@@ -49,7 +49,8 @@ void	add_to_history(char *input, t_ms_history *hist,
 	{
 		del_history(hist, 0, HISTMAX / 2);
 		if ((path = path ? ft_strjoin(path, "/.minihistory") : NULL)
-			&& (fd = open(path, O_TRUNC | O_WRONLY | O_CREAT, 0600)) != -1)
+			&& (fd = open(path, O_TRUNC | O_WRONLY | O_CREAT
+				| O_NOFOLLOW, 0600)) != -1)
 		{
 			write_history(fd, hist, 0, HISTMAX / 2);
 			close(fd);
@@ -105,7 +106,8 @@ void	flush_history(t_ms_history *hist, size_t len, char *path)
 	if (old.size > max)
 		del_history(&old, 0, old.size - max);
 	if ((path = path ? ft_strjoin(path, "/.minihistory") : NULL)
-		&& (fd = open(path, O_TRUNC | O_WRONLY | O_CREAT, 0600)) != -1)
+		&& (fd = open(path, O_TRUNC | O_WRONLY | O_CREAT
+			| O_NOFOLLOW, 0600)) != -1)
 	{
 		write_history(fd, &old, 0, old.size);
 		write_history(fd, hist, hist->size - len, len);
