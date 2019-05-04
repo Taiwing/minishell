@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 01:33:16 by yforeau           #+#    #+#             */
-/*   Updated: 2019/05/03 22:26:17 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/04 22:59:53 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	signal_hand(int sig)
 		if (sig == SIGINT)
 			ft_putchar_fd('\n', 0);
 	}
-	if (sig == SIGWINCH)
+	else if (sig == SIGWINCH)
 	{
 		if ((tw = term_width_container(NULL)))
 			*tw = get_terminal_width();

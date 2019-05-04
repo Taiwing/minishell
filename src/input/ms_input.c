@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 15:42:19 by yforeau           #+#    #+#             */
-/*   Updated: 2019/05/02 21:53:56 by yforeau          ###   ########.fr       */
+/*   Updated: 2019/05/04 23:19:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "quotes.h"
 #include "t_shvar.h"
 #include "c_colors.h"
+#include "terminal_size.h"
 #include "terminal_cursor.h"
 
 const char	*g_inputstr[5] = {
@@ -103,6 +104,7 @@ char		*ms_input(t_ms_data *msd, int qmode, int word)
 	ft_bzero(idat.c, 8);
 	get_curs_pos(idat.cursor_pos);
 	curs_pos_container(idat.cursor_pos);
+	msd->term_width = get_terminal_width();
 	idat.qmode = qmode == BSQUOTE ? NO_QUOTE : qmode;
 	while (g_charfunc[ms_getchar(idat.c)](&idat, msd))
 		ft_bzero(idat.c, 8);

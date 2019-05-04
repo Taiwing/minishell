@@ -137,7 +137,7 @@ file_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h
 input_history.o: ms_input.h ms_data.h libft.h t_dllst.h charfunc.h\
 	terminal_cursor.h
 ms_input.o: charfunc.h ms_input.h ms_data.h libft.h t_dllst.h quotes.h\
-	t_shvar.h c_colors.h terminal_cursor.h
+	t_shvar.h c_colors.h terminal_size.h terminal_cursor.h
 tab_completion.o: tab_completion.h ms_input.h ms_data.h libft.h t_dllst.h\
 	charfunc.h quotes.h terminal_cursor.h
 terminal_cursor.o: libft.h ms_input.h ms_data.h t_dllst.h
