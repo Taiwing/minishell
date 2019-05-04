@@ -1,2 +1,0 @@
-- do not forget to modify the Makefile so that it does not relink
-  the libft when nothing has to be done.
